@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+    <title>list</title>
+    <link rel="stylesheet" href="stylesheets/main.css" media="screen" title="no title" charset="utf-8">
+    <!-- FOR ANGULAR ROUTING -->
+  <base href="/">
+
+  <!-- CSS  -->
+  <!-- load bootstrap from CDN and custom CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.1/paper/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css">
+
+  <!-- JS -->
+  <!-- load angular and angular-route via CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-route.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular-animate.js"></script>
+
+  <!-- controllers -->
+  <!-- <script src="../app/controllers/mainCtrl.js"></script>
+  <script src="../app/controllers/userCtrl.js"></script> -->
+
+  <!-- services -->
+
+  <!-- <script src="app/services/userService.js"></script>
+  <script src="app/services/authService.js"></script> -->
+
+  <!-- main Angular app files -->
+  <script src="./app.routes.js"></script>
+  <script src="./app.js"></script>
+  </head>
+  <body ng-app="movieApp">
+    Back-Template bitches!
+    <section ng-view></section>
+  </body>
+</html>
