@@ -4,13 +4,7 @@ angular.module('listCtrl', [])
 function listController($http){
   var self = this;
 
-  // $http.get('/data.js')
-  //   .then(function(data){
-  //     console.log(data);
-  //   })
-
-
-
+  
   ///begin long asssssss data call, we use this in the rest of the app
     self.data = [
     {
