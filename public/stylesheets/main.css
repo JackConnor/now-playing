@@ -25,11 +25,88 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
-/*#map {
-  width: 500px;
-  height: 350px;
-  outline: 2px solid gray;
-}*/
+/*begin  custom css*/
+/*begin html elements*/
+
+/*begin class elements*/
+
+.buttons {
+  margin-left: 25%;
+}
+
+.buttonContainer {
+  height: 90px;
+  width: 100%;
+  outline: 2px solid black;
+}
+
+.buttonContainer button {
+  height: 60px;
+  width: 100px;
+  margin-left: 10px;
+}
+
+.goToMap {
+  height: 100%;
+  max-height: 100%;
+  background-color: green;
+  display: inline-block;
+  position: relative;
+}
+
+.listBox {
+  height: 110px;
+  margin: 0 0 4px 0;
+}
+
+.listContainer{
+  background-color: #E9E5DC;
+}
+
+.listedMovie {
+  list-style-type: none;
+  background-color: #c0e8e8;
+  width: 60%;
+  max-height: 100%;
+  margin: 0 0 0 20%;
+}
+
+.listedTitle h4 {
+  float: left;
+  padding-right: 25px;
+}
+
+.listTitle {
+  display: inline-block;
+  height: 100%;
+  max-height: 100%;
+  position: relative;
+  border-right: 2px solid gray;
+  padding-right: 25px;
+}
+
+.movieDetails {
+  display: inline-block;
+  height: 100%;
+  max-height: 100%;
+  position: relative;
+  border-right: 2px solid gray;
+  padding-right: 25px;
+}
+
+.titleContainer {
+  width: 40%;
+  margin: 0 0 0 30%;
+}
+
+/*begin id elements*/
+
+#listTitle {
+  background-color: white;
+  height: 150px;
+  font-weight: bolder;
+}
+
 
 #goseenowlink {
   margin: 5px 0px 5px 0px;

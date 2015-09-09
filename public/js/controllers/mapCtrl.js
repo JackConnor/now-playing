@@ -4,7 +4,5 @@ angular.module('mapCtrl', [])
 function mapController($http){
   var self = this;
 
-
-
   console.log('mapppppppppppp');
 }
