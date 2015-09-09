@@ -12,6 +12,33 @@ function listController($http){
      self.data = data;
    })
 
+  var buttonCounter = true;
+
+  self.openButtons = function(id){
+    console.log(id);
+
+    $('#'+id).append('<div class="buttonContainer '+id+'"><ul class="buttons"><button ng-click="map('+id+')">get directions</button><button ng-click="movieDetails('+id+')">see movie details</button></div></div>');
+
+    $('.buttons')
+
+    if (buttonCounter) {
+      // $('#'+id).css('margin-bottom', 100+"px");
+      console.log('lowering button container');
+      buttonCounter = !buttonCounter;
+      return buttonCounter;
+    }
+    else if(!buttonCounter) {
+      $('.'+id).remove();
+      console.log('raising button container');
+      $('#'+id).css('margin-bottom', 4+'px');
+      buttonCounter = !buttonCounter;
+      return buttonCounter;
+
+    } else {
+      console.log('something weird happened');
+    }
+  }
+
   self.map = function(id){
     console.log('testing event');
     console.log(id);
@@ -21,6 +48,9 @@ function listController($http){
         console.log(data.location.geoCode);
       })
     // window.location.href = "/#/map/"+id;
+  }
 
+  self.movieDetails = function(){
+    console.log('movie details');
   }
 }
