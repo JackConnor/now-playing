@@ -1,7 +1,8 @@
 angular.module('mainCtrl', [])
   .controller('mainController', mainController);
 
-function mainController(){
+
+function mainController($routeParams){
   var self = this;
 
   console.log('mainnnnn');

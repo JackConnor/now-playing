@@ -1,7 +1,22 @@
-<h2>list list list</h2>
-
 <div class="listContainer">
-  <ul>
-    <li class="listedMovie" ng-repeat="movie in list.data">{{movie.title}}</li>
-  </ul>
-</div>
+  <div class="titleContainer">
+    <h2 id=listTitle>A List of all the movies closest to 90036</h2>
+    <h3>test: {{list.testData}}</h3>
+  </div>
+
+
+  <div class="listContainer">
+    <div class="listedMovie" ng-repeat="movie in list.data" ng-click="list.openButtons(movie.tmsId)" id="{{movie.tmsId}}">
+      <div class="listBox">
+        <div class="listTitle">
+          <h4>{{movie.title}}</h4>
+        </div>
+        <div class="movieDetails">
+          <div class="detailsContainer">
+            <p>{{movie.showtimes[0].theatre.name}}</p>
+            <p>{{movie.showtimes[0].dateTime}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
