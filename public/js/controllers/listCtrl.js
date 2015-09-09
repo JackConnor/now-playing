@@ -7,11 +7,11 @@ function listController($http){
 
   self.testData = "hello"
 
-  self.map = function(x){
-    // window.location.href = '/#/map';
+  self.map = function(title){
+    window.location.href = '/#/map';
     console.log('testing event');
-    console.log(x);
-    console.log(this);
+    console.log(title);
+
   }
 
 
