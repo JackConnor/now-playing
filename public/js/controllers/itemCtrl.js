@@ -1,7 +1,7 @@
-// angular.module('movieApp')
-//
-//   .controller('itemCtrl', itemCtrl);
-//
-//   function itemCtrl(){
-//     console.log('whatup');
-//   }
+angular.module('mainCtrl', [])
+  .controller('mainController', mainController);
+
+function mainController(){
+
+  console.log('mainnnnn');
+}

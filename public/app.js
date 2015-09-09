@@ -1,4 +1,4 @@
-angular.module('movieApp', ['ngAnimate', 'mainCtrl', 'app.routes', 'ngRoute'])
+angular.module('movieApp', ['ngAnimate', 'mainCtrl', 'listCtrl', 'mapCtrl', 'app.routes', 'ngRoute'])
 
 .config(function($httpProvider) {
 

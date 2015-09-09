@@ -6,21 +6,20 @@ appRoutes.$inject = ['$routeProvider'];
 function appRoutes($routeProvider){
   $routeProvider
     .when('/', {
-      templateUrl: "templates/_home.html"
+      templateUrl: "templates/_home.html",
+    })
+
+    .when('/list', {
+      templateUrl: 'templates/_list.html',
+      controller: 'listController',
+      controllerAs: 'list'
     })
 
     .when('/map', {
-      templateUrl: 'templates/_map.html'
+      templateUrl: 'templates/_map.html',
+      controller: 'mapController',
+      controllerAs: 'map'
     })
-    // .when('/brady/:id', {
-    //   templateUrl: 'templates/_profile.html'
-    //   ,controller: 'bradyController'
-    //   ,controllerAs: 'bradyCtrl'
-    // })
-    // .when('/new', {
-    //   templateUrl: 'templates/_new.html'
-    //   ,controller: 'bradyController'
-    //   ,controllerAs: 'bradyCtrl'
-    // })
+
     .otherwise('/');
 }
