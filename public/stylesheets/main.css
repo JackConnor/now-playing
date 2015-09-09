@@ -34,14 +34,14 @@
 
 .listedMovie {
   list-style-type: none;
-  background-color: #99EBFF;
-  border-bottom: 2px solid gray;
+  background-color: #c0e8e8;
   width: 60%;
   margin: 0 0 0 20%;
+
 }
 
 .listedMovie h3 {
-  opacity: 0.75;
+  margin: 2px 0 0 0;
 }
 
 /*begin id elements*/
