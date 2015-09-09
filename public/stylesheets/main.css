@@ -25,6 +25,26 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
+
+/*begin  custom css*/
+/*begin html elements*/
+
+
+/*begin class elements*/
+
+.listedMovie {
+  list-style-type: none;
+  background-color: #99EBFF;
+  border-bottom: 2px solid gray;
+  width: 60%;
+  margin: 0 0 0 20%;
+}
+
+.listedMovie h3 {
+  opacity: 0.75;
+}
+
+/*begin id elements*/
 #map {
   width: 500px;
   height: 350px;
