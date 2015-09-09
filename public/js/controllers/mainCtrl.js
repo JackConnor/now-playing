@@ -4,5 +4,5 @@ angular.module('mainCtrl', [])
 function mainController(){
   var self = this;
 
-  console.log('mainnnnn testing');
+  console.log('mainnnnn testing testing');
 }
