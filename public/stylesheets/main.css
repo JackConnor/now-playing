@@ -29,8 +29,11 @@
 /*begin  custom css*/
 /*begin html elements*/
 
-
 /*begin class elements*/
+
+.listContainer{
+  background-color: #E9E5DC;
+}
 
 .listedMovie {
   list-style-type: none;
@@ -44,7 +47,19 @@
   margin: 2px 0 0 0;
 }
 
+.titleContainer {
+  width: 40%;
+  margin: 0 0 0 30%;
+}
+
 /*begin id elements*/
+
+#listTitle {
+  background-color: white;
+  height: 150px;
+  font-weight: bolder;
+}
+
 #map {
   width: 500px;
   height: 350px;

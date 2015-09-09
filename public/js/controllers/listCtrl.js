@@ -3,8 +3,18 @@ angular.module('listCtrl', [])
 
 function listController($http){
   var self = this;
+  console.log('yea ysa');
 
-  
+  self.testData = "hello"
+
+  self.map = function(x){
+    // window.location.href = '/#/map';
+    console.log('testing event');
+    console.log(x);
+    console.log(this);
+  }
+
+
   ///begin long asssssss data call, we use this in the rest of the app
     self.data = [
     {
