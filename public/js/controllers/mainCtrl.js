@@ -6,7 +6,7 @@ function mainController($http){
   var self = this;
 
 ///begin long asssssss data call, we use this in the rest of the app
-  var data = [
+  self.data = [
   {
   tmsId: "MV006183910000",
   rootId: "11019661",
@@ -8424,5 +8424,5 @@ function mainController($http){
   ]
   //begin all functions using seed data
 
-  console.log(data);
+  console.log(self.data);
 }
