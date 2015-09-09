@@ -25,8 +25,36 @@
     .jumbotron .lang-logo img {
       max-width: 100%; }
 
-#map {
+/*#map {
   width: 500px;
   height: 350px;
   outline: 2px solid gray;
+}*/
+
+#goseenowlink {
+  margin: 5px 0px 5px 0px;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-top: 74px;
+  padding-bottom: 50px;
+}
+
+#map {
+  height: 100%;
+}
+
+#footer-text {
+  color: black;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 16px;
 }
