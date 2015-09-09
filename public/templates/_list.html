@@ -4,6 +4,6 @@
     <h3>test: {{list.testData}}</h3>
   </div>
   <div class="listContainer">
-    <div class="listedMovie" ng-repeat="movie in list.data" ><h4>{{movie.title}}</h4><button type="button" ng-click="list.map(movie.showtimes[0].theatre.name)" id="{{movie.name}}">see in map</button></div>
+    <div class="listedMovie" ng-repeat="movie in list.data" ><h4>>{{movie.title}}</h4><button type="button" ng-click="list.map(movie.showtimes[0].theatre.id)" id="{{movie.name}}">see in map</button></div>
   </div>
 </div>

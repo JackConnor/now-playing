@@ -21,5 +21,11 @@ function appRoutes($routeProvider){
       controllerAs: 'map'
     })
 
+    .when('/map/:id', {
+      templateUrl: 'templates/_map.html',
+      controller: 'mapController',
+      controllerAs: 'map'
+    })
+
     .otherwise('/');
 }
