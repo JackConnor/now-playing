@@ -9,13 +9,25 @@ function mapController($http, $routeParams){
     $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatre+'?api_key=qf6mzc3fkprbntfd95db3hkk')
       .success(function(data){
         console.log(data);
-        self.theatreLocation = {lat: data.location.geoCode.latitude, long: data.location.geoCode.longitude}
+        self.theatreLocation = {lat: data.location.geoCode.latitude, lng: data.location.geoCode.longitude}
         console.log(self.theatreLocation);
         self.theatreLatitude = data.location.geoCode.latitude;
         self.theatreLongitude = data.location.geoCode.longitude;
       })
+      var markerdest = new google.maps.Marker({
+          position: self.theatreLocation,
+          icon: {
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            strokeColor: "#CF2F4D",
+            scale: 4
+          },
+          map: window.map,
+          title: 'Your Movie!'
+       });
 
   }
+
+
 
   console.log('mapppppppppppp');
 }
