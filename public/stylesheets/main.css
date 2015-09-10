@@ -37,13 +37,30 @@
 .buttonContainer {
   height: 90px;
   width: 100%;
+  margin-bottom: 4px;
   outline: 2px solid black;
+  display: inline-block;
 }
 
 .buttonContainer button {
   height: 60px;
   width: 100px;
   margin-left: 10px;
+}
+
+.detailsButton {
+  postion: relative:
+  height: 50px;
+  width: 120px;
+  outline: 2px solid black
+}
+
+.detailsContainer {
+  width: 90%;
+  height: 1200px;
+  margin: 0 0 25px 5%;
+  background-color: #c0e8e8;
+  outline: 3px solid black;
 }
 
 .goToMap {
@@ -54,11 +71,6 @@
   position: relative;
 }
 
-.listBox {
-  height: 110px;
-  margin: 0 0 4px 0;
-}
-
 .listContainer{
   background-color: #E9E5DC;
 }
@@ -66,9 +78,10 @@
 .listedMovie {
   list-style-type: none;
   background-color: #c0e8e8;
-  width: 60%;
   max-height: 100%;
   margin: 0 0 0 20%;
+  height: 130px;
+  margin: 0 0 4px 0;
 }
 
 .listedTitle h4 {
@@ -85,6 +98,14 @@
   padding-right: 25px;
 }
 
+.mapButton {
+  postion: relative:
+  height: 50px;
+  width: 120px;
+  outline: 2px solid black
+}
+
+
 .movieDetails {
   display: inline-block;
   height: 100%;
@@ -92,6 +113,11 @@
   position: relative;
   border-right: 2px solid gray;
   padding-right: 25px;
+}
+
+.posterContainer img {
+  width: 300px;
+  height: 500px;
 }
 
 .titleContainer {

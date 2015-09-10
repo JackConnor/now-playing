@@ -3,9 +3,3 @@ angular.module('movieApp', ['ngAnimate', 'mainCtrl', 'listCtrl', 'mapCtrl', 'app
 .config(function($httpProvider) {
 
 })
-
-// .controller('mainCtrl', mainCtrl);
-//
-// function mainCtrl() {
-//   console.log('main working');
-// }
