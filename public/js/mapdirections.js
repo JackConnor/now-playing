@@ -133,45 +133,5 @@ function initMap() {
      destination: {lat: 34.016, lng: -118.495},
      travelMode: google.maps.DirectionsTravelMode.DRIVING
    };
-  //  var markeryou = new google.maps.Marker({
-  //        position: coords,
-  //        icon: {
-  //          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-  //          strokeColor: "#21927A",
-  //          scale: 4
-  //        },
-  //        map: map,
-  //        title: 'You!'
-  //      });
-
-    // var markerdest = new google.maps.Marker({
-    //       position: {lat: 34.016, lng: -118.495},
-    //       icon: {
-    //         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-    //         strokeColor: "#CF2F4D",
-    //         scale: 4
-    //       },
-    //       map: map,
-    //       title: 'Your Movie!'
-    //    });
-
-      // //  Jimmy's code
-      //  var markerdest = new google.maps.Marker({
-      //        position: {lat: 34.017, lng: -118.495},
-      //        icon: {
-      //          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-      //          strokeColor: "#CF2F4D",
-      //          scale: 4
-      //        },
-      //        map: window.map,
-      //        title: 'Your Movie!'
-      //     });
-
-
-  //  directionsService.route(request, function (response, status) {
-  //    if (status == google.maps.DirectionsStatus.OK) {
-  //      directionsDisplay.setDirections(response);
-  //    }
-  //  });
  }
 }
