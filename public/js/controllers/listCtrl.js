@@ -38,14 +38,20 @@ function listController($http, $routeParams){
 
   var buttonCounter = true;
 
-  self.openButtons = function(id){
+  self.openButtons = function(movie){
     //jquery stuff
-    $('#'+id).css('color', 'red')
 
     if (buttonCounter) {
       // $('#'+id).css('margin-bottom', 100+"px");
-      $('#'+id).append('<div class="buttonContainer" id=abc'+id+'>hello</div>')
+      $('#'+movie.id).append('<div class="row"><div class="buttonContainer col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0" id=abc'+movie.id+'><button class="mapButton btn-default" ng-click="list.map()">Get Directions</button><button class="detailsButton btn-default" ng-click="list.movieDetails()">See Movie Details</button></div></div>')
       console.log('lowering button container');
+      //adding event listeners
+      $('.detailsButton').on('click', function(){
+        console.log('testing');
+        window.location.href = "/#/list/"+movie.movieName;
+      })
+
+      //end event listeners
       buttonCounter = !buttonCounter;
       return buttonCounter;
     }
@@ -62,20 +68,33 @@ function listController($http, $routeParams){
     }
   }
 
-  self.map = function(id){
+  self.map = function(){
     console.log('testing event');
-    console.log(id);
-    var url = 'http://data.tmsapi.com/v1.1/theatres/'+id+'?api_key=qf6mzc3fkprbntfd95db3hkk'
-    $http.get(url)
-      .success(function(data){
-        console.log(data.location.geoCode);
-      })
+    console.log();
+    // var url = 'http://data.tmsapi.com/v1.1/theatres/'+id+'?api_key=qf6mzc3fkprbntfd95db3hkk'
+    // $http.get(url)
+    //   .success(function(data){
+    //     console.log(data.location.geoCode);
+    //   })
     // window.location.href = "/#/map/"+id;
   }
 
-  self.movieDetails = function(x){
+  self.movieDetails = function(){
     console.log('movie details');
-    console.log(x);
+    console.log();
     window.location.href = '/#/list/'+x;
+  }
+
+  self.getMovie = function(){
+    console.log('movie bitches!!!!!!!');
+    console.log($routeParams.id);
+    var key = "a9e6b3f7506ddf2d1499a135372be9f7";
+    var url = "http://api.themoviedb.org/3/search/movie?query="+$routeParams.id+"&api_key="
+
+    $http.get(url+key)
+      .success(function(data){
+      console.log(data);
+      self.posterLink = "http://image.tmdb.org/t/p/w500"+data.results[0].poster_path;
+    })
   }
 }

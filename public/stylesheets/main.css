@@ -48,6 +48,21 @@
   margin-left: 10px;
 }
 
+.detailsButton {
+  postion: relative:
+  height: 50px;
+  width: 120px;
+  outline: 2px solid black
+}
+
+.detailsContainer {
+  width: 90%;
+  height: 1200px;
+  margin: 0 0 25px 5%;
+  background-color: #c0e8e8;
+  outline: 3px solid black;
+}
+
 .goToMap {
   height: 100%;
   max-height: 100%;
@@ -83,6 +98,14 @@
   padding-right: 25px;
 }
 
+.mapButton {
+  postion: relative:
+  height: 50px;
+  width: 120px;
+  outline: 2px solid black
+}
+
+
 .movieDetails {
   display: inline-block;
   height: 100%;
@@ -90,6 +113,11 @@
   position: relative;
   border-right: 2px solid gray;
   padding-right: 25px;
+}
+
+.posterContainer img {
+  width: 300px;
+  height: 500px;
 }
 
 .titleContainer {
