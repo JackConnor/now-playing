@@ -105,6 +105,7 @@ function initMap() {
    var longitude = position.coords.longitude;                 //location
    var coords = new google.maps.LatLng(latitude, longitude); //Creates variable for map coordinates
    var directionsService = new google.maps.DirectionsService();
+   window.directionsService = directionsService;
 
    var directionsDisplay = new google.maps.DirectionsRenderer({
      polylineOptions:
@@ -113,6 +114,7 @@ function initMap() {
        strokeWeight: 4
      }
    });
+   window.directionsDisplay = directionsDisplay;
    var mapOptions = //Sets map options
    {
      zoom: 15,  //Sets zoom level (0-21)
@@ -131,45 +133,45 @@ function initMap() {
      destination: {lat: 34.016, lng: -118.495},
      travelMode: google.maps.DirectionsTravelMode.DRIVING
    };
-   var markeryou = new google.maps.Marker({
-         position: coords,
-         icon: {
-           path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-           strokeColor: "#21927A",
-           scale: 4
-         },
-         map: map,
-         title: 'You!'
-       });
+  //  var markeryou = new google.maps.Marker({
+  //        position: coords,
+  //        icon: {
+  //          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+  //          strokeColor: "#21927A",
+  //          scale: 4
+  //        },
+  //        map: map,
+  //        title: 'You!'
+  //      });
 
-    var markerdest = new google.maps.Marker({
-          position: {lat: 34.016, lng: -118.495},
-          icon: {
-            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-            strokeColor: "#CF2F4D",
-            scale: 4
-          },
-          map: map,
-          title: 'Your Movie!'
-       });
+    // var markerdest = new google.maps.Marker({
+    //       position: {lat: 34.016, lng: -118.495},
+    //       icon: {
+    //         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+    //         strokeColor: "#CF2F4D",
+    //         scale: 4
+    //       },
+    //       map: map,
+    //       title: 'Your Movie!'
+    //    });
 
-      //  Jimmy's code
-       var markerdest = new google.maps.Marker({
-             position: {lat: 34.017, lng: -118.495},
-             icon: {
-               path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-               strokeColor: "#CF2F4D",
-               scale: 4
-             },
-             map: window.map,
-             title: 'Your Movie!'
-          });
+      // //  Jimmy's code
+      //  var markerdest = new google.maps.Marker({
+      //        position: {lat: 34.017, lng: -118.495},
+      //        icon: {
+      //          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+      //          strokeColor: "#CF2F4D",
+      //          scale: 4
+      //        },
+      //        map: window.map,
+      //        title: 'Your Movie!'
+      //     });
 
 
-   directionsService.route(request, function (response, status) {
-     if (status == google.maps.DirectionsStatus.OK) {
-       directionsDisplay.setDirections(response);
-     }
-   });
+  //  directionsService.route(request, function (response, status) {
+  //    if (status == google.maps.DirectionsStatus.OK) {
+  //      directionsDisplay.setDirections(response);
+  //    }
+  //  });
  }
 }
