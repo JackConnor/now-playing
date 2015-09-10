@@ -139,20 +139,19 @@ var marker1 = new google.maps.Marker({
       position: {lat: 34.016, lng: -118.495},
       icon: {
         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+        strokeColor: "#CF2F4D",
         scale: 4
       },
       map: map,
       title: 'AMC Santa Monica'
     });
-    // marker.addListener('click', function() {
-    //   infowindow.open(map, marker);
-    // });
 
 // generic marker #2
 var marker2 = new google.maps.Marker({
     position: {lat: 34.0153, lng: 241.506},
     icon: {
       path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+      strokeColor: "#CF2F4D",
       scale: 4
     },
     map: map,
