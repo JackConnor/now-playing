@@ -1,13 +1,18 @@
 <div class="" ng-init="list.getMovie()">
-  <h1>details!</h1>
   <div class="detailsContainer">
     <div class="row">
-      <div class="col-md-6 col-xs-12">
+      <div class="col-sm-9 col-xs-12">
         <div class="posterContainer">
           <img src="{{list.posterLink}}" alt="" />
         </div>
-      <div class="col-md-6 col-xs-12">
-        <h1>{{list.results[0].original_title}}</h1>
+      <div class="detailInfo col-sm-7 col-xs-12">
+        <h1>{{list.movieTitle}}</h1>
+        <h3>{{list.movieDescription}}</h3>
+        <!-- <h3>{{list.data}}</h3> -->
+        <br>
+        <br>
+        <br>
+        <br>
       </div>
     </div>
   </div>
