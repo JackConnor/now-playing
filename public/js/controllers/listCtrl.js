@@ -8,10 +8,6 @@ function listController($http, $routeParams){
 
   $http.get('http://data.tmsapi.com/v1.1/movies/showings?startDate=2015-09-09&zip=90036&api_key=qf6mzc3fkprbntfd95db3hkk')
    .success(function(data){
-     var currentTime = new Date();
-     console.log('begin');
-     console.log(data);
-     console.log('end');
      self.rawData = data;
      var filteredData = [];
      var idCount = 1;
@@ -23,7 +19,9 @@ function listController($http, $routeParams){
         var time = showtimes[j].dateTime.split('').slice(length-5, length).join('');
 
         var item = {
-          movieName: self.rawData[i].title, time: time, theatreName: showtimes[j].theatre.name,
+          movieName: self.rawData[i].title, time: time,
+          theatreId: showtimes[j].theatre.id,
+          theatreName: showtimes[j].theatre.name,
           id: idCount
         }
         filteredData.push(item);
@@ -43,12 +41,17 @@ function listController($http, $routeParams){
 
     if (buttonCounter) {
       // $('#'+id).css('margin-bottom', 100+"px");
-      $('#'+movie.id).append('<div class="row"><div class="buttonContainer col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0" id=abc'+movie.id+'><button class="mapButton btn-default" ng-click="list.map()">Get Directions</button><button class="detailsButton btn-default" ng-click="list.movieDetails()">See Movie Details</button></div></div>')
+      $('#'+movie.id).append('<div class="row"><div class="buttonContainer col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0" id=abc'+movie.id+'><button class="mapButton btn-default">Get Directions</button><button class="detailsButton btn-default">See Movie Details</button></div></div>')
       console.log('lowering button container');
       //adding event listeners
       $('.detailsButton').on('click', function(){
         console.log('testing');
         window.location.href = "/#/list/"+movie.movieName;
+      })
+
+      $(".mapButton").on('click', function(){
+        console.log('testing map button');
+        window.location.href = "/#/map/"+movie.theatreId;
       })
 
       //end event listeners
@@ -66,23 +69,6 @@ function listController($http, $routeParams){
     } else {
       console.log('something weird happened');
     }
-  }
-
-  self.map = function(){
-    console.log('testing event');
-    console.log();
-    // var url = 'http://data.tmsapi.com/v1.1/theatres/'+id+'?api_key=qf6mzc3fkprbntfd95db3hkk'
-    // $http.get(url)
-    //   .success(function(data){
-    //     console.log(data.location.geoCode);
-    //   })
-    // window.location.href = "/#/map/"+id;
-  }
-
-  self.movieDetails = function(){
-    console.log('movie details');
-    console.log();
-    window.location.href = '/#/list/'+x;
   }
 
   self.getMovie = function(){
