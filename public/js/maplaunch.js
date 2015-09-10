@@ -116,7 +116,7 @@ if (navigator.geolocation) {
       };
 
       infoWindow.setPosition(pos);
-      infoWindow.setContent('You!');
+      infoWindow.setContent('AMC Santa Monica Your Movie');
       map.setCenter(pos);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());

@@ -30,6 +30,5 @@ function mapController($http, $routeParams){
   }
 
 
-
   console.log('mapppppppppppp');
 }
