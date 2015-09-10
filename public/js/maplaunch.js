@@ -105,57 +105,63 @@ var map = new google.maps.Map(document.getElementById('map'), {
   zoom: 16
 });
 
-var infoWindow = new google.maps.InfoWindow({map: map});
+var pos = null;
+
+// var info = new google.maps.InfoWindow({map: map});
 
 // get geolocation info, center map on you!, and creates infowindow above you
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
+      pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
+      console.log(pos);
 
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('You!');
+      // infoWindow.setPosition(pos);
+      // infoWindow.setContent('You!');
       map.setCenter(pos);
-    }, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
+
+      console.log(pos);
+      var marker1 = new google.maps.Marker({
+            position: pos,
+            icon: {
+              path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+              strokeColor: "#CF2F4D",
+              scale: 4
+            },
+            map: map,
+            title: 'AMC Santa Monica'
+          });
+
+      // generic marker #2
+      var marker2 = new google.maps.Marker({
+          position: {lat: 34.0153, lng: 241.506},
+          icon: {
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            strokeColor: "#CF2F4D",
+            scale: 4
+          },
+          map: map,
+          title: 'Arclight Santa Monica'
+        });
+    })
+    // , function() {
+    //   handleLocationError(true, infoWindow, map.getCenter());
+    // });
   } else {
     // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
+    // handleLocationError(false, infoWindow, map.getCenter());
   };
 
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
-};
+// function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+//   infoWindow.setPosition(pos);
+//   infoWindow.setContent(browserHasGeolocation ?
+//                         'Error: The Geolocation service failed.' :
+//                         'Error: Your browser doesn\'t support geolocation.');
+// };
 
 // generic marker #1 in process of adding clickable description
-var marker1 = new google.maps.Marker({
-      position: {lat: 34.016, lng: -118.495},
-      icon: {
-        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-        strokeColor: "#CF2F4D",
-        scale: 4
-      },
-      map: map,
-      title: 'AMC Santa Monica'
-    });
-
-// generic marker #2
-var marker2 = new google.maps.Marker({
-    position: {lat: 34.0153, lng: 241.506},
-    icon: {
-      path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-      strokeColor: "#CF2F4D",
-      scale: 4
-    },
-    map: map,
-    title: 'Arclight Santa Monica'
-  });
 
 }
