@@ -20,7 +20,6 @@ function listController($http, $routeParams){
   self.formatDate = formatDate;
   console.log(formatDate);
   //end finding today's date with formatting for api call
-
   //begin api call for the data to populate the list view
   var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate='+formatDate+'&zip=90036&api_key=qf6mzc3fkprbntfd95db3hkk'
   console.log(url);
@@ -36,9 +35,11 @@ function listController($http, $routeParams){
       for (var j = 0; j < showtimes.length; j++) {
         var length = showtimes[j].dateTime.split('').length;
         var time = showtimes[j].dateTime.split('').slice(length-5, length).join('');
-
+        self.runTime = self.rawData[i].runTime;
+        console.log("run time is:",self.runTime);
         var item = {
-          movieName: self.rawData[i].title, time: time,
+          movieName: self.rawData[i].title,
+          time: time,
           theatreId: showtimes[j].theatre.id,
           theatreName: showtimes[j].theatre.name,
           id: idCount,
@@ -98,6 +99,8 @@ function listController($http, $routeParams){
     var url = "http://api.themoviedb.org/3/search/movie?query="+$routeParams.id+"&api_key="
 
     //single movie detail http call to return additional movie details
+    console.log(self.movieTitle);
+    console.log(self.runTime);
     $http.get(url+key)
       .success(function(data){
       console.log(data);
@@ -107,10 +110,7 @@ function listController($http, $routeParams){
       console.log(self.movieDescription);
       self.movieTitle = data.results[0].title;
       console.log(self.movieTitle);
-      self.runtime = function(){
-        console.log(self.data);
-      }
-
+      console.log("the running time for this movie should be: "+self.runTime);
     })
   }
 }
