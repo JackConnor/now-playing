@@ -100,9 +100,9 @@ var styleArray = [
 // Create a map object and specify the DOM element for display.
 var map = new google.maps.Map(document.getElementById('map'), {
   center: {lat: 0, lng: 0},
-  scrollwheel: false,
+  scrollwheel: true,
   styles: styleArray,
-  zoom: 13
+  zoom: 16
 });
 
 var infoWindow = new google.maps.InfoWindow({map: map});
@@ -136,23 +136,22 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 // generic marker #1 in process of adding clickable description
 var marker1 = new google.maps.Marker({
-      position: {lat: 34.016, lng: 241.502},
+      position: {lat: 34.016, lng: -118.495},
       icon: {
         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+        strokeColor: "#CF2F4D",
         scale: 4
       },
       map: map,
       title: 'AMC Santa Monica'
     });
-    // marker.addListener('click', function() {
-    //   infowindow.open(map, marker);
-    // });
 
 // generic marker #2
 var marker2 = new google.maps.Marker({
     position: {lat: 34.0153, lng: 241.506},
     icon: {
       path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+      strokeColor: "#CF2F4D",
       scale: 4
     },
     map: map,
