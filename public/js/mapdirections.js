@@ -1,5 +1,4 @@
 function initMap() {
-
   var styleArray = [
     {
         "elementType": "labels.text.stroke",
@@ -97,63 +96,80 @@ function initMap() {
     }
   ];
 
-  if (navigator.geolocation) { //Checks if browser supports geolocation
-   navigator.geolocation.getCurrentPosition(function (position) {                                                              //This gets the
-     var latitude = position.coords.latitude;                    //users current
-     var longitude = position.coords.longitude;                 //location
-     var coords = new google.maps.LatLng(latitude, longitude); //Creates variable for map coordinates
-     var directionsService = new google.maps.DirectionsService();
-     var directionsDisplay = new google.maps.DirectionsRenderer({
-       polylineOptions:
-       {
-         strokeColor: "#666666",
-         strokeWeight: 4
-       }
-     });
-     var mapOptions = //Sets map options
+ if (navigator.geolocation) { //Checks if browser supports geolocation
+   navigator.geolocation.getCurrentPosition(getPosition);
+ }
+
+ function getPosition (position) {                                                              //This gets the
+   var latitude = position.coords.latitude;                    //users current
+   var longitude = position.coords.longitude;                 //location
+   var coords = new google.maps.LatLng(latitude, longitude); //Creates variable for map coordinates
+   var directionsService = new google.maps.DirectionsService();
+
+   var directionsDisplay = new google.maps.DirectionsRenderer({
+     polylineOptions:
      {
-       zoom: 15,  //Sets zoom level (0-21)
-       center: coords, //zoom in on users location
-       styles: styleArray
-     };
-     map = new google.maps.Map(document.getElementById("map"), mapOptions);
-     directionsDisplay.setMap(map);
-     directionsDisplay.setOptions( { suppressMarkers: true } );
-     var request = {
-       //origin is equal to your location
-       origin: coords,
-       //destination is equal to where you are going
-       //we will 'api in' the theatre coordinates right here:
-       destination: {lat: 34.016, lng: -118.495},
-       travelMode: google.maps.DirectionsTravelMode.DRIVING
-     };
-     var markeryou = new google.maps.Marker({
-           position: coords,
-           icon: {
-             path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-             strokeColor: "#21927A",
-             scale: 4
-           },
-           map: map,
-           title: 'You!'
-         });
+       strokeColor: "#666666",
+       strokeWeight: 4
+     }
+   });
+   var mapOptions = //Sets map options
+   {
+     zoom: 15,  //Sets zoom level (0-21)
+     center: coords, //zoom in on users location
+     styles: styleArray
+   };
+   map = new google.maps.Map(document.getElementById("map"), mapOptions);
+   window.map = map;
+   directionsDisplay.setMap(map);
+   directionsDisplay.setOptions( { suppressMarkers: true } );
+   var request = {
+     //origin is equal to your location
+     origin: coords,
+     //destination is equal to where you are going
+     //we want the self.theatreLocation
+     destination: {lat: 34.016, lng: -118.495},
+     travelMode: google.maps.DirectionsTravelMode.DRIVING
+   };
+   var markeryou = new google.maps.Marker({
+         position: coords,
+         icon: {
+           path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+           strokeColor: "#21927A",
+           scale: 4
+         },
+         map: map,
+         title: 'You!'
+       });
 
-      var markerdest = new google.maps.Marker({
-            position: {lat: 34.016, lng: -118.495},
-            icon: {
-              path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-              strokeColor: "#CF2F4D",
-              scale: 4
-            },
-            map: map,
-            title: 'Your Movie!'
-         });
+    var markerdest = new google.maps.Marker({
+          position: {lat: 34.016, lng: -118.495},
+          icon: {
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            strokeColor: "#CF2F4D",
+            scale: 4
+          },
+          map: map,
+          title: 'Your Movie!'
+       });
 
-     directionsService.route(request, function (response, status) {
-       if (status == google.maps.DirectionsStatus.OK) {
-         directionsDisplay.setDirections(response);
-       }
-     });
+      //  Jimmy's code
+       var markerdest = new google.maps.Marker({
+             position: {lat: 34.017, lng: -118.495},
+             icon: {
+               path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+               strokeColor: "#CF2F4D",
+               scale: 4
+             },
+             map: window.map,
+             title: 'Your Movie!'
+          });
+
+
+   directionsService.route(request, function (response, status) {
+     if (status == google.maps.DirectionsStatus.OK) {
+       directionsDisplay.setDirections(response);
+     }
    });
  }
 }
