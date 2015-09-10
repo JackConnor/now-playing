@@ -11,7 +11,7 @@ function mapController($http, $routeParams){
         console.log(data);
         self.theatreLocation = {lat: data.location.geoCode.latitude, lng: data.location.geoCode.longitude}
         console.log(self.theatreLocation);
-        
+
         self.theatreLatitude = data.location.geoCode.latitude;
         self.theatreLongitude = data.location.geoCode.longitude;
       })
@@ -25,6 +25,7 @@ function mapController($http, $routeParams){
           map: window.map,
           title: 'Your Movie!'
        });
+       console.log(markerdest);
 
   }
 
