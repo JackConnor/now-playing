@@ -11,6 +11,7 @@ function mapController($http, $routeParams){
   self.getTheatre = function(){
     var theatre = $routeParams.id
       //begin if statement
+      ////////////////////
     if(currentUrl == 'http://localhost:5000/#/map'){
       console.log('on map');
       ///ad "onload" stuff here
@@ -51,9 +52,9 @@ function mapController($http, $routeParams){
               });
           })
         }
-
-////end launch
+////end "on launch" portion of if-statement
     } else {
+      ///begin "single theater directions" portion of if-statement
       console.log('getting directions');
       //add single theater directions here
       $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatre+'?api_key=qf6mzc3fkprbntfd95db3hkk')
