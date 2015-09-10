@@ -1,34 +1,57 @@
 angular.module('listCtrl', [])
   .controller('listController', listController);
 
-function listController($http){
+function listController($http, $routeParams){
   var self = this;
+  console.log($routeParams.id);
+  // console.log(route.curretn.params);
 
   $http.get('http://data.tmsapi.com/v1.1/movies/showings?startDate=2015-09-09&zip=90036&api_key=qf6mzc3fkprbntfd95db3hkk')
    .success(function(data){
+     var currentTime = new Date();
      console.log('begin');
      console.log(data);
      console.log('end');
-     self.data = data;
+     self.rawData = data;
+     var filteredData = [];
+     var idCount = 1;
+     for (var i = 0; i < self.rawData.length; i++) {
+      var showtimes = self.rawData[i].showtimes;
+      //  console.log(showtimes);
+      for (var j = 0; j < showtimes.length; j++) {
+        var length = showtimes[j].dateTime.split('').length;
+        var time = showtimes[j].dateTime.split('').slice(length-5, length).join('');
+
+        var item = {
+          movieName: self.rawData[i].title, time: time, theatreName: showtimes[j].theatre.name,
+          id: idCount
+        }
+        filteredData.push(item);
+        idCount++;
+      }
+     }
+     console.log(filteredData);
+     self.data = filteredData;
    })
+
+
 
   var buttonCounter = true;
 
   self.openButtons = function(id){
-    console.log(id);
-
-    $('#'+id).append('<div class="buttonContainer '+id+'"><ul class="buttons"><button ng-click="map('+id+')">get directions</button><button ng-click="movieDetails('+id+')">see movie details</button></div></div>');
-
-    $('.buttons')
+    //jquery stuff
+    $('#'+id).css('color', 'red')
 
     if (buttonCounter) {
       // $('#'+id).css('margin-bottom', 100+"px");
+      $('#'+id).append('<div class="buttonContainer" id=abc'+id+'>hello</div>')
       console.log('lowering button container');
       buttonCounter = !buttonCounter;
       return buttonCounter;
     }
     else if(!buttonCounter) {
-      $('.'+id).remove();
+      console.log('#abc'+id);
+      $('#abc'+id).remove();
       console.log('raising button container');
       $('#'+id).css('margin-bottom', 4+'px');
       buttonCounter = !buttonCounter;
@@ -50,7 +73,9 @@ function listController($http){
     // window.location.href = "/#/map/"+id;
   }
 
-  self.movieDetails = function(){
+  self.movieDetails = function(x){
     console.log('movie details');
+    console.log(x);
+    window.location.href = '/#/list/'+x;
   }
 }

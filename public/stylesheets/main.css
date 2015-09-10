@@ -37,7 +37,9 @@
 .buttonContainer {
   height: 90px;
   width: 100%;
+  margin-bottom: 4px;
   outline: 2px solid black;
+  display: inline-block;
 }
 
 .buttonContainer button {
@@ -54,11 +56,6 @@
   position: relative;
 }
 
-.listBox {
-  height: 110px;
-  margin: 0 0 4px 0;
-}
-
 .listContainer{
   background-color: #E9E5DC;
 }
@@ -66,9 +63,10 @@
 .listedMovie {
   list-style-type: none;
   background-color: #c0e8e8;
-  width: 60%;
   max-height: 100%;
   margin: 0 0 0 20%;
+  height: 130px;
+  margin: 0 0 4px 0;
 }
 
 .listedTitle h4 {

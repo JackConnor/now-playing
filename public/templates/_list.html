@@ -1,12 +1,29 @@
 <div class="listContainer">
   <div class="titleContainer">
     <h2 id=listTitle>A List of all the movies closest to 90036</h2>
-    <h3>test: {{list.testData}}</h3>
   </div>
 
-
   <div class="listContainer">
-    <div class="listedMovie" ng-repeat="movie in list.data" ng-click="list.openButtons(movie.tmsId)" id="{{movie.tmsId}}">
+    <div class="row" ng-repeat="movie in list.data" id="{{movie.id}}">
+      <div class="listedMovie col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0" ng-click='list.openButtons(movie.id)'>
+        <div class="row">
+          <div class="title col-sm-4 col-xs-12">
+            <h3>{{movie.movieName}}</h3>
+          </div>
+          <div class="time col-sm-4 col-xs-12">
+            <h2>{{movie.time}}</h2>
+          </div>
+          <div class="poster col-sm-4 col-xs-12">
+            <h3>{{movie.theatreName}}</h3>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+<!--
+    <div class="listedMovie col-sm-8 col-sm-offset-2 col-xs-12" ng-click="list.openButtons(movie.tmsId)" id="{{movie.tmsId}}">
       <div class="listBox">
         <div class="listTitle">
           <h4>{{movie.title}}</h4>
@@ -18,5 +35,5 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>

@@ -15,6 +15,12 @@ function appRoutes($routeProvider){
       controllerAs: 'list'
     })
 
+    .when('/list/:id', {
+      templateUrl: 'templates/_details.html',
+      controller: 'listController',
+      controllerAs: 'list'
+    })
+
     .when('/map', {
       templateUrl: 'templates/_map.html',
       controller: 'mapController',
