@@ -3,6 +3,33 @@ angular.module('mapCtrl', [])
 
 function mapController($http, $routeParams){
   var self = this;
+  navigator.geolocation.getCurrentPosition(function(data){
+    $http.get("http://data.tmsapi.com/v1.1/theatres?lat=34.0131228&lng=-118.49513040000001&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
+      .then(function(data){
+        console.log(data.data);
+        var theatresArray = [];
+        for (var i = 0; i < 8; i++) {
+          console.log(data.data[i].location.geoCode.latitude);
+          console.log(data.data[i].location.geoCode.longitude);
+
+          var theatreItem = {lat: parseFloat(data.data[i].location.geoCode.latitude), lng: parseFloat(data.data[i].location.geoCode.longitude), name: data.data[i].name}
+          theatresArray.push(theatreItem);
+          console.log(theatreItem);
+          var marker1 = new google.maps.Marker({
+                position: {lat: theatreItem.lat, lng: theatreItem.lng},
+                icon: {
+                  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                  strokeColor: "#CF2F4D",
+                  scale: 4
+                },
+                map: map,
+                title: theatreItem.name
+              });
+        }
+        console.log(theatresArray);
+      })
+  })
+
 
   self.counter = true;
 
@@ -22,6 +49,7 @@ function mapController($http, $routeParams){
       ////////////////////
     if(currentUrl == 'http://localhost:5000/#/map'){
       console.log('on map');
+
       ///ad "onload" stuff here
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -33,31 +61,76 @@ function mapController($http, $routeParams){
 
             // infoWindow.setPosition(pos);
             // infoWindow.setContent('You!');
-            map.setCenter(pos);
+            // window.map.setCenter(pos);
+            // console.log(pos);
 
-            console.log(pos);
-            var marker1 = new google.maps.Marker({
-                  position: pos,
-                  icon: {
-                    path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                    strokeColor: "#CF2F4D",
-                    scale: 4
-                  },
-                  map: map,
-                  title: 'AMC Santa Monica'
-                });
+            ///begin auto-population of map markers on launch
+            var currentDate = new Date();
+            self.currentDate = currentDate;
+            var year = currentDate.getFullYear();
+            var month = function(){
+              if(currentDate.getMonth() < 10){
+                var fullMonth = "0" + (currentDate.getMonth()+1);
+                var fullMonthInt = parseInt(fullMonth);
+                return fullMonth
+              } else {
+                return currentDate.getMonth()
+              };
+            }
+            var day = currentDate.getDate();
+            var formatDate = year + "-"+month()+"-"+day;
+            self.formatDate = formatDate;
+            console.log(self.formatDate);
 
-            // generic marker #2
-            var marker2 = new google.maps.Marker({
-                position: {lat: 34.0153, lng: 241.506},
-                icon: {
-                  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                  strokeColor: "#CF2F4D",
-                  scale: 4
-                },
-                map: map,
-                title: 'Arclight Santa Monica'
-              });
+            navigator.geolocation.getCurrentPosition(function(data){
+              self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude};
+              console.log(self.currentLocation);
+
+              var url = "http://data.tmsapi.com/v1.1/theatres?zip=78701&api_key=qf6mzc3fkprbntfd95db3hkk"
+              //  'https://data.tmsapi.com/v1.1/theatres?lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
+              $http.get(url)
+               .success(function(data){
+                 console.log(data);
+                 self.rawData = data;
+                 var filteredData = [];
+                 var idCount = 1;
+                //  for (var i = 0; i < self.rawData.length; i++) {
+                //    console.log('hi');
+                 //
+                //   }
+                //  filteredData.sort(function(a, b) {
+                //   return parseFloat(a.startTime) - parseFloat(b.startTime);
+                //  });
+                //  console.log(filteredData);
+                //  self.data = filteredData;
+               }, function(err) {
+                 console.log(err);
+               })
+            })
+
+
+            // var marker1 = new google.maps.Marker({
+            //       position: pos,
+            //       icon: {
+            //         path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            //         strokeColor: "#CF2F4D",
+            //         scale: 4
+            //       },
+            //       map: map,
+            //       title: 'AMC Santa Monica'
+            //     });
+            //
+            // // generic marker #2
+            // var marker2 = new google.maps.Marker({
+            //     position: {lat: 34.0153, lng: 241.506},
+            //     icon: {
+            //       path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            //       strokeColor: "#CF2F4D",
+            //       scale: 4
+            //     },
+            //     map: map,
+            //     title: 'Arclight Santa Monica'
+            //   });
           })
         }
 ////end "on launch" portion of if-statement

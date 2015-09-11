@@ -1,29 +1,4 @@
-.jumbotron {
-  background: #532F8C;
-  color: white;
-  padding-bottom: 80px; }
-  .jumbotron .btn-primary {
-    background: #845ac7;
-    border-color: #845ac7; }
-    .jumbotron .btn-primary:hover {
-      background: #7646c1; }
-  .jumbotron p {
-    color: #d9ccee;
-    max-width: 75%;
-    margin: 1em auto 2em; }
-  .navbar + .jumbotron {
-    margin-top: -20px; }
-  .jumbotron .lang-logo {
-    display: block;
-    background: #B01302;
-    border-radius: 50%;
-    overflow: hidden;
-    width: 100px;
-    height: 100px;
-    margin: auto;
-    border: 2px solid white; }
-    .jumbotron .lang-logo img {
-      max-width: 100%; }
+
 
 .buttons {
   margin-left: 25%;
@@ -60,6 +35,12 @@
 
 .detailInfo {
 
+}
+
+.dropdownToggle {
+  display: block;
+  width: 16%;
+  min-width:100px; 
 }
 
 .formControl {
@@ -102,12 +83,38 @@
   border-right: 2px solid gray;
   padding-right: 25px;
 }
-
+.logoContainer {
+  height: 70px;
+  width: 130px;
+  outline: 2px solid gray;
+  display: inline-block;
+  text-align: center;
+}
 .mapButton {
   position: relative:
   height: 50px;
   width: 120px;
   outline: 2px solid black
+}
+
+.navContainer {
+  height: 120px;
+}
+
+.navTab {
+  width: 190px;
+  text-align: center;
+  background-color: #FDF5FD
+}
+
+.navTab a{
+
+}
+
+.tabContainer {
+  display: inline-block;
+  float: right;
+  margin-right: 40%;
 }
 
 /*begin _details.html css*/
@@ -131,6 +138,8 @@
 .detailInfo {
 
 }
+
+
 
 #movietitle {
   font-size: 35px;
@@ -165,10 +174,19 @@
   font-weight: bolder;
 }
 
+
 #goseenowlink {
   margin: 5px 0px 5px 0px;
   font-size: 30px;
   font-weight: 800;
+  border-right: 2px solid gray
+}
+
+#gomapnowlink {
+  margin: 5px 0px 5px 0px;
+  font-size: 30px;
+  font-weight: 800;
+
 }
 
 html, body {

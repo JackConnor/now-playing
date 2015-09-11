@@ -43,15 +43,20 @@
   <body ng-app="movieApp" ng-controller='mainController as main'>
 
     <!--navigation bar top  -->
-    <nav class="nav navbar navbar-fixed-top">
-    <ul class="nav nav-tabs">
-      <li class="active"><a id="goseenowlink" href="/#/map" data-toggle="tab" aria-expanded="true">MAP</a></li>
-      <li class=""><a id="goseenowlink" href="/#/list" data-toggle="tab" aria-expanded="false">LIST</a></li>
-    </ul>
+  <nav class="nav navbar navbar-fixed-top">
+    <div class="navContainer">
+      <div class="logoContainer">
+        <h2>Logo</h2>
+      </div>
+      <ul class="tabContainer nav nav-tabs">
+        <li class="navTab"><a id="goseenowlink" href="/#/map" data-toggle="tab" aria-expanded="true" >MAP</a></li>
+        <li class="navTab"><a id="gomapnowlink" href="/#/list" data-toggle="tab" aria-expanded="false">LIST</a></li>
+      </ul>
+    </div>
   </nav>
 
 <div id="myTabContent" class="tab-content">
-  <div class="tab-pane fade active in" id="gohome"></div>
+  <div class="tab-pane fade active in navTabe" id="gohome"></div>
   <div class="tab-pane fade" id="see"></div>
 </div>
 
