@@ -9,14 +9,14 @@
 
     <div class="row" ng-repeat="movie in list.data | orderBy: sortBy" id="{{movie.id}}">
       <div class="listedMovie col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0" ng-click='list.openButtons(movie)'>
-        <div class="row">
+        <div class="row movieRow">
           <div class="title col-sm-4 col-xs-12">
-            <h3>{{movie.movieName}}</h3>
+            <h2>{{movie.movieName}}</h2>
           </div>
           <div class="time col-sm-4 col-xs-12">
-            <h2>{{movie.startTime}}</h2>
+            <h3>begins at:<h3> <h2>{{movie.startTimeParsed}}</h2>
           </div>
-          <div class="poster col-sm-4 col-xs-12">
+          <div class="theater col-sm-4 col-xs-12">
             <h3>{{movie.theatreName}}</h3>
           </div>
         </div>

@@ -92,6 +92,10 @@
   outline: 2px solid black
 }
 
+.movieRow {
+  max-width: 100%;
+}
+
 .navTab {
   width: 190px;
   text-align: center;
@@ -145,6 +149,11 @@
   margin: 20px 0px 60px 0px;
   background-color: #c0e8e8;
   outline: 3px solid black;
+}
+
+.title {
+  position: relative;
+  margin-top: 20px;
 }
 
 .posterContainer img {

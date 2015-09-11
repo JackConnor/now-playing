@@ -34,6 +34,7 @@ function listController($http, $routeParams){
       $http.get(url)
        .success(function(data){
          self.rawData = data;
+        //  console.log(data);
          var filteredData = [];
          var idCount = 1;
          //begin if statement
@@ -83,7 +84,8 @@ function listController($http, $routeParams){
               theatreName: showtimes[j].theatre.name,
               id: idCount,
               runTime: self.runTime,
-              startTime: self.startTime
+              startTime: self.startTime,
+              startTimeParsed: self.startTimeParsed
             }
             ///if statement to see if runtime comes after current time
 
