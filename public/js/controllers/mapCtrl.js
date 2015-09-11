@@ -4,7 +4,8 @@ angular.module('mapCtrl', [])
 function mapController($http, $routeParams){
   var self = this;
   navigator.geolocation.getCurrentPosition(function(data){
-    $http.get("https://data.tmsapi.com/v1.1/theatres?lat=34.0131228&lng=-118.49513040000001&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
+    var currentLoc = {lat: data.coords.latitude, lng: data.coords.longitude}
+    $http.get("https://data.tmsapi.com/v1.1/theatres?lat="+currentLoc.lat+"&lng="+currentLoc.lng+"&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
       .then(function(data){
         console.log(data.data);
         var theatresArray = [];
@@ -14,9 +15,7 @@ function mapController($http, $routeParams){
 
           var theatreItem = {lat: parseFloat(data.data[i].location.geoCode.latitude), lng: parseFloat(data.data[i].location.geoCode.longitude), name: data.data[i].name, distance: data.data[i].location.distance}
           theatresArray.push(theatreItem);
-          console.log(theatreItem);
         }
-        console.log(theatresArray);
         function compare(a,b) {
           if (a.distance < b.distance)
             return -1;
@@ -26,7 +25,6 @@ function mapController($http, $routeParams){
         }
 
         theatresArray.sort(compare);
-        console.log(theatresArray);
         for (var i = 0; i < 11; i++) {
           var name = "marker"+i;
           var name = new google.maps.Marker({

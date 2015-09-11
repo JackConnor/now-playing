@@ -33,7 +33,6 @@ function listController($http, $routeParams){
       var url = 'https://data.tmsapi.com/v1.1/movies/showings?radius=20&startDate='+formatDate+'&lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
       $http.get(url)
        .success(function(data){
-         console.log(data);
          self.rawData = data;
          var filteredData = [];
          var idCount = 1;
@@ -90,9 +89,6 @@ function listController($http, $routeParams){
 
             if (self.startTime > self.currentTime) {
               filteredData.push(item);
-              console.log(item);
-              // itemsArray.push(item);
-              // console.log(itemsArray);
               idCount++;
             } else {
             }
@@ -105,8 +101,6 @@ function listController($http, $routeParams){
        })
     })
   }
-  // console.log(self.data);
-  // console.log(itemsArray());
   itemsArray();
 
   //end finding today's date with formatting for api call
