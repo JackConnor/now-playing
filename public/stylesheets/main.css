@@ -8,21 +8,28 @@
   height: 90px;
   width: 100%;
   margin-bottom: 4px;
-  outline: 2px solid black;
+  /*outline: 2px solid black;*/
   display: inline-block;
 }
 
 .buttonContainer button {
   height: 60px;
-  width: 100px;
-  margin-left: 10px;
+  width: 200px;
+  margin: 15px 10px 10px 10px;
 }
 
 .detailsButton {
-  postion: relative:
-  height: 50px;
-  width: 120px;
-  outline: 2px solid black
+  postion: relative;
+  height: 100px;
+  width: 200px;
+  /*outline: 2px solid black*/
+}
+
+.mapButton {
+  position: relative;
+  height: 100px;
+  width: 200px;
+  /*outline: 2px solid black*/
 }
 
 .detailsContainer {
@@ -83,13 +90,6 @@
   position: relative;
   border-right: 2px solid gray;
   padding-right: 25px;
-}
-
-.mapButton {
-  position: relative:
-  height: 50px;
-  width: 120px;
-  outline: 2px solid black
 }
 
 .movieRow {

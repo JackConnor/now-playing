@@ -127,7 +127,7 @@ function listController($http, $routeParams){
     //jquery stuff
     if (buttonCounter) {
       // $('#'+id).css('margin-bottom', 100+"px");
-      $('#'+movie.id).append('<div class="row"><div class="buttonContainer col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0" id=abc'+movie.id+'><button class="mapButton btn-default">Get Directions</button><button class="detailsButton btn-default">See Movie Details</button></div></div>')
+      $('#'+movie.id).append('<div class="row"><div class="buttonContainer col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0" id=abc'+movie.id+'><button class="mapButton btn-default">Directions To</button><button class="detailsButton btn-default">Movie Details</button></div></div>')
       //adding event listeners
       $('.detailsButton').on('click', function(){
         window.location.href = "/#/list/"+movie.movieName;
