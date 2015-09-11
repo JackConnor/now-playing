@@ -3,6 +3,10 @@ angular.module('listCtrl', [])
 
 function listController($http, $routeParams){
   var self = this;
+  function setMap(){
+    $('#map').css("height", 0+"px");
+  }
+  setMap();
   //finding the date on load and feeding it to the tmsapi to initially populate the list based on the user's location
   var currentDate = new Date();
   var year = currentDate.getFullYear();
@@ -33,17 +37,36 @@ function listController($http, $routeParams){
       var showtimes = self.rawData[i].showtimes;
       //  console.log(showtimes);
       for (var j = 0; j < showtimes.length; j++) {
+        //start getting showtimes
         var length = showtimes[j].dateTime.split('').length;
-        var time = showtimes[j].dateTime.split('').slice(length-5, length).join('');
+        self.startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
+        console.log('time is: '+self.startTime);
+        //end getting showtimes
+
+        //begin getting now's time
+        var currentTime = new Date();
+        var currMin = currentTime.getMinutes();
+        var currHour = currentTime.getHours();
+        self.currentTime = currHour+":"+currMin;
+        console.log("right now is: "+self.currentTime);
+        ///end gettting current time
+
+        ///gettting the movies runtime
         self.runTime = self.rawData[i].runTime;
-        console.log("run time is:",self.runTime);
+        console.log(self.runTime);
+        var runHours = self.runTime.slice(self.runTime.length-6, self.runTime.length-4);
+        var runMinutes = self.runTime.slice(self.runTime.length-3, self.runTime.length-1);
+        self.runTime = runHours+":"+runMinutes
+        console.log("your total runtime is: "+self.Runtime);
+        ///end getting movies runtime
+
         var item = {
           movieName: self.rawData[i].title,
-          time: time,
           theatreId: showtimes[j].theatre.id,
           theatreName: showtimes[j].theatre.name,
           id: idCount,
-          runTime: self.rawData[i].runTime
+          runTime: self.runTime,
+          startTime: self.startTime
         }
         filteredData.push(item);
         idCount++;

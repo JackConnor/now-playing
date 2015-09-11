@@ -1,19 +1,22 @@
 <div class="" ng-init="list.getMovie()">
+
+  <div class="col-sm-9 col-xs-12">
   <div class="detailsContainer">
-    <div class="row">
-      <div class="col-sm-9 col-xs-12">
+
         <div class="posterContainer">
-          <img src="{{list.posterLink}}" alt="" />
+          <img src="{{list.posterLink}}" width="450" height="675" alt="Movie Poster" />
         </div>
-      <div class="detailInfo col-sm-7 col-xs-12">
-        <h1>{{list.movieTitle}}</h1>
-        <h3>{{list.movieDescription}}</h3>
-        <h3>{{list.runtime}}</h3>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
-    </div>
+
+        <div class="col-sm-7 col-xs-12">
+        <div class="descriptionContainer">
+          <h1 id="movietitle">{{list.movieTitle}}</h1>
+          <h3 id="moviedesc">{{list.movieDescription}}</h3>
+          <h3 id="moviestarttime">Start Time: {{list.startTime}}</h3>
+          <p id="moviestartsin">(starts in xx minutes)</p>
+          <h3 id="movieruntime">Run Time: {{list.runTime}}</h3>
+          <p id="movieends">(ends at approximately xx:xx)</p>
+        </div>
+        </div>
+
   </div>
-</div>
+  </div>
