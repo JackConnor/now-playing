@@ -65,7 +65,7 @@ function mapController($http, $routeParams){
       ///begin "single theater directions" portion of if-statement
       console.log('getting directions');
       //add single theater directions here
-      $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatre+'?api_key=qf6mzc3fkprbntfd95db3hkk')
+      $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatre+'?api_key=qf6mzc3fkprbntfd95db3hkk')
         .success(function(data){
           console.log(data);
           self.theatreLocation = {lat: parseFloat(data.location.geoCode.latitude), lng: parseFloat(data.location.geoCode.longitude)}
@@ -122,13 +122,6 @@ function mapController($http, $routeParams){
 
        })
     }
-
-    //  directionsService.route(request, function (response, status) {
-    //    if (status == google.maps.DirectionsStatus.OK) {
-    //      directionsDisplay.setDirections(response);
-    //    }
-    //  });
-
   }
 
 

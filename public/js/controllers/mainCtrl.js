@@ -11,7 +11,4 @@ function mainController($http, $location){
     }
     setMap();
   }
-
-///begin long asssssss data call, we use this in the rest of the app
-
 }

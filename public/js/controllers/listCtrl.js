@@ -31,7 +31,7 @@ function listController($http, $routeParams){
   // self.currentLocation = currentLocation();
   //end finding today's date with formatting for api call
   //begin api call for the data to populate the list view
-  var url = 'http://data.tmsapi.com/v1.1/movies/showings?startDate='+formatDate+'&zip=90036&api_key=qf6mzc3fkprbntfd95db3hkk'
+  var url = 'https://data.tmsapi.com/v1.1/movies/showings?startDate='+formatDate+'&zip=90036&api_key=qf6mzc3fkprbntfd95db3hkk'
   $http.get(url)
    .success(function(data){
      self.rawData = data;
@@ -41,7 +41,7 @@ function listController($http, $routeParams){
       var showtimes = self.rawData[i].showtimes;
       //  console.log(showtimes);
       for (var j = 0; j < showtimes.length; j++) {
-        
+
         //start getting showtimes
         var length = showtimes[j].dateTime.split('').length;
         self.startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
@@ -79,6 +79,10 @@ function listController($http, $routeParams){
         }
       }
      }
+     filteredData.sort(function(a, b) {
+      return parseFloat(a.startTime) - parseFloat(b.startTime);
+     });
+     console.log(filteredData);
      self.data = filteredData;
    })
 
@@ -117,16 +121,15 @@ function listController($http, $routeParams){
   //end function for button window
 
   self.getMovie = function(){
-
     var key = "a9e6b3f7506ddf2d1499a135372be9f7";
-    var url = "http://api.themoviedb.org/3/search/movie?query="+$routeParams.id+"&api_key="
+    var url = "https://api.themoviedb.org/3/search/movie?query="+$routeParams.id+"&api_key="
 
     //single movie detail http call to return additional movie details
 
     $http.get(url+key)
       .success(function(data){
       //begin passing my data to my angular frontend via self.'s
-      self.posterLink = "http://image.tmdb.org/t/p/w500"+data.results[0].poster_path;
+      self.posterLink = "https://image.tmdb.org/t/p/w500"+data.results[0].poster_path;
       self.movieDescription = data.results[0].overview;
       self.movieTitle = data.results[0].title;
       self.startTime = self.startTime;
