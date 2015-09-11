@@ -1,7 +1,4 @@
 
-.bodyHolder {
-  position: relative;
-}
 
 .buttons {
   margin-left: 25%;
@@ -43,10 +40,6 @@
   height: 25px;
 }
 
-.dropdownToggle option {
-    font-size: 22px;
-}
-
 .formControl {
   width: 250px;
   height: 50px;
@@ -63,7 +56,6 @@
 
 .listContainer{
   background-color: #E9E5DC;
-  margin-top: 0px;
 }
 
 .listedMovie {
