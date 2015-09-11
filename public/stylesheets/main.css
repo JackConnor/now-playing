@@ -40,7 +40,7 @@
 .dropdownToggle {
   display: block;
   width: 16%;
-  min-width:100px; 
+  min-width:100px;
 }
 
 .formControl {
@@ -59,6 +59,7 @@
 
 .listContainer{
   background-color: #E9E5DC;
+  margin-top: 10px;
 }
 
 .listedMovie {
@@ -98,7 +99,7 @@
 }
 
 .navContainer {
-  height: 120px;
+  height: 90px;
 }
 
 .navTab {

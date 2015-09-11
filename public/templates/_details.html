@@ -11,24 +11,11 @@
         <div class="descriptionContainer">
           <h1 id="movietitle">{{list.movieTitle}}</h1>
           <h3 id="moviedesc">{{list.movieDescription}}</h3>
-          <h3 id="moviestarttime">Start Time: {{list.startTime}}</h3>
-          <p id="moviestartsin">(starts in xx minutes)</p>
+          <h3 id="moviestarttime">Start Time: {{list.startTimeParsed}}</h3>
+          <p id="moviestartsin">(starts in {{list.minutesTo()}})</p>
           <h3 id="movieruntime">Run Time: {{list.runTime}}</h3>
-          <p id="movieends">(ends at approximately xx:xx)</p>
+          <p id="movieends">(ends at approximately {{list.endTime}})</p>
         </div>
         </div>
 
-  </div>
-  
-      <div class="detailInfo col-sm-7 col-xs-12">
-        <h1>{{list.movieTitle}}</h1>
-        <h3>{{list.movieDescription}}</h3>
-        <h3>{{list.runTime}}</h3>
-        <br>
-        <br>
-        <br>
-        <br>
-      </div>
-    </div>
->>>>>>> mapview
   </div>
