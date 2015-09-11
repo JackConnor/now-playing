@@ -4,7 +4,7 @@ angular.module('mapCtrl', [])
 function mapController($http, $routeParams){
   var self = this;
   navigator.geolocation.getCurrentPosition(function(data){
-    $http.get("http://data.tmsapi.com/v1.1/theatres?lat=34.0131228&lng=-118.49513040000001&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
+    $http.get("https://data.tmsapi.com/v1.1/theatres?lat=34.0131228&lng=-118.49513040000001&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
       .then(function(data){
         console.log(data.data);
         var theatresArray = [];
@@ -60,7 +60,7 @@ function mapController($http, $routeParams){
     var theatre = $routeParams.id
       //begin if statement
       ////////////////////
-    if(currentUrl == 'http://localhost:5000/#/map'){
+    if(currentUrl == 'https://localhost:5000/#/map'){
       console.log('on map');
 
       ///ad "onload" stuff here
