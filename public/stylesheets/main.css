@@ -1,4 +1,7 @@
 
+.bodyHolder {
+  position: relative;
+}
 
 .buttons {
   margin-left: 25%;
