@@ -8,25 +8,38 @@ function mapController($http, $routeParams){
       .then(function(data){
         console.log(data.data);
         var theatresArray = [];
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < data.data.length; i++) {
           console.log(data.data[i].location.geoCode.latitude);
           console.log(data.data[i].location.geoCode.longitude);
 
-          var theatreItem = {lat: parseFloat(data.data[i].location.geoCode.latitude), lng: parseFloat(data.data[i].location.geoCode.longitude), name: data.data[i].name}
+          var theatreItem = {lat: parseFloat(data.data[i].location.geoCode.latitude), lng: parseFloat(data.data[i].location.geoCode.longitude), name: data.data[i].name, distance: data.data[i].location.distance}
           theatresArray.push(theatreItem);
           console.log(theatreItem);
-          var marker1 = new google.maps.Marker({
-                position: {lat: theatreItem.lat, lng: theatreItem.lng},
-                icon: {
-                  path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
-                  strokeColor: "#CF2F4D",
-                  scale: 4
-                },
-                map: map,
-                title: theatreItem.name
-              });
         }
         console.log(theatresArray);
+        function compare(a,b) {
+          if (a.distance < b.distance)
+            return -1;
+          if (a.distance > b.distance)
+            return 1;
+          return 0;
+        }
+
+        theatresArray.sort(compare);
+        console.log(theatresArray);
+        for (var i = 0; i < 11; i++) {
+          var name = "marker"+i;
+          var name = new google.maps.Marker({
+              position: {lat: theatresArray[i].lat, lng: theatresArray[i].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: 'Arclight Santa Monica'
+            });
+        }
       })
   })
 
@@ -52,17 +65,13 @@ function mapController($http, $routeParams){
 
       ///ad "onload" stuff here
       if (navigator.geolocation) {
+        console.log('geoloc working');
           navigator.geolocation.getCurrentPosition(function(position) {
             pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
             console.log(pos);
-
-            // infoWindow.setPosition(pos);
-            // infoWindow.setContent('You!');
-            // window.map.setCenter(pos);
-            // console.log(pos);
 
             ///begin auto-population of map markers on launch
             var currentDate = new Date();
@@ -86,8 +95,8 @@ function mapController($http, $routeParams){
               self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude};
               console.log(self.currentLocation);
 
-              var url = "http://data.tmsapi.com/v1.1/theatres?zip=78701&api_key=qf6mzc3fkprbntfd95db3hkk"
-              //  'https://data.tmsapi.com/v1.1/theatres?lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
+              var url = "https://data.tmsapi.com/v1.1/theatres?lat="+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
+
               $http.get(url)
                .success(function(data){
                  console.log(data);

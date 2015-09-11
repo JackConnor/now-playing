@@ -104,8 +104,8 @@ function listController($http, $routeParams){
        })
     })
   }
-  console.log(self.data);
-  console.log(itemsArray());
+  // console.log(self.data);
+  // console.log(itemsArray());
   itemsArray();
 
   //end finding today's date with formatting for api call
