@@ -7,15 +7,6 @@
       <option value="movieName">Name</option>
     </select>
 
-    <div class="btn-group">
-      <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Large button <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-        ...
-      </ul>
-    </div>
-
     <div class="row" ng-repeat="movie in list.data | orderBy: sortBy" id="{{movie.id}}">
       <div class="listedMovie col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0" ng-click='list.openButtons(movie)'>
         <div class="row">
