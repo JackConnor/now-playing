@@ -3,15 +3,11 @@ angular.module('mapCtrl', [])
 
 function mapController($http, $routeParams){
   var self = this;
-<<<<<<< HEAD
-  function setMap(){
-  $('#map').css("height", 100+"%");
-=======
+
   self.counter = true;
 
   function setMap(){
     $('#map').css("height", 100+"%");
->>>>>>> mapview
   }
   setMap();
 

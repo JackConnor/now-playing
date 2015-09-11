@@ -12,9 +12,6 @@ function mainController($http, $location){
     setMap();
   }
 
-
-
->>>>>>> mapview
 ///begin long asssssss data call, we use this in the rest of the app
 
 }
