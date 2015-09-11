@@ -33,10 +33,6 @@
   outline: 3px solid black;
 }
 
-.detailInfo {
-
-}
-
 .dropdownToggle {
   display: block;
   width: 16%;
@@ -224,4 +220,8 @@ body {
   font-size: 13px;
   text-align: center;
   margin-top: 16px;
+}
+
+.navbar-fixed-top {
+  background-color: white;
 }
