@@ -78,6 +78,14 @@ function listController($http, $routeParams){
             self.runTime = runHours+":"+runMinutes
             ///end getting movies runtime
 
+            //get time to start
+            self.timeTo = function(){
+              var hours = currHour + runHours;
+              var minutes = runMinutes + currMin;
+              var minutesTo = hours*60 + minutes;
+              return minutesTo;
+            }
+
             var item = {
               movieName: self.rawData[i].title,
               theatreId: showtimes[j].theatre.id,
@@ -85,7 +93,8 @@ function listController($http, $routeParams){
               id: idCount,
               runTime: self.runTime,
               startTime: self.startTime,
-              startTimeParsed: self.startTimeParsed
+              startTimeParsed: self.startTimeParsed,
+              timeTo: self.timeTo()
             }
             ///if statement to see if runtime comes after current time
 
@@ -98,7 +107,7 @@ function listController($http, $routeParams){
          }
          ///end if statement
          self.data = filteredData;
-        //  console.log(self.data);
+         console.log(self.data);
          return self.data
        })
     })
@@ -145,9 +154,17 @@ function listController($http, $routeParams){
 
   self.getMovie = function(){
     console.log("getting your movie");
+    console.log(itemsArray());
+
 
     var key = "a9e6b3f7506ddf2d1499a135372be9f7";
     var url = "https://api.themoviedb.org/3/search/movie?query="+$routeParams.id+"&api_key="
+
+    self.findItem = function(){
+      // for (var i = 0; i < array.length; i++) {
+      //   array[i]
+      // }
+    }
 
     //single movie detail http call to return additional movie details
     //find the proper item object with runtimes and stuff from our self.data object
