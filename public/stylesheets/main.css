@@ -87,13 +87,7 @@
   border-right: 2px solid gray;
   padding-right: 25px;
 }
-.logoContainer {
-  height: 70px;
-  width: 130px;
-  outline: 2px solid gray;
-  display: inline-block;
-  text-align: center;
-}
+
 .mapButton {
   position: relative:
   height: 50px;
@@ -101,18 +95,24 @@
   outline: 2px solid black
 }
 
-.navContainer {
-  height: 90px;
-}
-
 .navTab {
   width: 190px;
   text-align: center;
-  background-color: #FDF5FD
+  /*background-color: #FDF5FD*/
 }
 
 .navTab a{
 
+}
+
+.navContainer {
+
+}
+
+.logoContainer {
+  width: 250px;
+  display: inline-block;
+  /*text-align: center;*/
 }
 
 .tabContainer {
@@ -121,11 +121,31 @@
   margin-right: 40%;
 }
 
+#logolink {
+  margin: 22px 0px 0px 10px;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+#maplink {
+  margin: 5px 0px 5px 0px;
+  font-size: 35px;
+  font-weight: 800;
+  border-right: 2px solid gray
+}
+
+#listlink {
+  margin: 5px 0px 5px 0px;
+  font-size: 35px;
+  font-weight: 800;
+}
+
 /*begin _details.html css*/
 .detailsContainer {
-  height: 1200px;
+  height: auto;
   width: 550px;
-  margin: 0 auto;
+  display: inline-block;
+  margin: 20px 0px 60px 0px;
   background-color: #c0e8e8;
   outline: 3px solid black;
 }
@@ -136,37 +156,37 @@
 
 .descriptionContainer {
   width: 450px;
-  margin: 0 auto;
+  margin: 0px 0px 0px 20px;
 }
-
-.detailInfo {
-
-}
-
-
 
 #movietitle {
   font-size: 35px;
+  text-align: center;
 }
 
 #moviedesc {
   font-size: 12px;
+  margin-left: 40px;
 }
 
 #moviestarttime {
   font-size: 25px;
+  text-align: center;
 }
 
 #moviestartsin {
   font-size: 20px;
+  text-align: center;
 }
 
 #movieruntime {
   font-size: 25px;
+  text-align: center;
 }
 
 #movieends {
   font-size: 14px;
+  text-align: center;
 }
 /*end _details.html css*/
 
@@ -176,21 +196,6 @@
   background-color: white;
   height: 150px;
   font-weight: bolder;
-}
-
-
-#goseenowlink {
-  margin: 5px 0px 5px 0px;
-  font-size: 30px;
-  font-weight: 800;
-  border-right: 2px solid gray
-}
-
-#gomapnowlink {
-  margin: 5px 0px 5px 0px;
-  font-size: 30px;
-  font-weight: 800;
-
 }
 
 html, body {
