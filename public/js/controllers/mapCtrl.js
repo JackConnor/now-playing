@@ -3,6 +3,13 @@ angular.module('mapCtrl', [])
 
 function mapController($http, $routeParams){
   var self = this;
+  self.counter = true;
+
+  function setMap(){
+    $('#map').css("height", 100+"%");
+  }
+  setMap();
+
   console.log(window.location.href);
   var currentUrl = window.location.href;
   console.log(currentUrl);
