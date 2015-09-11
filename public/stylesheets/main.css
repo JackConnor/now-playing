@@ -44,6 +44,11 @@
   display: block;
   width: 16%;
   min-width:100px;
+  height: 25px;
+}
+
+.dropdownToggle option {
+    font-size: 22px;
 }
 
 .formControl {

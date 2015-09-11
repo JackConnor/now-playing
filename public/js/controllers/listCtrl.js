@@ -96,7 +96,7 @@ function listController($http, $routeParams){
          }
          ///end if statement
          self.data = filteredData;
-         console.log(self.data);
+        //  console.log(self.data);
          return self.data
        })
     })
