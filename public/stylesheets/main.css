@@ -128,10 +128,14 @@
 
 #startTime {
   font-size: 15px;
+  margin: 5px 0px 0px 0px;
+  text-align: left;
 }
 
 #theatreName {
   font-size: 15px;
+  margin: 5px 0px 0px 0px;
+  text-align: right;
 }
 
 .navTab {
