@@ -74,8 +74,21 @@
   background-color: #c0e8e8;
   max-height: 100%;
   margin: 0 0 0 20%;
-  height: 130px;
+  height: 120px;
   margin: 0 0 4px 0;
+}
+
+.threeBtn {
+  width: 235px;
+  height: 35px;
+}
+
+.dirBtn {
+  background-color: 
+}
+
+.buttonRow {
+  margin-right: 0px;
 }
 
 .listedTitle h4 {
@@ -153,7 +166,7 @@
 
 .title {
   position: relative;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 .posterContainer img {
@@ -224,4 +237,8 @@ body {
   font-size: 13px;
   text-align: center;
   margin-top: 16px;
+}
+
+.navbar-fixed-top {
+  background-color: white;
 }
