@@ -71,7 +71,7 @@
 
 .listedMovie {
   list-style-type: none;
-  background-color: #c0e8e8;
+  background-color: #e0efef;
   max-height: 100%;
   margin: 0 0 0 20%;
   height: 120px;
@@ -79,16 +79,27 @@
 }
 
 .threeBtn {
-  width: 235px;
+  width: 239px;
   height: 35px;
 }
 
-.dirBtn {
-  background-color: 
+#dirBtn {
+  background-color: #666666;
+  color: white;
+}
+
+#movBtn {
+  background-color: #7dcdcd;
+  color: white;
+}
+
+#buyBtn {
+  background-color: white;
+  color: black;
 }
 
 .buttonRow {
-  margin-right: 0px;
+  margin: 5px 0px 0px 15px;
 }
 
 .listedTitle h4 {
@@ -107,6 +118,20 @@
 
 .movieRow {
   max-width: 100%;
+  margin: 10px 0px 0px 20px;
+}
+
+#movieName {
+  font-size: 20px;
+  margin: 0px 0px 0px 20px;
+}
+
+#startTime {
+  font-size: 15px;
+}
+
+#theatreName {
+  font-size: 15px;
 }
 
 .navTab {
