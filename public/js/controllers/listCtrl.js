@@ -94,7 +94,8 @@ function listController($http, $routeParams){
               runTime: self.runTime,
               startTime: self.startTime,
               startTimeParsed: self.startTimeParsed,
-              timeTo: self.timeTo()
+              timeTo: self.timeTo(),
+              ticketUrl: showtimes[j].ticketURI
             }
             ///if statement to see if runtime comes after current time
 
@@ -117,39 +118,61 @@ function listController($http, $routeParams){
   //end finding today's date with formatting for api call
   //begin api call for the data to populate the list view
 
-
-
-
   var buttonCounter = true;
 
-//this is the function to open the secret button window when you click on an movie
+  //this is the function to open the secret button window when you click on an movie
   self.openButtons = function(movie){
     //jquery stuff
     if (buttonCounter) {
-      // $('#'+id).css('margin-bottom', 100+"px");
-      $('#'+movie.id).append('<div class="row"><div class="buttonContainer col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0" id=abc'+movie.id+'><button class="mapButton btn-default">Directions To</button><button class="detailsButton btn-default">Movie Details</button></div></div>')
-      //adding event listeners
-      $('.detailsButton').on('click', function(){
+      $('#movBtn').on('click', function(){
         window.location.href = "/#/list/"+movie.movieName;
       })
 
-      $(".mapButton").on('click', function(){
+      $("#dirBtn").on('click', function(){
         window.location.href = "/#/map/"+movie.theatreId;
       })
 
-      //end event listeners
-      buttonCounter = !buttonCounter;
-      return buttonCounter;
-    }
-    else if(!buttonCounter) {
-      $('#abc'+id).remove();
-      $('#'+id).css('margin-bottom', 4+'px');
-      buttonCounter = !buttonCounter;
-      return buttonCounter;
+      $("#buyBtn").on('click', function(){
+        window.location.href = movie.ticketUrl;
+      })
 
-    } else {
+      return buttonCounter;
     }
-  }
+
+    else {
+    }
+  };
+
+//   var buttonCounter = true;
+//
+// //this is the function to open the secret button window when you click on an movie
+//   self.openButtons = function(movie){
+//     //jquery stuff
+//     if (buttonCounter) {
+//       // $('#'+id).css('margin-bottom', 100+"px");
+//       $('#'+movie.id).append('<div class="row"><div class="buttonContainer col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0" id=abc'+movie.id+'><button class="mapButton btn-default">Directions To</button><button class="detailsButton btn-default">Movie Details</button></div></div>')
+//       //adding event listeners
+//       $('#movBtn').on('click', function(){
+//         window.location.href = "/#/list/"+movie.movieName;
+//       })
+//
+//       $("#dirBtn").on('click', function(){
+//         window.location.href = "/#/map/"+movie.theatreId;
+//       })
+//
+//       //end event listeners
+//       buttonCounter = !buttonCounter;
+//       return buttonCounter;
+//     }
+//     else if(!buttonCounter) {
+//       $('#abc'+id).remove();
+//       $('#'+id).css('margin-bottom', 4+'px');
+//       buttonCounter = !buttonCounter;
+//       return buttonCounter;
+//
+//     } else {
+//     }
+//   }
   //end function for button window
 
   self.getMovie = function(){

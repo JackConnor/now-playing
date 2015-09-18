@@ -71,11 +71,47 @@
 
 .listedMovie {
   list-style-type: none;
-  background-color: #c0e8e8;
-  max-height: 100%;
+  background-color: #e0efef;
+  min-height: 100%;
   margin: 0 0 0 20%;
-  height: 130px;
+  height: 120px;
   margin: 0 0 4px 0;
+}
+
+.threeBtn {
+  width: 239px;
+  height: 35px;
+}
+
+#dirBtn {
+  background-color: #666666;
+  color: white;
+}
+
+#dirBtn:hover {
+  background-color: #5b5b5b;
+}
+
+#movBtn {
+  background-color: #7dcdcd;
+  color: white;
+}
+
+#movBtn:hover {
+  background-color: #70b8b8;
+}
+
+#buyBtn {
+  background-color: white;
+  color: black;
+}
+
+#buyBtn:hover {
+  background-color: #e5e5e5;
+}
+
+.buttonRow {
+  margin: 5px 0px 0px 15px;
 }
 
 .listedTitle h4 {
@@ -94,6 +130,24 @@
 
 .movieRow {
   max-width: 100%;
+  margin: 10px 0px 0px 20px;
+}
+
+#movieName {
+  font-size: 20px;
+  margin: 8px 0px 8px 20px;
+}
+
+#startTime {
+  font-size: 15px;
+  margin: 13px 0px 8px 0px;
+  text-align: left;
+}
+
+#theatreName {
+  font-size: 15px;
+  margin: 13px 0px 8px 0px;
+  text-align: right;
 }
 
 .navTab {
@@ -153,7 +207,7 @@
 
 .title {
   position: relative;
-  margin-top: 20px;
+  margin-top: 0px;
 }
 
 .posterContainer img {
