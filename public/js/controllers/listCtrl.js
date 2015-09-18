@@ -34,7 +34,7 @@ function listController($http, $routeParams){
       $http.get(url)
        .success(function(data){
          self.rawData = data;
-        //  console.log(data);
+        //  console.log(data.showtimes[i]);
          var filteredData = [];
          var idCount = 1;
          //begin if statement
@@ -42,6 +42,7 @@ function listController($http, $routeParams){
           var showtimes = self.rawData[i].showtimes;
           //  console.log(showtimes);
           for (var j = 0; j < showtimes.length; j++) {
+            console.log(showtimes[j]);
 
             //start getting showtimes
             var length = showtimes[j].dateTime.split('').length;
