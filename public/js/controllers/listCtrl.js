@@ -94,7 +94,8 @@ function listController($http, $routeParams){
               runTime: self.runTime,
               startTime: self.startTime,
               startTimeParsed: self.startTimeParsed,
-              timeTo: self.timeTo()
+              timeTo: self.timeTo(),
+              ticketUrl: showtimes[j].ticketURI
             }
             ///if statement to see if runtime comes after current time
 
@@ -132,7 +133,7 @@ function listController($http, $routeParams){
       })
 
       $("#buyBtn").on('click', function(){
-        window.location.href = "/#/map/"+movie.theatreId;
+        window.location.href = movie.ticketUrl;
       })
 
       return buttonCounter;
