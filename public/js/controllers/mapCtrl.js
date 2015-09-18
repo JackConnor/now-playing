@@ -7,13 +7,13 @@ function mapController($http, $routeParams){
     var currentLoc = {lat: data.coords.latitude, lng: data.coords.longitude}
     $http.get("https://data.tmsapi.com/v1.1/theatres?lat="+currentLoc.lat+"&lng="+currentLoc.lng+"&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
       .then(function(data){
-        console.log(data.data);
+        console.log(data);
         var theatresArray = [];
         for (var i = 0; i < data.data.length; i++) {
-          console.log(data.data[i].location.geoCode.latitude);
-          console.log(data.data[i].location.geoCode.longitude);
-
-          var theatreItem = {lat: parseFloat(data.data[i].location.geoCode.latitude), lng: parseFloat(data.data[i].location.geoCode.longitude), name: data.data[i].name, distance: data.data[i].location.distance}
+          var theatreItem = {
+            lat: parseFloat(data.data[i].location.geoCode.latitude), lng: parseFloat(data.data[i].location.geoCode.longitude), name: data.data[i].name,
+            distance: data.data[i].location.distance,
+            theatreId: data.data[i].theatreId}
           theatresArray.push(theatreItem);
         }
         function compare(a,b) {
@@ -24,20 +24,236 @@ function mapController($http, $routeParams){
           return 0;
         }
 
+        //begin all markers on map in load-view
+        var myLoc = new google.maps.Marker({
+            position: {lat: currentLoc.lat, lng: currentLoc.lng},
+            icon: {
+              path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+              strokeColor: "#21927a",
+              scale: 4
+            },
+            map: map,
+            title: "Your Location",
+          });
         theatresArray.sort(compare);
-        for (var i = 0; i < 11; i++) {
-          var name = "marker"+i;
-          var name = new google.maps.Marker({
-              position: {lat: theatresArray[i].lat, lng: theatresArray[i].lng},
+        console.log(theatresArray);
+          var marker1 = new google.maps.Marker({
+              position: {lat: theatresArray[1].lat, lng: theatresArray[1].lng},
               icon: {
                 path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
                 strokeColor: "#CF2F4D",
                 scale: 4
               },
               map: map,
-              title: 'Arclight Santa Monica'
+              title: theatresArray[1].name,
             });
-        }
+            var infoWindow1 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[1].name+"</h4>"+
+                "<button id='dir1'>Get Directions</button>"
+            })
+            marker1.addListener('click', function(){
+              infoWindow1.open(map, marker1);
+              $('#dir1').on('click', function(){
+                console.log(theatresArray[1]);
+                window.location.href = "#/map/"+theatresArray[1].theatreId;
+              })
+            })
+
+          var marker2 = new google.maps.Marker({
+              position: {lat: theatresArray[2].lat, lng: theatresArray[2].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: theatresArray[2].name,
+            });
+            var infoWindow2 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[2].name+"</h4>"+
+                "<button id='dir2'>Get Directions</button>"
+            })
+            marker2.addListener('click', function(){
+              infoWindow2.open(map, marker2);
+              $('#dir2').on('click', function(){
+                console.log(theatresArray[2]);
+                window.location.href = "#/map/"+theatresArray[2].theatreId;
+              })
+            })
+
+          var marker3 = new google.maps.Marker({
+              position: {lat: theatresArray[3].lat, lng: theatresArray[3].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: theatresArray[3].name,
+            });
+            var infoWindow3 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[3].name+"</h4>"+
+                "<button id='dir3'>Get Directions</button>"
+            })
+            marker3.addListener('click', function(){
+              infoWindow3.open(map, marker3);
+              $('#dir3').on('click', function(){
+                console.log(theatresArray[3]);
+                window.location.href = "#/map/"+theatresArray[3].theatreId;
+              })
+            })
+
+
+          var marker4 = new google.maps.Marker({
+              position: {lat: theatresArray[4].lat, lng: theatresArray[4].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: theatresArray[4].name,
+            });
+            var infoWindow4 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[4].name+"</h4>"+
+                "<button id='dir4'>Get Directions</button>"
+            })
+            marker4.addListener('click', function(){
+              infoWindow4.open(map, marker4);
+              $('#dir4').on('click', function(){
+                console.log(theatresArray[4]);
+                window.location.href = "#/map/"+theatresArray[4].theatreId;
+              })
+            })
+          var marker5 = new google.maps.Marker({
+              position: {lat: theatresArray[5].lat, lng: theatresArray[5].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: theatresArray[5].name,
+            });
+            var infoWindow5 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[5].name+"</h4>"+
+                "<button id='dir5'>Get Directions</button>"
+            })
+            marker5.addListener('click', function(){
+              infoWindow5.open(map, marker3);
+              $('#dir5').on('click', function(){
+                console.log(theatresArray[5]);
+                window.location.href = "#/map/"+theatresArray[5].theatreId;
+              })
+            })
+
+          var marker6 = new google.maps.Marker({
+              position: {lat: theatresArray[6].lat, lng: theatresArray[6].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: theatresArray[6].name,
+            });
+            var infoWindow6 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[6].name+"</h4>"+
+                "<button id='dir6'>Get Directions</button>"
+            })
+            marker6.addListener('click', function(){
+              infoWindow6.open(map, marker6);
+              $('#dir6').on('click', function(){
+                console.log(theatresArray[6]);
+                window.location.href = "#/map/"+theatresArray[6].theatreId;
+              })
+            })
+
+          var marker7 = new google.maps.Marker({
+              position: {lat: theatresArray[7].lat, lng: theatresArray[7].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: theatresArray[7].name,
+            });
+            var infoWindow7 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[7].name+"</h4>"+
+                "<button id='dir7'>Get Directions</button>"
+            })
+            marker7.addListener('click', function(){
+              infoWindow7.open(map, marker7);
+              $('#dir7').on('click', function(){
+                console.log(theatresArray[7]);
+                window.location.href = "#/map/"+theatresArray[7].theatreId;
+              })
+            })
+          var marker8 = new google.maps.Marker({
+              position: {lat: theatresArray[8].lat, lng: theatresArray[8].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: theatresArray[8].name,
+            });
+            var infoWindow8 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[8].name+"</h4>"+
+                "<button id='dir8'>Get Directions</button>"
+            })
+            marker8.addListener('click', function(){
+              infoWindow8.open(map, marker8);
+              $('#dir8').on('click', function(){
+                console.log(theatresArray[8]);
+                window.location.href = "#/map/"+theatresArray[8].theatreId;
+              })
+            })
+          var marker9 = new google.maps.Marker({
+              position: {lat: theatresArray[9].lat, lng: theatresArray[9].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: theatresArray[9].name,
+            });
+            var infoWindow9 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[9].name+"</h4>"+
+                "<button id='dir9'>Get Directions</button>"
+            })
+            marker9.addListener('click', function(){
+              infoWindow9.open(map, marker9);
+              $('#dir9').on('click', function(){
+                console.log(theatresArray[9]);
+                window.location.href = "#/map/"+theatresArray[9].theatreId;
+              })
+            })
+
+          var marker10 = new google.maps.Marker({
+              position: {lat: theatresArray[10].lat, lng: theatresArray[10].lng},
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                strokeColor: "#CF2F4D",
+                scale: 4
+              },
+              map: map,
+              title: theatresArray[10].name,
+            });
+            var infoWindow10 = new google.maps.InfoWindow({
+              content: "<h4>"+theatresArray[10].name+"</h4>"+
+                "<button id='dir10'>Get Directions</button>"
+            })
+            marker10.addListener('click', function(){
+              infoWindow10.open(map, marker10);
+              $('#dir10').on('click', function(){
+                console.log(theatresArray[10]);
+                window.location.href = "#/map/"+theatresArray[10].theatreId;
+              })
+            })
       })
   })
 

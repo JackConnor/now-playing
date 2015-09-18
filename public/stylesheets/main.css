@@ -106,10 +106,6 @@
   color: black;
 }
 
-#buyBtn:hover {
-  background-color: #e5e5e5;
-}
-
 .buttonRow {
   margin: 5px 0px 0px 15px;
 }
@@ -280,6 +276,6 @@ body {
   margin-top: 16px;
 }
 
-.navbar-fixed-top{
+.navbar-fixed-top {
   background-color: white;
 }
