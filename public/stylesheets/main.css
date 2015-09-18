@@ -88,14 +88,27 @@
   color: white;
 }
 
+#dirBtn:hover {
+  background-color: #5b5b5b;
+  color: black;
+}
+
 #movBtn {
   background-color: #7dcdcd;
   color: white;
 }
 
+#movBtn:hover {
+  background-color: #70b8b8;
+}
+
 #buyBtn {
   background-color: white;
   color: black;
+}
+
+#buyBtn:hover {
+  background-color: #e5e5e5;
 }
 
 .buttonRow {
@@ -123,18 +136,18 @@
 
 #movieName {
   font-size: 20px;
-  margin: 0px 0px 0px 20px;
+  margin: 8px 0px 8px 20px;
 }
 
 #startTime {
   font-size: 15px;
-  margin: 5px 0px 0px 0px;
+  margin: 13px 0px 8px 0px;
   text-align: left;
 }
 
 #theatreName {
   font-size: 15px;
-  margin: 5px 0px 0px 0px;
+  margin: 13px 0px 8px 0px;
   text-align: right;
 }
 
