@@ -289,7 +289,7 @@ function mapController($http, $routeParams){
                 "<p>dummy showtime -- 12:40</p>" +
                 "<button class='direction' id='dir10'>Get Directions</button>"+
                 "<button class='showtimes' id='"+theatresArray[10].theatreId+"'>See All Showtimes</button>"+
-              "<div>"
+              "<div>" 
             })
             marker10.addListener('click', function(){
               infoWindow10.open(map, marker10);
