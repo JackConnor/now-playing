@@ -282,24 +282,32 @@ function mapController($http, $routeParams){
             var infoWindow10 = new google.maps.InfoWindow({
               content:
               //begin html content for infowindow
-              "<div>"+
+              "<div class='popoutBox'>"+
                 "<h4>"+theatresArray[10].name+"</h4>"+
-                "<p>dummy showtime -- 12:40</p>" +
-                "<br>"+
-                "<p>dummy showtime -- 12:40</p>" +
-                "<button class='direction' id='dir10'>Get Directions</button>"+
+                "<ul class="+theatresArray[10].theatreId+"></ul>" +
+                "<button class='direction' id='dir10'>Get Directions</button>" +
                 "<button class='showtimes' id='"+theatresArray[10].theatreId+"'>See All Showtimes</button>"+
-              "<div>" 
+              "<div>"
             })
             marker10.addListener('click', function(){
-              infoWindow10.open(map, marker10);
-              $('#dir10').on('click', function(){
-                window.location.href = "#/map/"+theatresArray[10].theatreId;
-              });
-              $('#'+theatresArray[10].theatreId).on('click', function(){
-                window.location.href = "/#/showtimes/"+theatresArray[10].theatreId
-              })
-            })
+              //api call to get showtime data
+              $http.get('http://data.tmsapi.com/v1.1/theatres/8749/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow10.open(map, marker10);
+                  $('#dir10').on('click', function(){
+                    window.location.href = "#/map/"+theatresArray[10].theatreId;
+                  });
+                  $('#'+theatresArray[10].theatreId).on('click', function(){
+                    window.location.href = "/#/showtimes/"+theatresArray[10].theatreId
+                  });
+                  $('.'+theatresArray[10].theatreId).append(
+                    '<li>'+showtimes.data[0].title+'</li>'+
+                    '<li>'+showtimes.data[1].title+'</li>'
+                  )
+                })
+                })
+              //end api stuff
       })
   })
 
