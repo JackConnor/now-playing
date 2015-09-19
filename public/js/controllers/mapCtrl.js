@@ -49,13 +49,17 @@ function mapController($http, $routeParams){
             });
             var infoWindow1 = new google.maps.InfoWindow({
               content: "<h4>"+theatresArray[1].name+"</h4>"+
-                "<button id='dir1'>Get Directions</button>"
+                "<button class='direction' id='dir1'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[1].theatreId+"'>See All Showtimes</button>"
             })
             marker1.addListener('click', function(){
               infoWindow1.open(map, marker1);
               $('#dir1').on('click', function(){
                 console.log(theatresArray[1]);
                 window.location.href = "#/map/"+theatresArray[1].theatreId;
+              });
+              $('#'+theatresArray[1].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[1].theatreId
               })
             })
 
@@ -71,13 +75,17 @@ function mapController($http, $routeParams){
             });
             var infoWindow2 = new google.maps.InfoWindow({
               content: "<h4>"+theatresArray[2].name+"</h4>"+
-                "<button id='dir2'>Get Directions</button>"
+                "<button class='direction' id='dir2'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[2].theatreId+"'>See All Showtimes</button>"
             })
             marker2.addListener('click', function(){
               infoWindow2.open(map, marker2);
               $('#dir2').on('click', function(){
                 console.log(theatresArray[2]);
                 window.location.href = "#/map/"+theatresArray[2].theatreId;
+              });
+              $('#'+theatresArray[2].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[2].theatreId
               })
             })
 
@@ -93,13 +101,17 @@ function mapController($http, $routeParams){
             });
             var infoWindow3 = new google.maps.InfoWindow({
               content: "<h4>"+theatresArray[3].name+"</h4>"+
-                "<button id='dir3'>Get Directions</button>"
+                "<button class='direction' id='dir3'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[3].theatreId+"'>See All Showtimes</button>"
             })
             marker3.addListener('click', function(){
               infoWindow3.open(map, marker3);
               $('#dir3').on('click', function(){
                 console.log(theatresArray[3]);
                 window.location.href = "#/map/"+theatresArray[3].theatreId;
+              });
+              $('#'+theatresArray[3].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[3].theatreId
               })
             })
 
@@ -116,13 +128,17 @@ function mapController($http, $routeParams){
             });
             var infoWindow4 = new google.maps.InfoWindow({
               content: "<h4>"+theatresArray[4].name+"</h4>"+
-                "<button id='dir4'>Get Directions</button>"
+                "<button class='direction' id='dir4'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[4].theatreId+"'>See All Showtimes</button>"
             })
             marker4.addListener('click', function(){
               infoWindow4.open(map, marker4);
               $('#dir4').on('click', function(){
                 console.log(theatresArray[4]);
                 window.location.href = "#/map/"+theatresArray[4].theatreId;
+              });
+              $('#'+theatresArray[4].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[4].theatreId
               })
             })
           var marker5 = new google.maps.Marker({
@@ -137,13 +153,17 @@ function mapController($http, $routeParams){
             });
             var infoWindow5 = new google.maps.InfoWindow({
               content: "<h4>"+theatresArray[5].name+"</h4>"+
-                "<button id='dir5'>Get Directions</button>"
+                "<button class='direction' id='dir5'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[5].theatreId+"'>See All Showtimes</button>"
             })
             marker5.addListener('click', function(){
               infoWindow5.open(map, marker3);
               $('#dir5').on('click', function(){
                 console.log(theatresArray[5]);
                 window.location.href = "#/map/"+theatresArray[5].theatreId;
+              });
+              $('#'+theatresArray[5].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[5].theatreId
               })
             })
 
@@ -159,13 +179,17 @@ function mapController($http, $routeParams){
             });
             var infoWindow6 = new google.maps.InfoWindow({
               content: "<h4>"+theatresArray[6].name+"</h4>"+
-                "<button id='dir6'>Get Directions</button>"
+                "<button class='direction' id='dir6'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[6].theatreId+"'>See All Showtimes</button>"
             })
             marker6.addListener('click', function(){
               infoWindow6.open(map, marker6);
               $('#dir6').on('click', function(){
                 console.log(theatresArray[6]);
                 window.location.href = "#/map/"+theatresArray[6].theatreId;
+              });
+              $('#'+theatresArray[6].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[6].theatreId
               })
             })
 
@@ -181,13 +205,17 @@ function mapController($http, $routeParams){
             });
             var infoWindow7 = new google.maps.InfoWindow({
               content: "<h4>"+theatresArray[7].name+"</h4>"+
-                "<button id='dir7'>Get Directions</button>"
+                "<button class='direction' id='dir7'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[7].theatreId+"'>See All Showtimes</button>"
             })
             marker7.addListener('click', function(){
               infoWindow7.open(map, marker7);
               $('#dir7').on('click', function(){
                 console.log(theatresArray[7]);
                 window.location.href = "#/map/"+theatresArray[7].theatreId;
+              });
+              $('#'+theatresArray[7].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[7].theatreId
               })
             })
           var marker8 = new google.maps.Marker({
@@ -202,13 +230,17 @@ function mapController($http, $routeParams){
             });
             var infoWindow8 = new google.maps.InfoWindow({
               content: "<h4>"+theatresArray[8].name+"</h4>"+
-                "<button id='dir8'>Get Directions</button>"
+                "<button class='direction' id='dir8'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[8].theatreId+"'>See All Showtimes</button>"
             })
             marker8.addListener('click', function(){
               infoWindow8.open(map, marker8);
               $('#dir8').on('click', function(){
                 console.log(theatresArray[8]);
                 window.location.href = "#/map/"+theatresArray[8].theatreId;
+              });
+              $('#'+theatresArray[8].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[8].theatreId
               })
             })
           var marker9 = new google.maps.Marker({
@@ -223,13 +255,17 @@ function mapController($http, $routeParams){
             });
             var infoWindow9 = new google.maps.InfoWindow({
               content: "<h4>"+theatresArray[9].name+"</h4>"+
-                "<button id='dir9'>Get Directions</button>"
+                "<button class='direction' id='dir9'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[9].theatreId+"'>See All Showtimes</button>"
             })
             marker9.addListener('click', function(){
               infoWindow9.open(map, marker9);
               $('#dir9').on('click', function(){
                 console.log(theatresArray[9]);
                 window.location.href = "#/map/"+theatresArray[9].theatreId;
+              });
+              $('#'+theatresArray[9].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[9].theatreId
               })
             })
 
@@ -244,14 +280,24 @@ function mapController($http, $routeParams){
               title: theatresArray[10].name,
             });
             var infoWindow10 = new google.maps.InfoWindow({
-              content: "<h4>"+theatresArray[10].name+"</h4>"+
-                "<button id='dir10'>Get Directions</button>"
+              content:
+              //begin html content for infowindow
+              "<div>"+
+                "<h4>"+theatresArray[10].name+"</h4>"+
+                "<p>dummy showtime -- 12:40</p>" +
+                "<br>"+
+                "<p>dummy showtime -- 12:40</p>" +
+                "<button class='direction' id='dir10'>Get Directions</button>"+
+                "<button class='showtimes' id='"+theatresArray[10].theatreId+"'>See All Showtimes</button>"+
+              "<div>"
             })
             marker10.addListener('click', function(){
               infoWindow10.open(map, marker10);
               $('#dir10').on('click', function(){
-                console.log(theatresArray[10]);
                 window.location.href = "#/map/"+theatresArray[10].theatreId;
+              });
+              $('#'+theatresArray[10].theatreId).on('click', function(){
+                window.location.href = "/#/showtimes/"+theatresArray[10].theatreId
               })
             })
       })
