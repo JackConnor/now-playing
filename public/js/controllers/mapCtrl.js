@@ -75,6 +75,11 @@ function mapController($http, $routeParams){
                       $('.'+theatresArray[1].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
+                      $('.'+theatresArray[1].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
                   } else {
                     $('.'+theatresArray[1].theatreId).append(
                       '<li>Sorry, no movies showing today</li>')
@@ -95,9 +100,13 @@ function mapController($http, $routeParams){
             var infoWindow2 = new google.maps.InfoWindow({
               content:
               //begin html content for infowindow
-              "<div class='popoutBox'>"+
+              "<div class='popoutBox' id='popoutBox2'>"+
                 "<h4>"+theatresArray[2].name+"</h4>"+
                 "<ul class="+theatresArray[2].theatreId+"></ul>" +
+                "<button id='backMove2'>see earlier showtimes/|\\</button>" +
+                "<br>" +
+                "<button id='moreMove2'>see later showtimes\\|/</button>" +
+                "<br>" +
                 "<button class='direction' id='dir2'>Get Directions</button>" +
                 "<button class='showtimes' id='"+theatresArray[2].theatreId+"'>See All Showtimes</button>"+
               "<div>"
@@ -114,12 +123,47 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[2].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[2].theatreId
                   });
-                  if(showtimes.data.length > 0){
+                  var movieCache = [];
+                  $('#moreMove2').on('click', function(){
+                    console.log(showtimes.data.length);
+                    movieCache.push(showtimes.data[0]);
+                    //movieCache will hold all "scrolled-through" listings
+                    console.log(movieCache);
+                    showtimes.data.shift();
+                    console.log(showtimes.data.length);
+                    console.log($('.'+theatresArray[2].theatreId).find('li')[0]);
+                    //this removes first item from list/cache and adds a new one to the end of modal list
+                   $('.'+theatresArray[2].theatreId).find('li')[0].remove();
+                   $('.'+theatresArray[2].theatreId).append(
+                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                  })
+                  //begin the "go up " button where you can see start times you already scanned through
+                  $('#backMove2').on('click', function(){
+                    var counterCounter = 0;
+                    if(movieCache.length > 0){
+                      showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                      movieCache.pop();
+                      $('.'+theatresArray[2].theatreId).find('li')[5].remove();
+                      $('.'+theatresArray[2].theatreId).prepend(
+                        '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'
+                      );
+                      counterCounter++;
+                    } else {
+                      console.log('no earlier movie times');
+                    }
+
+                  })
+                  if(showtimes.data.length > 0 && showtimes.data.length < 6){
                     for (var i = 0; i < showtimes.data.length; i++) {
                       $('.'+theatresArray[2].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
-                  } else {
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
+                      $('.'+theatresArray[2].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
+                  }else {
                     $('.'+theatresArray[2].theatreId).append(
                       '<li>Sorry, no movies showing today</li>')
                   }
@@ -160,6 +204,11 @@ function mapController($http, $routeParams){
                   });
                   if(showtimes.data.length > 0){
                     for (var i = 0; i < showtimes.data.length; i++) {
+                      $('.'+theatresArray[3].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
                       $('.'+theatresArray[3].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
@@ -208,6 +257,11 @@ function mapController($http, $routeParams){
                       $('.'+theatresArray[4].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
+                      $('.'+theatresArray[4].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
                   } else {
                     $('.'+theatresArray[4].theatreId).append(
                       '<li>Sorry, no movies showing today</li>')
@@ -248,6 +302,11 @@ function mapController($http, $routeParams){
                   });
                   if(showtimes.data.length > 0){
                     for (var i = 0; i < showtimes.data.length; i++) {
+                      $('.'+theatresArray[5].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
                       $('.'+theatresArray[5].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
@@ -295,6 +354,11 @@ function mapController($http, $routeParams){
                       $('.'+theatresArray[6].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
+                      $('.'+theatresArray[6].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
                   } else {
                     $('.'+theatresArray[6].theatreId).append(
                       '<li>Sorry, no movies showing today</li>')
@@ -339,6 +403,11 @@ function mapController($http, $routeParams){
                       $('.'+theatresArray[7].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
+                      $('.'+theatresArray[7].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
                   } else {
                     $('.'+theatresArray[7].theatreId).append(
                       '<li>Sorry, no movies showing today</li>')
@@ -379,6 +448,11 @@ function mapController($http, $routeParams){
                   });
                   if(showtimes.data.length > 0){
                     for (var i = 0; i < showtimes.data.length; i++) {
+                      $('.'+theatresArray[8].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
                       $('.'+theatresArray[8].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
@@ -426,6 +500,11 @@ function mapController($http, $routeParams){
                       $('.'+theatresArray[9].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
+                      $('.'+theatresArray[9].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
                   } else {
                     $('.'+theatresArray[9].theatreId).append(
                       '<li>Sorry, no movies showing today</li>')
@@ -470,12 +549,17 @@ function mapController($http, $routeParams){
                       $('.'+theatresArray[10].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
                     }
+                  } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                    for (var i = 0; i < 6; i++) {
+                      $('.'+theatresArray[10].theatreId).append(
+                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                    }
                   } else {
                     $('.'+theatresArray[10].theatreId).append(
                       '<li>Sorry, no movies showing today</li>')
                   }
                 })
-              })
+              });
               //end api stuff
       })
   })
