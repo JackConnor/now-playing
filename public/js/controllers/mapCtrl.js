@@ -143,9 +143,15 @@ function mapController($http, $routeParams){
                     if(movieCache.length > 0){
                       showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
                       movieCache.pop();
-                      $('.'+theatresArray[2].theatreId).find('li')[5].remove();
+                      //begin finding time
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+                      //end finding time
+                      if(showtimes.data.length > 5){
+                        $('.'+theatresArray[2].theatreId).find('li')[4].remove();
+                      }
                       $('.'+theatresArray[2].theatreId).prepend(
-                        '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'
+                        '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
                       );
                       counterCounter++;
                     } else {
@@ -155,13 +161,19 @@ function mapController($http, $routeParams){
                   })
                   if(showtimes.data.length > 0 && showtimes.data.length < 6){
                     for (var i = 0; i < showtimes.data.length; i++) {
+                      var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+                      //end finding time
                       $('.'+theatresArray[2].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
+                      var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+                      //finish filtering time for syntax
                       $('.'+theatresArray[2].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
                     }
                   }else {
                     $('.'+theatresArray[2].theatreId).append(
