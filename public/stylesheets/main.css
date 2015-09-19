@@ -1,4 +1,7 @@
 
+li {
+  list-style-type: none
+}
 
 .buttons {
   margin-left: 25%;
@@ -122,6 +125,17 @@
   position: relative;
   border-right: 2px solid gray;
   padding-right: 25px;
+}
+
+.popoutBox {
+  min-height: 100%;
+}
+
+.popoutBox li{
+  border-bottom: 2px solid gray;
+  height: 25px;
+  margin: 0 0 0 0;
+  background-color: #B6B6B4;
 }
 
 .movieRow {
