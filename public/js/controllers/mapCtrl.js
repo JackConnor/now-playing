@@ -70,12 +70,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[1].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[1].theatreId
                   });
-                  $('.'+theatresArray[1].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[1].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
 
@@ -111,12 +109,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[2].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[2].theatreId
                   });
-                  $('.'+theatresArray[2].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[2].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
 
@@ -152,12 +148,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[3].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[3].theatreId
                   });
-                  $('.'+theatresArray[3].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[3].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
 
@@ -194,12 +188,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[4].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[4].theatreId
                   });
-                  $('.'+theatresArray[4].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[4].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
           var marker5 = new google.maps.Marker({
@@ -234,12 +226,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[5].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[5].theatreId
                   });
-                  $('.'+theatresArray[5].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[5].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
 
@@ -275,12 +265,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[6].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[6].theatreId
                   });
-                  $('.'+theatresArray[6].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[6].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
 
@@ -316,12 +304,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[7].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[7].theatreId
                   });
-                  $('.'+theatresArray[7].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[7].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
           var marker8 = new google.maps.Marker({
@@ -356,12 +342,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[8].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[8].theatreId
                   });
-                  $('.'+theatresArray[8].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[8].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
 
@@ -397,12 +381,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[9].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[9].theatreId
                   });
-                  $('.'+theatresArray[9].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[9].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
 
@@ -438,12 +420,10 @@ function mapController($http, $routeParams){
                   $('#'+theatresArray[10].theatreId).on('click', function(){
                     window.location.href = "/#/showtimes/"+theatresArray[10].theatreId
                   });
-                  $('.'+theatresArray[10].theatreId).append(
-                    '<li>'+showtimes.data[0].title+' '+showtimes.data[0].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[1].title+' '+showtimes.data[1].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[2].title+' '+showtimes.data[2].showtimes[0].dateTime+'</li>'+
-                    '<li>'+showtimes.data[3].title+' '+showtimes.data[3].showtimes[0].dateTime+'</li>'
-                  )
+                  for (var i = 0; i < showtimes.data.length; i++) {
+                    $('.'+theatresArray[10].theatreId).append(
+                      '<li>'+showtimes.data[i].title+' '+showtimes.data[i].showtimes[0].dateTime+'</li>')
+                  }
                 })
               })
               //end api stuff
