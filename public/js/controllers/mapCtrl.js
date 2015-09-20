@@ -7,7 +7,6 @@ function mapController($http, $routeParams){
     var currentLoc = {lat: data.coords.latitude, lng: data.coords.longitude}
     $http.get("https://data.tmsapi.com/v1.1/theatres?lat="+currentLoc.lat+"&lng="+currentLoc.lng+"&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
       .then(function(data){
-        console.log(data);
         var theatresArray = [null];
         for (var i = 0; i < data.data.length; i++) {
           var theatreItem = {
@@ -27,8 +26,6 @@ function mapController($http, $routeParams){
             map: map,
             title: "Your Location",
           });
-        console.log(theatresArray);
-        console.log('testing 1');
 
           var marker1 = new google.maps.Marker({
               position: {lat: theatresArray[1].lat, lng: theatresArray[1].lng},
@@ -60,9 +57,8 @@ function mapController($http, $routeParams){
             })
             marker1.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow1.open(map, marker1);
                   $('#dir1').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[1].theatreId;
@@ -72,27 +68,28 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove1').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[1].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[1].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[1].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove1').on('click', function(){
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     var counterCounter = 0;
                     if(movieCache.length > 0){
                       showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
                       movieCache.pop();
-                      //begin finding time
                       var time = showtimes.data[0].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
+                      //begin finding time
+
                       //end finding time
                       if(showtimes.data.length > 5){
                         $('.'+theatresArray[1].theatreId).find('li')[4].remove();
@@ -102,7 +99,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -130,7 +126,6 @@ function mapController($http, $routeParams){
               })
               /////////end/////
               //////////////////
-              console.log('testing 2');
 
           var marker2 = new google.maps.Marker({
               position: {lat: theatresArray[2].lat, lng: theatresArray[2].lng},
@@ -162,9 +157,8 @@ function mapController($http, $routeParams){
             })
             marker2.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow2.open(map, marker2);
                   $('#dir2').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[2].theatreId;
@@ -174,17 +168,15 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove2').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[2].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[2].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[2].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove2').on('click', function(){
@@ -192,9 +184,10 @@ function mapController($http, $routeParams){
                     if(movieCache.length > 0){
                       showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
                       movieCache.pop();
-                      //begin finding time
                       var time = showtimes.data[0].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
+                      //begin finding time
+
                       //end finding time
                       if(showtimes.data.length > 5){
                         $('.'+theatresArray[2].theatreId).find('li')[4].remove();
@@ -203,10 +196,7 @@ function mapController($http, $routeParams){
                         '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
                       );
                       counterCounter++;
-                    } else {
-                      console.log('no earlier movie times');
                     }
-
                   })
                   if(showtimes.data.length > 0 && showtimes.data.length < 6){
                     for (var i = 0; i < showtimes.data.length; i++) {
@@ -232,7 +222,6 @@ function mapController($http, $routeParams){
               })
               /////////end/////
               //////////////////
-              console.log('testing 3');
 
           var marker3 = new google.maps.Marker({
               position: {lat: theatresArray[3].lat, lng: theatresArray[3].lng},
@@ -265,9 +254,8 @@ function mapController($http, $routeParams){
             })
             marker3.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[3].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[3].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow3.open(map, marker3);
                   $('#dir3').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[3].theatreId;
@@ -277,17 +265,15 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove3').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[3].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[3].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[3].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove3').on('click', function(){
@@ -307,7 +293,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -335,7 +320,6 @@ function mapController($http, $routeParams){
               })
               /////////end/////
               //////////////////
-              console.log('testing 3');
 
           var marker4 = new google.maps.Marker({
               position: {lat: theatresArray[4].lat, lng: theatresArray[4].lng},
@@ -368,9 +352,8 @@ function mapController($http, $routeParams){
             })
             marker4.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[4].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[4].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow4.open(map, marker4);
                   $('#dir4').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[4].theatreId;
@@ -380,17 +363,15 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove4').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[4].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[4].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[4].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove4').on('click', function(){
@@ -410,7 +391,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -470,9 +450,8 @@ function mapController($http, $routeParams){
             })
             marker5.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[5].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[5].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow5.open(map, marker5);
                   $('#dir5').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[5].theatreId;
@@ -482,17 +461,15 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove5').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[5].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[5].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[5].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove5').on('click', function(){
@@ -512,7 +489,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -572,9 +548,8 @@ function mapController($http, $routeParams){
             })
             marker6.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[6].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[6].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow6.open(map, marker6);
                   $('#dir6').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[6].theatreId;
@@ -584,17 +559,15 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove6').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[6].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[6].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[6].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove6').on('click', function(){
@@ -614,7 +587,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -674,9 +646,8 @@ function mapController($http, $routeParams){
             })
             marker7.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[7].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[7].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow7.open(map, marker7);
                   $('#dir7').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[7].theatreId;
@@ -686,17 +657,15 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove7').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[7].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[7].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[7].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove7').on('click', function(){
@@ -716,7 +685,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -776,9 +744,8 @@ function mapController($http, $routeParams){
             })
             marker8.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow8.open(map, marker8);
                   $('#dir8').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[8].theatreId;
@@ -788,17 +755,15 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove8').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[8].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[8].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[8].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove8').on('click', function(){
@@ -818,7 +783,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -878,9 +842,8 @@ function mapController($http, $routeParams){
             })
             marker9.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[9].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[9].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow9.open(map, marker9);
                   $('#dir9').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[9].theatreId;
@@ -890,17 +853,15 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove9').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[9].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[9].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[9].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove9').on('click', function(){
@@ -920,7 +881,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -980,9 +940,8 @@ function mapController($http, $routeParams){
             })
             marker10.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[10].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[10].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   infoWindow10.open(map, marker10);
                   $('#dir10').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[10].theatreId;
@@ -992,17 +951,15 @@ function mapController($http, $routeParams){
                   });
                   var movieCache = [];
                   $('#moreMove10').on('click', function(){
-                    console.log(showtimes.data.length);
                     movieCache.push(showtimes.data[0]);
                     //movieCache will hold all "scrolled-through" listings
-                    console.log(movieCache);
                     showtimes.data.shift();
-                    console.log(showtimes.data.length);
-                    console.log($('.'+theatresArray[10].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[10].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[10].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove10').on('click', function(){
@@ -1022,7 +979,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -1062,9 +1018,7 @@ function mapController($http, $routeParams){
   }
   setMap();
 
-  console.log(window.location.href);
   var currentUrl = window.location.href;
-  console.log(currentUrl);
 
   //self.getTheatre is the method for retrieveing a single theater's directions when a clicked on from list view, or to Load theaters by proximity
   self.getTheatre = function(){
@@ -1072,17 +1026,14 @@ function mapController($http, $routeParams){
       //begin if statement
       ////////////////////
     if(currentUrl == 'https://localhost:5000/#/map'){
-      console.log('on map');
 
       ///ad "onload" stuff here
       if (navigator.geolocation) {
-        console.log('geoloc working');
           navigator.geolocation.getCurrentPosition(function(position) {
             pos = {
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-            console.log(pos);
 
             ///begin auto-population of map markers on launch
             var currentDate = new Date();
@@ -1100,17 +1051,14 @@ function mapController($http, $routeParams){
             var day = currentDate.getDate();
             var formatDate = year + "-"+month()+"-"+day;
             self.formatDate = formatDate;
-            console.log(self.formatDate);
 
             navigator.geolocation.getCurrentPosition(function(data){
               self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude};
-              console.log(self.currentLocation);
-
+            
               var url = "https://data.tmsapi.com/v1.1/theatres?lat="+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
 
               $http.get(url)
                .success(function(data){
-                 console.log(data);
                  self.rawData = data;
                  var filteredData = [];
                  var idCount = 1;
@@ -1124,13 +1072,10 @@ function mapController($http, $routeParams){
 ////end "on launch" portion of if-statement
     } else {
       ///begin "single theater directions" portion of if-statement
-      console.log('getting directions');
       //add single theater directions here
       $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatre+'?api_key=qf6mzc3fkprbntfd95db3hkk')
         .success(function(data){
-          console.log(data);
           self.theatreLocation = {lat: parseFloat(data.location.geoCode.latitude), lng: parseFloat(data.location.geoCode.longitude)}
-          console.log(self.theatreLocation);
 
           self.theatreLatitude = parseInt(data.location.geoCode.latitude);
           self.theatreLongitude = parseInt(data.location.geoCode.longitude);
@@ -1139,9 +1084,7 @@ function mapController($http, $routeParams){
 
          //begin drawing directions on map
          var location = navigator.geolocation.getCurrentPosition(function(data){
-           console.log(data);
            self.myLocation = {lat: data.coords.latitude, lng: data.coords.longitude}
-           console.log(self.theatreLocation);
            var request = {
              //origin is equal to your location
              origin: self.myLocation,
@@ -1184,8 +1127,4 @@ function mapController($http, $routeParams){
        })
     }
   }
-
-
-
-  console.log('mapppppppppppp');
 }
