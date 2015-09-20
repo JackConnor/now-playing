@@ -129,6 +129,7 @@ li {
 
 .popoutBox {
   min-height: 100%;
+  width: 270px;
 }
 
 .popoutBox li{
