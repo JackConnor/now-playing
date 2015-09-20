@@ -79,20 +79,25 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[1].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[1].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[1].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove1').on('click', function(){
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     var counterCounter = 0;
                     if(movieCache.length > 0){
                       showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
                       movieCache.pop();
-                      //begin finding time
                       var time = showtimes.data[0].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
+                      //begin finding time
+
                       //end finding time
                       if(showtimes.data.length > 5){
                         $('.'+theatresArray[1].theatreId).find('li')[4].remove();
@@ -181,10 +186,12 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[2].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[2].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[2].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove2').on('click', function(){
@@ -192,9 +199,10 @@ function mapController($http, $routeParams){
                     if(movieCache.length > 0){
                       showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
                       movieCache.pop();
-                      //begin finding time
                       var time = showtimes.data[0].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
+                      //begin finding time
+
                       //end finding time
                       if(showtimes.data.length > 5){
                         $('.'+theatresArray[2].theatreId).find('li')[4].remove();
@@ -203,10 +211,7 @@ function mapController($http, $routeParams){
                         '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
                       );
                       counterCounter++;
-                    } else {
-                      console.log('no earlier movie times');
                     }
-
                   })
                   if(showtimes.data.length > 0 && showtimes.data.length < 6){
                     for (var i = 0; i < showtimes.data.length; i++) {
@@ -284,10 +289,12 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[3].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[3].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[3].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove3').on('click', function(){
@@ -387,10 +394,12 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[4].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[4].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[4].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove4').on('click', function(){
@@ -489,10 +498,12 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[5].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[5].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[5].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove5').on('click', function(){
@@ -591,10 +602,12 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[6].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[6].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[6].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove6').on('click', function(){
@@ -693,10 +706,12 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[7].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[7].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[7].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove7').on('click', function(){
@@ -795,10 +810,12 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[8].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[8].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[8].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove8').on('click', function(){
@@ -818,7 +835,6 @@ function mapController($http, $routeParams){
                       );
                       counterCounter++;
                     } else {
-                      console.log('no earlier movie times');
                     }
 
                   })
@@ -897,10 +913,12 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[9].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[9].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[9].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove9').on('click', function(){
@@ -999,10 +1017,12 @@ function mapController($http, $routeParams){
                     showtimes.data.shift();
                     console.log(showtimes.data.length);
                     console.log($('.'+theatresArray[10].theatreId).find('li')[0]);
+                    var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                    var filteredTime = time.slice(time.length-5, time.length).join('');
                     //this removes first item from list/cache and adds a new one to the end of modal list
                    $('.'+theatresArray[10].theatreId).find('li')[0].remove();
                    $('.'+theatresArray[10].theatreId).append(
-                     '<li>'+showtimes.data[5].title+' '+showtimes.data[5].showtimes[0].dateTime+'</li>')
+                     '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
                   })
                   //begin the "go up " button where you can see start times you already scanned through
                   $('#backMove10').on('click', function(){
