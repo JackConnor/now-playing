@@ -3,6 +3,7 @@ angular.module('mapCtrl', [])
 
 function mapController($http, $routeParams){
   var self = this;
+
   navigator.geolocation.getCurrentPosition(function(data){
     var currentLoc = {lat: data.coords.latitude, lng: data.coords.longitude}
     $http.get("https://data.tmsapi.com/v1.1/theatres?lat="+currentLoc.lat+"&lng="+currentLoc.lng+"&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
@@ -56,6 +57,10 @@ function mapController($http, $routeParams){
               "<div>"
             })
             marker1.addListener('click', function(){
+              // $('#map').on('click', function(){
+              //   console.log('testing baby');
+              //   infoWindow1.close();
+              // })
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -168,6 +173,10 @@ function mapController($http, $routeParams){
               "<div>"
             })
             marker2.addListener('click', function(){
+              // $('#map').on('click', function(){
+              //   console.log('testing baby');
+              //   infoWindow2.close();
+              // })
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -277,6 +286,10 @@ function mapController($http, $routeParams){
               "<div>"
             })
             marker3.addListener('click', function(){
+              // $('#map').on('click', function(){
+              //   console.log('testing baby');
+              //   infoWindow3.close();
+              // })
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[3].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -387,6 +400,10 @@ function mapController($http, $routeParams){
               "<div>"
             })
             marker4.addListener('click', function(){
+              // $('#map').on('click', function(){
+              //   console.log('testing baby');
+              //   infoWindow4.close();
+              // })
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[4].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -500,6 +517,10 @@ function mapController($http, $routeParams){
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[5].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
+                  $('#map').on('click', function(){
+                    console.log('testing baby');
+                    infoWindow5.close();
+                  })
                   //close all infoWindows before opening the target one
                   infoWindow1.close();
                   infoWindow2.close();
@@ -607,6 +628,10 @@ function mapController($http, $routeParams){
               "<div>"
             })
             marker6.addListener('click', function(){
+              // $('#map').on('click', function(){
+              //   console.log('testing baby');
+              //   infoWindow6.close();
+              // })
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[6].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -717,6 +742,10 @@ function mapController($http, $routeParams){
               "<div>"
             })
             marker7.addListener('click', function(){
+              // $('#map').on('click', function(){
+              //   console.log('testing baby');
+              //   infoWindow7.close();
+              // })
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[7].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -827,6 +856,10 @@ function mapController($http, $routeParams){
               "<div>"
             })
             marker8.addListener('click', function(){
+              // $('#map').on('click', function(){
+              //   console.log('testing baby');
+              //   infoWindow8.close();
+              // })
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -937,6 +970,10 @@ function mapController($http, $routeParams){
               "<div>"
             })
             marker9.addListener('click', function(){
+              // $('#map').on('click', function(){
+              //   console.log('testing baby');
+              //   infoWindow9.close();
+              // })
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[9].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1050,6 +1087,10 @@ function mapController($http, $routeParams){
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[10].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
+                  // $('#map').on('click', function(){
+                  //   console.log('testing baby');
+                  //   infoWindow10.close();
+                  // })
                   //close all infoWindows before opening the target one
                   infoWindow1.close();
                   infoWindow2.close();
@@ -1063,6 +1104,10 @@ function mapController($http, $routeParams){
                   infoWindow10.close();
                   //begin opening new infoWindow
                   infoWindow10.open(map, marker10);
+                  // $('#map').on('click', function(){
+                  //   console.log('testing baby');
+                  //   infoWindow1.close();
+                  // })
                   $('#dir10').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[10].theatreId;
                   });
@@ -1146,7 +1191,6 @@ function mapController($http, $routeParams){
       //begin if statement
       ////////////////////
     if(currentUrl == 'https://localhost:5000/#/map'){
-
       ///ad "onload" stuff here
       if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
