@@ -75,6 +75,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow1.open(map, marker1);
                   $('#dir1').on('click', function(){
@@ -191,6 +195,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow2.open(map, marker2);
                   $('#dir2').on('click', function(){
@@ -304,6 +312,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow3.open(map, marker3);
                   $('#dir3').on('click', function(){
@@ -418,6 +430,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow4.open(map, marker4);
                   $('#dir4').on('click', function(){
@@ -532,6 +548,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow5.open(map, marker5);
                   $('#dir5').on('click', function(){
@@ -646,6 +666,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow6.open(map, marker6);
                   $('#dir6').on('click', function(){
@@ -760,6 +784,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow7.open(map, marker7);
                   $('#dir7').on('click', function(){
@@ -874,6 +902,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow8.open(map, marker8);
                   $('#dir8').on('click', function(){
@@ -988,6 +1020,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow9.open(map, marker9);
                   $('#dir9').on('click', function(){
@@ -1102,6 +1138,10 @@ function mapController($http, $routeParams){
                   infoWindow8.close();
                   infoWindow9.close();
                   infoWindow10.close();
+                  infoWindow11.close();
+                  infoWindow12.close();
+                  infoWindow13.close();
+                  infoWindow14.close();
                   //begin opening new infoWindow
                   infoWindow10.open(map, marker10);
                   // $('#map').on('click', function(){
@@ -1171,6 +1211,493 @@ function mapController($http, $routeParams){
               })
               /////////end/////
               //////////////////
+
+              var marker11 = new google.maps.Marker({
+                  position: {lat: theatresArray[11].lat, lng: theatresArray[11].lng},
+                  icon: {
+                    path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                    strokeColor: "#CF2F4D",
+                    scale: 4
+                  },
+                  map: map,
+                  title: theatresArray[11].name,
+                });
+
+                /////////begin/////
+                //////////////////
+                var infoWindow11 = new google.maps.InfoWindow({
+                  content:
+                  //begin html content for infowindow
+                  "<div class='popoutBox' id='popoutBox11'>"+
+                    "<h4>"+theatresArray[11].name+"</h4>"+
+                    "<p>Upcoming Movietimes</p>"+
+                    "<ul class="+theatresArray[11].theatreId+">"+
+                    "</ul>" +
+                    "<button id='backMove11'>see earlier showtimes/|\\</button>" +
+                    "<br>" +
+                    "<button id='moreMove11'>see later showtimes\\|/</button>" +
+                    "<br>" +
+                    "<button class='direction' id='dir11'>Get Directions</button>" +
+                    "<button class='showtimes' id='"+theatresArray[11].theatreId+"'>See All Showtimes</button>"+
+                  "<div>"
+                })
+                marker11.addListener('click', function(){
+                  //api call to get showtime data
+                  $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[11].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+                    .then(function(showtimes){
+                      // $('#map').on('click', function(){
+                      //   console.log('testing baby');
+                      //   infoWindow11.close();
+                      // })
+                      //close all infoWindows before opening the target one
+                      infoWindow1.close();
+                      infoWindow2.close();
+                      infoWindow3.close();
+                      infoWindow4.close();
+                      infoWindow5.close();
+                      infoWindow6.close();
+                      infoWindow7.close();
+                      infoWindow8.close();
+                      infoWindow9.close();
+                      infoWindow10.close();
+                      infoWindow11.close();
+                      infoWindow12.close();
+                      infoWindow13.close();
+                      infoWindow14.close();
+                      //begin opening new infoWindow
+                      infoWindow11.open(map, marker11);
+                      // $('#map').on('click', function(){
+                      //   console.log('testing baby');
+                      //   infoWindow1.close();
+                      // })
+                      $('#dir11').on('click', function(){
+                        window.location.href = "#/map/"+theatresArray[11].theatreId;
+                      });
+                      $('#'+theatresArray[11].theatreId).on('click', function(){
+                        window.location.href = "/#/showtimes/"+theatresArray[11].theatreId
+                      });
+                      var movieCache = [];
+                      $('#moreMove11').on('click', function(){
+                        movieCache.push(showtimes.data[0]);
+                        //movieCache will hold all "scrolled-through" listings
+                        showtimes.data.shift();
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //this removes first item from list/cache and adds a new one to the end of modal list
+                       $('.'+theatresArray[11].theatreId).find('li')[0].remove();
+                       $('.'+theatresArray[11].theatreId).append(
+                         '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
+                      })
+                      //begin the "go up " button where you can see start times you already scanned through
+                      $('#backMove11').on('click', function(){
+                        var counterCounter = 0;
+                        if(movieCache.length > 0){
+                          showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                          movieCache.pop();
+                          //begin finding time
+                          var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                          var filteredTime = time.slice(time.length-5, time.length).join('');
+                          //end finding time
+                          if(showtimes.data.length > 5){
+                            $('.'+theatresArray[11].theatreId).find('li')[4].remove();
+                          }
+                          $('.'+theatresArray[11].theatreId).prepend(
+                            '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                          );
+                          counterCounter++;
+                        } else {
+                        }
+
+                      })
+                      if(showtimes.data.length > 0 && showtimes.data.length < 6){
+                        for (var i = 0; i < showtimes.data.length; i++) {
+                          var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                          var filteredTime = time.slice(time.length-5, time.length).join('');
+                          //end finding time
+                          $('.'+theatresArray[11].theatreId).append(
+                            '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                        }
+                      } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                        for (var i = 0; i < 6; i++) {
+                          var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                          var filteredTime = time.slice(time.length-5, time.length).join('');
+                          //finish filtering time for syntax
+                          $('.'+theatresArray[11].theatreId).append(
+                            '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                        }
+                      }else {
+                        $('.'+theatresArray[11].theatreId).append(
+                          '<li>Sorry, no movies showing today</li>')
+                      }
+                    })
+                  })
+                  /////////end/////
+                  //////////////////
+
+                  var marker12 = new google.maps.Marker({
+                      position: {lat: theatresArray[12].lat, lng: theatresArray[12].lng},
+                      icon: {
+                        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                        strokeColor: "#CF2F4D",
+                        scale: 4
+                      },
+                      map: map,
+                      title: theatresArray[12].name,
+                    });
+
+                    /////////begin/////
+                    //////////////////
+                    var infoWindow12 = new google.maps.InfoWindow({
+                      content:
+                      //begin html content for infowindow
+                      "<div class='popoutBox' id='popoutBox12'>"+
+                        "<h4>"+theatresArray[12].name+"</h4>"+
+                        "<p>Upcoming Movietimes</p>"+
+                        "<ul class="+theatresArray[12].theatreId+">"+
+                        "</ul>" +
+                        "<button id='backMove12'>see earlier showtimes/|\\</button>" +
+                        "<br>" +
+                        "<button id='moreMove12'>see later showtimes\\|/</button>" +
+                        "<br>" +
+                        "<button class='direction' id='dir12'>Get Directions</button>" +
+                        "<button class='showtimes' id='"+theatresArray[12].theatreId+"'>See All Showtimes</button>"+
+                      "<div>"
+                    })
+                    marker12.addListener('click', function(){
+                      //api call to get showtime data
+                      $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[12].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+                        .then(function(showtimes){
+                          // $('#map').on('click', function(){
+                          //   console.log('testing baby');
+                          //   infoWindow12.close();
+                          // })
+                          //close all infoWindows before opening the target one
+                          infoWindow1.close();
+                          infoWindow2.close();
+                          infoWindow3.close();
+                          infoWindow4.close();
+                          infoWindow5.close();
+                          infoWindow6.close();
+                          infoWindow7.close();
+                          infoWindow8.close();
+                          infoWindow9.close();
+                          infoWindow10.close();
+                          infoWindow11.close();
+                          infoWindow12.close();
+                          infoWindow13.close();
+                          infoWindow14.close();
+                          //begin opening new infoWindow
+                          infoWindow12.open(map, marker12);
+                          // $('#map').on('click', function(){
+                          //   console.log('testing baby');
+                          //   infoWindow1.close();
+                          // })
+                          $('#dir12').on('click', function(){
+                            window.location.href = "#/map/"+theatresArray[12].theatreId;
+                          });
+                          $('#'+theatresArray[12].theatreId).on('click', function(){
+                            window.location.href = "/#/showtimes/"+theatresArray[12].theatreId
+                          });
+                          var movieCache = [];
+                          $('#moreMove12').on('click', function(){
+                            movieCache.push(showtimes.data[0]);
+                            //movieCache will hold all "scrolled-through" listings
+                            showtimes.data.shift();
+                            var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                            var filteredTime = time.slice(time.length-5, time.length).join('');
+                            //this removes first item from list/cache and adds a new one to the end of modal list
+                           $('.'+theatresArray[12].theatreId).find('li')[0].remove();
+                           $('.'+theatresArray[12].theatreId).append(
+                             '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
+                          })
+                          //begin the "go up " button where you can see start times you already scanned through
+                          $('#backMove12').on('click', function(){
+                            var counterCounter = 0;
+                            if(movieCache.length > 0){
+                              showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                              movieCache.pop();
+                              //begin finding time
+                              var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                              var filteredTime = time.slice(time.length-5, time.length).join('');
+                              //end finding time
+                              if(showtimes.data.length > 5){
+                                $('.'+theatresArray[12].theatreId).find('li')[4].remove();
+                              }
+                              $('.'+theatresArray[12].theatreId).prepend(
+                                '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                              );
+                              counterCounter++;
+                            } else {
+                            }
+
+                          })
+                          if(showtimes.data.length > 0 && showtimes.data.length < 6){
+                            for (var i = 0; i < showtimes.data.length; i++) {
+                              var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                              var filteredTime = time.slice(time.length-5, time.length).join('');
+                              //end finding time
+                              $('.'+theatresArray[12].theatreId).append(
+                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                            }
+                          } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                            for (var i = 0; i < 6; i++) {
+                              var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                              var filteredTime = time.slice(time.length-5, time.length).join('');
+                              //finish filtering time for syntax
+                              $('.'+theatresArray[12].theatreId).append(
+                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                            }
+                          }else {
+                            $('.'+theatresArray[12].theatreId).append(
+                              '<li>Sorry, no movies showing today</li>')
+                          }
+                        })
+                      })
+                      /////////end/////
+                      //////////////////
+
+                  var marker13 = new google.maps.Marker({
+                      position: {lat: theatresArray[13].lat, lng: theatresArray[13].lng},
+                      icon: {
+                        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                        strokeColor: "#CF2F4D",
+                        scale: 4
+                      },
+                      map: map,
+                      title: theatresArray[13].name,
+                    });
+
+                    /////////begin/////
+                    //////////////////
+                    var infoWindow13 = new google.maps.InfoWindow({
+                      content:
+                      //begin html content for infowindow
+                      "<div class='popoutBox' id='popoutBox13'>"+
+                        "<h4>"+theatresArray[13].name+"</h4>"+
+                        "<p>Upcoming Movietimes</p>"+
+                        "<ul class="+theatresArray[13].theatreId+">"+
+                        "</ul>" +
+                        "<button id='backMove13'>see earlier showtimes/|\\</button>" +
+                        "<br>" +
+                        "<button id='moreMove13'>see later showtimes\\|/</button>" +
+                        "<br>" +
+                        "<button class='direction' id='dir13'>Get Directions</button>" +
+                        "<button class='showtimes' id='"+theatresArray[13].theatreId+"'>See All Showtimes</button>"+
+                      "<div>"
+                    })
+                    marker13.addListener('click', function(){
+                      //api call to get showtime data
+                      $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[13].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+                        .then(function(showtimes){
+                          // $('#map').on('click', function(){
+                          //   console.log('testing baby');
+                          //   infoWindow13.close();
+                          // })
+                          //close all infoWindows before opening the target one
+                          infoWindow1.close();
+                          infoWindow2.close();
+                          infoWindow3.close();
+                          infoWindow4.close();
+                          infoWindow5.close();
+                          infoWindow6.close();
+                          infoWindow7.close();
+                          infoWindow8.close();
+                          infoWindow9.close();
+                          infoWindow10.close();
+                          infoWindow11.close();
+                          infoWindow12.close();
+                          infoWindow13.close();
+                          infoWindow14.close();
+                          //begin opening new infoWindow
+                          infoWindow13.open(map, marker13);
+                          // $('#map').on('click', function(){
+                          //   console.log('testing baby');
+                          //   infoWindow1.close();
+                          // })
+                          $('#dir13').on('click', function(){
+                            window.location.href = "#/map/"+theatresArray[13].theatreId;
+                          });
+                          $('#'+theatresArray[13].theatreId).on('click', function(){
+                            window.location.href = "/#/showtimes/"+theatresArray[13].theatreId
+                          });
+                          var movieCache = [];
+                          $('#moreMove13').on('click', function(){
+                            movieCache.push(showtimes.data[0]);
+                            //movieCache will hold all "scrolled-through" listings
+                            showtimes.data.shift();
+                            var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                            var filteredTime = time.slice(time.length-5, time.length).join('');
+                            //this removes first item from list/cache and adds a new one to the end of modal list
+                           $('.'+theatresArray[13].theatreId).find('li')[0].remove();
+                           $('.'+theatresArray[13].theatreId).append(
+                             '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
+                          })
+                          //begin the "go up " button where you can see start times you already scanned through
+                          $('#backMove13').on('click', function(){
+                            var counterCounter = 0;
+                            if(movieCache.length > 0){
+                              showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                              movieCache.pop();
+                              //begin finding time
+                              var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                              var filteredTime = time.slice(time.length-5, time.length).join('');
+                              //end finding time
+                              if(showtimes.data.length > 5){
+                                $('.'+theatresArray[13].theatreId).find('li')[4].remove();
+                              }
+                              $('.'+theatresArray[13].theatreId).prepend(
+                                '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                              );
+                              counterCounter++;
+                            } else {
+                            }
+
+                          })
+                          if(showtimes.data.length > 0 && showtimes.data.length < 6){
+                            for (var i = 0; i < showtimes.data.length; i++) {
+                              var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                              var filteredTime = time.slice(time.length-5, time.length).join('');
+                              //end finding time
+                              $('.'+theatresArray[13].theatreId).append(
+                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                            }
+                          } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                            for (var i = 0; i < 6; i++) {
+                              var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                              var filteredTime = time.slice(time.length-5, time.length).join('');
+                              //finish filtering time for syntax
+                              $('.'+theatresArray[13].theatreId).append(
+                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                            }
+                          }else {
+                            $('.'+theatresArray[13].theatreId).append(
+                              '<li>Sorry, no movies showing today</li>')
+                          }
+                        })
+                      })
+                      /////////end/////
+                      //////////////////
+                  var marker14 = new google.maps.Marker({
+                      position: {lat: theatresArray[14].lat, lng: theatresArray[14].lng},
+                      icon: {
+                        path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                        strokeColor: "#CF2F4D",
+                        scale: 4
+                      },
+                      map: map,
+                      title: theatresArray[14].name,
+                    });
+
+                    /////////begin/////
+                    //////////////////
+                    var infoWindow14 = new google.maps.InfoWindow({
+                      content:
+                      //begin html content for infowindow
+                      "<div class='popoutBox' id='popoutBox14'>"+
+                        "<h4>"+theatresArray[14].name+"</h4>"+
+                        "<p>Upcoming Movietimes</p>"+
+                        "<ul class="+theatresArray[14].theatreId+">"+
+                        "</ul>" +
+                        "<button id='backMove14'>see earlier showtimes/|\\</button>" +
+                        "<br>" +
+                        "<button id='moreMove14'>see later showtimes\\|/</button>" +
+                        "<br>" +
+                        "<button class='direction' id='dir14'>Get Directions</button>" +
+                        "<button class='showtimes' id='"+theatresArray[14].theatreId+"'>See All Showtimes</button>"+
+                      "<div>"
+                    })
+                    marker14.addListener('click', function(){
+                      //api call to get showtime data
+                      $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[14].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+                        .then(function(showtimes){
+                          // $('#map').on('click', function(){
+                          //   console.log('testing baby');
+                          //   infoWindow14.close();
+                          // })
+                          //close all infoWindows before opening the target one
+                          infoWindow1.close();
+                          infoWindow2.close();
+                          infoWindow3.close();
+                          infoWindow4.close();
+                          infoWindow5.close();
+                          infoWindow6.close();
+                          infoWindow7.close();
+                          infoWindow8.close();
+                          infoWindow9.close();
+                          infoWindow10.close();
+                          infoWindow11.close();
+                          infoWindow12.close();
+                          infoWindow13.close();
+                          infoWindow14.close();
+                          //begin opening new infoWindow
+                          infoWindow14.open(map, marker14);
+                          // $('#map').on('click', function(){
+                          //   console.log('testing baby');
+                          //   infoWindow1.close();
+                          // })
+                          $('#dir14').on('click', function(){
+                            window.location.href = "#/map/"+theatresArray[14].theatreId;
+                          });
+                          $('#'+theatresArray[14].theatreId).on('click', function(){
+                            window.location.href = "/#/showtimes/"+theatresArray[14].theatreId
+                          });
+                          var movieCache = [];
+                          $('#moreMove14').on('click', function(){
+                            movieCache.push(showtimes.data[0]);
+                            //movieCache will hold all "scrolled-through" listings
+                            showtimes.data.shift();
+                            var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                            var filteredTime = time.slice(time.length-5, time.length).join('');
+                            //this removes first item from list/cache and adds a new one to the end of modal list
+                           $('.'+theatresArray[14].theatreId).find('li')[0].remove();
+                           $('.'+theatresArray[14].theatreId).append(
+                             '<li>'+showtimes.data[5].title+' '+filteredTime+'</li>')
+                          })
+                          //begin the "go up " button where you can see start times you already scanned through
+                          $('#backMove14').on('click', function(){
+                            var counterCounter = 0;
+                            if(movieCache.length > 0){
+                              showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                              movieCache.pop();
+                              //begin finding time
+                              var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                              var filteredTime = time.slice(time.length-5, time.length).join('');
+                              //end finding time
+                              if(showtimes.data.length > 5){
+                                $('.'+theatresArray[14].theatreId).find('li')[4].remove();
+                              }
+                              $('.'+theatresArray[14].theatreId).prepend(
+                                '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                              );
+                              counterCounter++;
+                            } else {
+                            }
+
+                          })
+                          if(showtimes.data.length > 0 && showtimes.data.length < 6){
+                            for (var i = 0; i < showtimes.data.length; i++) {
+                              var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                              var filteredTime = time.slice(time.length-5, time.length).join('');
+                              //end finding time
+                              $('.'+theatresArray[14].theatreId).append(
+                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                            }
+                          } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
+                            for (var i = 0; i < 6; i++) {
+                              var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                              var filteredTime = time.slice(time.length-5, time.length).join('');
+                              //finish filtering time for syntax
+                              $('.'+theatresArray[14].theatreId).append(
+                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                            }
+                          }else {
+                            $('.'+theatresArray[14].theatreId).append(
+                              '<li>Sorry, no movies showing today</li>')
+                          }
+                        })
+                      })
+                      /////////end/////
+                      //////////////////
               //end api stuff
       })
   })
