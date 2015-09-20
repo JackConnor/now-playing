@@ -1053,8 +1053,8 @@ function mapController($http, $routeParams){
             self.formatDate = formatDate;
 
             navigator.geolocation.getCurrentPosition(function(data){
-              self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude};
-            
+              self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude}; 
+
               var url = "https://data.tmsapi.com/v1.1/theatres?lat="+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
 
               $http.get(url)
