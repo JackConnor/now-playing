@@ -25,7 +25,7 @@ function mapController($http, $routeParams){
               scale: 4
             },
             map: map,
-            title: "Your Location",
+            title: "You are here",
           });
 
           var marker1 = new google.maps.Marker({
