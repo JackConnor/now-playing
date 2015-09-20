@@ -60,7 +60,7 @@ function mapController($http, $routeParams){
             })
             marker1.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow1.open(map, marker1);
@@ -162,7 +162,7 @@ function mapController($http, $routeParams){
             })
             marker2.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow2.open(map, marker2);
@@ -265,7 +265,7 @@ function mapController($http, $routeParams){
             })
             marker3.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[3].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[3].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow3.open(map, marker3);
@@ -368,7 +368,7 @@ function mapController($http, $routeParams){
             })
             marker4.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[4].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[4].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow4.open(map, marker4);
@@ -470,7 +470,7 @@ function mapController($http, $routeParams){
             })
             marker5.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[5].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[5].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow5.open(map, marker5);
@@ -572,7 +572,7 @@ function mapController($http, $routeParams){
             })
             marker6.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[6].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[6].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow6.open(map, marker6);
@@ -674,7 +674,7 @@ function mapController($http, $routeParams){
             })
             marker7.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[7].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[7].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow7.open(map, marker7);
@@ -776,7 +776,7 @@ function mapController($http, $routeParams){
             })
             marker8.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow8.open(map, marker8);
@@ -878,7 +878,7 @@ function mapController($http, $routeParams){
             })
             marker9.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[9].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[9].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow9.open(map, marker9);
@@ -980,7 +980,7 @@ function mapController($http, $routeParams){
             })
             marker10.addListener('click', function(){
               //api call to get showtime data
-              $http.get('http://data.tmsapi.com/v1.1/theatres/'+theatresArray[10].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[10].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
                   infoWindow10.open(map, marker10);
