@@ -1,0 +1,31 @@
+
+  <div class="listContainer">
+    <select class="dropdownToggle" ng-model="sortBy">
+      <option value="">Sort List</option>
+      <option value="startTime">Sort By Time</option>
+      <option value="movieName">Sort By Name</option>
+    </select>
+    <h1>List Data will be theater specific soon</h1>
+    <div class="row" ng-repeat="movie in list.data | orderBy: sortBy" id="{{movie.id}}">
+      <div class="listedMovie col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0" ng-click='list.openButtons(movie)'>
+        <div class="row movieRow">
+          <div class="title col-sm-6 col-xs-12">
+            <p id="movieName" ><strong>{{movie.movieName}}</strong></p>
+          </div>
+          <div class="time col-sm-1 col-xs-12">
+            <p id="startTime" ><strong>{{movie.startTimeParsed}}</strong></p>
+          </div>
+          <div class="theater col-sm-5 col-xs-12">
+            <p id="theatreName" ><strong>{{movie.theatreName}}</strong></p>
+          </div>
+          <div class="buttonRow col-sm-12 col-xs-12">
+
+            <button id="dirBtn" class="threeBtn btn btn-default" href="#" role="button">Directions</button>
+            <button id="movBtn" class="threeBtn btn btn-default" href="#" role="button">Movie Info</button>
+            <button id="buyBtn" class="threeBtn btn btn-default" href="#" role="button">Buy Tickets</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

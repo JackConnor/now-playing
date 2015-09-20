@@ -33,5 +33,11 @@ function appRoutes($routeProvider){
       controllerAs: 'map'
     })
 
+    .when('/showtimes/:id', {
+      templateUrl: 'templates/_showtimes.html',
+      controller: 'listController',
+      controllerAs: 'list'
+    })
+
     .otherwise('/');
 }
