@@ -16,6 +16,7 @@ function mapController($http, $routeParams){
             theatreId: data.data[i].theatreId}
           theatresArray.push(theatreItem);
         }
+        console.log(theatresArray);
         //begin all markers on map in load-view
         var myLoc = new google.maps.Marker({
             position: {lat: currentLoc.lat, lng: currentLoc.lng},
@@ -62,8 +63,9 @@ function mapController($http, $routeParams){
               //   infoWindow1.close();
               // })
               //api call to get showtime data
-              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate=2015-09-19&api_key=qf6mzc3fkprbntfd95db3hkk')
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate=2015-09-22&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
+                  console.log(showtimes);
                   //close all infoWindows before opening the target one
                   infoWindow1.close();
                   infoWindow2.close();
