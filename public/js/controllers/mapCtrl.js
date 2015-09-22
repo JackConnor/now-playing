@@ -8,7 +8,16 @@ function mapController($http, $routeParams){
   var year = today.getFullYear();
   var month = today.getMonth()+1;
   var day = today.getDate();
+  var hour = today.getHours();
+  var minute = today.getMinutes();
 
+  if(minute < 10){
+    minute = "0"+minute;
+    // return minute;
+  }
+
+  var currentTime = hour+":"+minute;
+  console.log(currentTime);
   var todaysDate = year+"-"+month+"-"+day;
   console.log(year+"-"+month+"-"+day);
 
@@ -37,7 +46,8 @@ function mapController($http, $routeParams){
             title: "You are here",
           });
 
-          var marker1 = new google.maps.Marker({
+          var markers = [];
+          markers[0] = new google.maps.Marker({
               position: {lat: theatresArray[1].lat, lng: theatresArray[1].lng},
               icon: {
                 path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
@@ -47,8 +57,13 @@ function mapController($http, $routeParams){
               map: map,
               title: theatresArray[1].name,
             });
+
+
             /////////begin/////
             //////////////////
+            ///creating a custom marker id//
+
+            ////////
             var infoWindow1 = new google.maps.InfoWindow({
               content:
               //begin html content for infowindow
@@ -65,15 +80,11 @@ function mapController($http, $routeParams){
                 "<button class='showtimes' id='"+theatresArray[1].theatreId+"'>See All Showtimes</button>"+
               "<div>"
             })
-            marker1.addListener('click', function(){
-              // $('#map').on('click', function(){
-              //   console.log('testing baby');
-              //   infoWindow1.close();
-              // })
+            //create event listener for theater marker
+            markers[0].addListener('click', function(){
               //api call to get showtime data
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
-                  console.log(showtimes);
                   //close all infoWindows before opening the target one
                   infoWindow1.close();
                   infoWindow2.close();
@@ -90,7 +101,7 @@ function mapController($http, $routeParams){
                   infoWindow13.close();
                   infoWindow14.close();
                   //begin opening new infoWindow
-                  infoWindow1.open(map, marker1);
+                  infoWindow1.open(map, markers[0]);
                   $('#dir1').on('click', function(){
                     window.location.href = "#/map/"+theatresArray[1].theatreId;
                   });
@@ -133,21 +144,39 @@ function mapController($http, $routeParams){
                     }
 
                   })
+                  //begin data loading call
                   if(showtimes.data.length > 0 && showtimes.data.length < 6){
                     for (var i = 0; i < showtimes.data.length; i++) {
+                      console.log(showtimes.data[i]);
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
+                      //test if statement to filter by time
+                      if (filteredTime > todaysDate) {
+                        console.log('movie at '+todaysDate+", you can still make it");
+                      } else {
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                       //end finding time
                       $('.'+theatresArray[1].theatreId).append(
                         '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
+                      console.log(showtimes.data[i]);
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
+                      //test if statement to filter by time
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[1].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                       //finish filtering time for syntax
-                      $('.'+theatresArray[1].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
                     }
                   }else {
                     $('.'+theatresArray[1].theatreId).append(
@@ -251,19 +280,37 @@ function mapController($http, $routeParams){
                   })
                   if(showtimes.data.length > 0 && showtimes.data.length < 6){
                     for (var i = 0; i < showtimes.data.length; i++) {
+                      console.log(showtimes.data[i]);
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //end finding time
-                      $('.'+theatresArray[2].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[2].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   } else if(showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
+                      console.log(showtimes.data[i]);
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //finish filtering time for syntax
-                      $('.'+theatresArray[2].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[1].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   }else {
                     $('.'+theatresArray[2].theatreId).append(
@@ -372,16 +419,32 @@ function mapController($http, $routeParams){
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //end finding time
-                      $('.'+theatresArray[3].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[3].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //finish filtering time for syntax
-                      $('.'+theatresArray[3].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[3].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   }else {
                     $('.'+theatresArray[3].theatreId).append(
@@ -490,16 +553,32 @@ function mapController($http, $routeParams){
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //end finding time
-                      $('.'+theatresArray[4].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[4].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //finish filtering time for syntax
-                      $('.'+theatresArray[4].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[4].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   }else {
                     $('.'+theatresArray[4].theatreId).append(
@@ -608,16 +687,32 @@ function mapController($http, $routeParams){
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //end finding time
-                      $('.'+theatresArray[5].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[5].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //finish filtering time for syntax
-                      $('.'+theatresArray[5].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[5].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   }else {
                     $('.'+theatresArray[5].theatreId).append(
@@ -726,16 +821,32 @@ function mapController($http, $routeParams){
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //end finding time
-                      $('.'+theatresArray[6].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[6].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //finish filtering time for syntax
-                      $('.'+theatresArray[6].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[6].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   }else {
                     $('.'+theatresArray[6].theatreId).append(
@@ -844,16 +955,32 @@ function mapController($http, $routeParams){
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //end finding time
-                      $('.'+theatresArray[7].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[7].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //finish filtering time for syntax
-                      $('.'+theatresArray[7].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[7].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   }else {
                     $('.'+theatresArray[7].theatreId).append(
@@ -962,16 +1089,32 @@ function mapController($http, $routeParams){
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //end finding time
-                      $('.'+theatresArray[8].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[8].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //finish filtering time for syntax
-                      $('.'+theatresArray[8].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[8].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   }else {
                     $('.'+theatresArray[8].theatreId).append(
@@ -1080,16 +1223,32 @@ function mapController($http, $routeParams){
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //end finding time
-                      $('.'+theatresArray[9].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[9].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //finish filtering time for syntax
-                      $('.'+theatresArray[9].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[9].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   }else {
                     $('.'+theatresArray[9].theatreId).append(
@@ -1202,16 +1361,32 @@ function mapController($http, $routeParams){
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //end finding time
-                      $('.'+theatresArray[10].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[10].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                     for (var i = 0; i < 6; i++) {
                       var time = showtimes.data[i].showtimes[0].dateTime.split('');
                       var filteredTime = time.slice(time.length-5, time.length).join('');
                       //finish filtering time for syntax
-                      $('.'+theatresArray[10].theatreId).append(
-                        '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      if (parseInt(filteredTime) > parseInt(currentTime)) {
+                        //parseInt above required to compare data types
+                        console.log('movie at '+todaysDate+", you can still make it");
+                        $('.'+theatresArray[10].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                      } else {
+                        console.log(currentTime);
+                        console.log(filteredTime);
+                        console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                      }
                     }
                   }else {
                     $('.'+theatresArray[10].theatreId).append(
@@ -1324,16 +1499,32 @@ function mapController($http, $routeParams){
                           var time = showtimes.data[i].showtimes[0].dateTime.split('');
                           var filteredTime = time.slice(time.length-5, time.length).join('');
                           //end finding time
-                          $('.'+theatresArray[11].theatreId).append(
-                            '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                          if (parseInt(filteredTime) > parseInt(currentTime)) {
+                            //parseInt above required to compare data types
+                            console.log('movie at '+todaysDate+", you can still make it");
+                            $('.'+theatresArray[11].theatreId).append(
+                              '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                          } else {
+                            console.log(currentTime);
+                            console.log(filteredTime);
+                            console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                          }
                         }
                       } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                         for (var i = 0; i < 6; i++) {
                           var time = showtimes.data[i].showtimes[0].dateTime.split('');
                           var filteredTime = time.slice(time.length-5, time.length).join('');
                           //finish filtering time for syntax
-                          $('.'+theatresArray[11].theatreId).append(
-                            '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                          if (parseInt(filteredTime) > parseInt(currentTime)) {
+                            //parseInt above required to compare data types
+                            console.log('movie at '+todaysDate+", you can still make it");
+                            $('.'+theatresArray[11].theatreId).append(
+                              '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                          } else {
+                            console.log(currentTime);
+                            console.log(filteredTime);
+                            console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                          }
                         }
                       }else {
                         $('.'+theatresArray[11].theatreId).append(
@@ -1446,16 +1637,32 @@ function mapController($http, $routeParams){
                               var time = showtimes.data[i].showtimes[0].dateTime.split('');
                               var filteredTime = time.slice(time.length-5, time.length).join('');
                               //end finding time
-                              $('.'+theatresArray[12].theatreId).append(
-                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              if (parseInt(filteredTime) > parseInt(currentTime)) {
+                                //parseInt above required to compare data types
+                                console.log('movie at '+todaysDate+", you can still make it");
+                                $('.'+theatresArray[12].theatreId).append(
+                                  '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              } else {
+                                console.log(currentTime);
+                                console.log(filteredTime);
+                                console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                              }
                             }
                           } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                             for (var i = 0; i < 6; i++) {
                               var time = showtimes.data[i].showtimes[0].dateTime.split('');
                               var filteredTime = time.slice(time.length-5, time.length).join('');
                               //finish filtering time for syntax
-                              $('.'+theatresArray[12].theatreId).append(
-                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              if (parseInt(filteredTime) > parseInt(currentTime)) {
+                                //parseInt above required to compare data types
+                                console.log('movie at '+todaysDate+", you can still make it");
+                                $('.'+theatresArray[12].theatreId).append(
+                                  '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              } else {
+                                console.log(currentTime);
+                                console.log(filteredTime);
+                                console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                              }
                             }
                           }else {
                             $('.'+theatresArray[12].theatreId).append(
@@ -1568,16 +1775,32 @@ function mapController($http, $routeParams){
                               var time = showtimes.data[i].showtimes[0].dateTime.split('');
                               var filteredTime = time.slice(time.length-5, time.length).join('');
                               //end finding time
-                              $('.'+theatresArray[13].theatreId).append(
-                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              if (parseInt(filteredTime) > parseInt(currentTime)) {
+                                //parseInt above required to compare data types
+                                console.log('movie at '+todaysDate+", you can still make it");
+                                $('.'+theatresArray[13].theatreId).append(
+                                  '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              } else {
+                                console.log(currentTime);
+                                console.log(filteredTime);
+                                console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                              }
                             }
                           } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                             for (var i = 0; i < 6; i++) {
                               var time = showtimes.data[i].showtimes[0].dateTime.split('');
                               var filteredTime = time.slice(time.length-5, time.length).join('');
                               //finish filtering time for syntax
-                              $('.'+theatresArray[13].theatreId).append(
-                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              if (parseInt(filteredTime) > parseInt(currentTime)) {
+                                //parseInt above required to compare data types
+                                console.log('movie at '+todaysDate+", you can still make it");
+                                $('.'+theatresArray[13].theatreId).append(
+                                  '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              } else {
+                                console.log(currentTime);
+                                console.log(filteredTime);
+                                console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                              }
                             }
                           }else {
                             $('.'+theatresArray[13].theatreId).append(
@@ -1689,16 +1912,32 @@ function mapController($http, $routeParams){
                               var time = showtimes.data[i].showtimes[0].dateTime.split('');
                               var filteredTime = time.slice(time.length-5, time.length).join('');
                               //end finding time
-                              $('.'+theatresArray[14].theatreId).append(
-                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              if (parseInt(filteredTime) > parseInt(currentTime)) {
+                                //parseInt above required to compare data types
+                                console.log('movie at '+todaysDate+", you can still make it");
+                                $('.'+theatresArray[14].theatreId).append(
+                                  '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              } else {
+                                console.log(currentTime);
+                                console.log(filteredTime);
+                                console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                              }
                             }
                           } else if(showtimes.data.length > 0 && showtimes.data.length > 5){
                             for (var i = 0; i < 6; i++) {
                               var time = showtimes.data[i].showtimes[0].dateTime.split('');
                               var filteredTime = time.slice(time.length-5, time.length).join('');
                               //finish filtering time for syntax
-                              $('.'+theatresArray[14].theatreId).append(
-                                '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              if (parseInt(filteredTime) > parseInt(currentTime)) {
+                                //parseInt above required to compare data types
+                                console.log('movie at '+todaysDate+", you can still make it");
+                                $('.'+theatresArray[14].theatreId).append(
+                                  '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')
+                              } else {
+                                console.log(currentTime);
+                                console.log(filteredTime);
+                                console.log("it's "+currentTime+", and the movie started at "+filteredTime+". sorry, you missed it");
+                              }
                             }
                           }else {
                             $('.'+theatresArray[14].theatreId).append(
