@@ -48,7 +48,7 @@ function mapController($http, $routeParams){
           });
         //end placing current location
         //Below, begin pushing all theaters to the theater array, to populate map
-        for (var i = 0; i < 8; i++) {
+        for (var i = 0; i < 16; i++) {
           var theatreItem = {
             lat: parseFloat(data.data[i].location.geoCode.latitude), lng: parseFloat(data.data[i].location.geoCode.longitude), name: data.data[i].name,
             distance: data.data[i].location.distance,
@@ -91,35 +91,71 @@ function mapController($http, $routeParams){
       })
       .then(function(){
           //begin hardCoded infowindow/marker events
-          var thId = [];
-          for (var m = 0; m < 8; m++) {
-            console.log(theatresArray);
-            console.log(theatresArray[m]);
-
-            thId[m] = {id: theatresArray[m].theatreId, url: 'https://data.tmsapi.com/v1.1/theatres/'+theatresArray[m].theatreId+'/showings?startDate=2015-09-22&api_key=qf6mzc3fkprbntfd95db3hkk'}
-            console.log(thId);
-            console.log('should be: '+m);
-            var url = 'https://data.tmsapi.com/v1.1/theatres/'+theatresArray[m].theatreId+'/showings?startDate=2015-09-22&api_key=qf6mzc3fkprbntfd95db3hkk';
-
-            marker[m].addListener('click', function(evt){
-              console.log(evt);
-              console.log(thId);
-              console.log(theatresArray);
-              var info = '';
-              for (var i = 0; i < theatresArray.length; i++) {
-                if (theatersArray[i].theatreId == thId[i]) {
-
-                }
-              }
-              $http.get(url)
+          ///begin theater marker 0
+            marker[0].addListener('click', function(){
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[0].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
                   console.log(showtimes);
-                  console.log('should be: '+m);
+                  infoWindow[0].open(map, marker[0]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[1].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[0].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir0').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[0].theatreId;
+                      });
+                    $('#moreMove0').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[0].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[0].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove0').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[0].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[0].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 1
+            marker[1].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
                   infoWindow[1].open(map, marker[1]);
                   console.log(showtimes);
                   ////begin creating in-modal list of showtimes when clicked-on
                     if(showtimes.data.length > 0){
-                      console.log('should be: '+m);
                       for (var i = 0; i < 6; i++) {
                         var time = showtimes.data[i].showtimes[0].dateTime.split('');
                         var filteredTime = time.slice(time.length-5, time.length).join('');
@@ -166,38 +202,793 @@ function mapController($http, $routeParams){
                     })
                 })
             })
-          }
-
+            ///begin theater marker 2
+            marker[2].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[2].open(map, marker[2]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[2].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[2].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir2').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[2].theatreId;
+                      });
+                    $('#moreMove2').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[2].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[2].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove2').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[2].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[2].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 3
+            marker[3].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[3].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[3].open(map, marker[3]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[3].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[3].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir3').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[3].theatreId;
+                      });
+                    $('#moreMove3').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[3].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[3].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove3').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[3].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[3].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 4
+            marker[4].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[4].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[4].open(map, marker[4]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[4].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[4].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir4').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[4].theatreId;
+                      });
+                    $('#moreMove4').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[4].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[4].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove4').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[4].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[4].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 5
+            marker[5].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[5].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[5].open(map, marker[5]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[5].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[5].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir5').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[5].theatreId;
+                      });
+                    $('#moreMove5').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[5].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[5].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove5').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[5].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[5].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 6
+            marker[6].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[6].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[6].open(map, marker[6]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[6].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[6].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir6').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[6].theatreId;
+                      });
+                    $('#moreMove6').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[6].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[6].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove6').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[6].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[6].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 7
+            marker[7].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[7].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[7].open(map, marker[7]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[7].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[7].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir7').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[7].theatreId;
+                      });
+                    $('#moreMove7').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[7].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[7].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove7').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[7].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[7].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 8
+            marker[8].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[8].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[8].open(map, marker[8]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[8].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[8].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir8').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[8].theatreId;
+                      });
+                    $('#moreMove8').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[8].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[8].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove8').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[8].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[8].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 9
+            marker[9].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[9].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[9].open(map, marker[9]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[9].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[9].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir9').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[9].theatreId;
+                      });
+                    $('#moreMove9').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[9].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[9].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove9').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[9].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[9].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 10
+            marker[10].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[10].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[10].open(map, marker[10]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[10].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[10].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir10').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[10].theatreId;
+                      });
+                    $('#moreMove10').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[10].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[10].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove10').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[10].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[10].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 11
+            marker[11].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[11].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[11].open(map, marker[11]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[11].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[11].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir11').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[11].theatreId;
+                      });
+                    $('#moreMove11').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[11].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[11].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove11').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[11].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[11].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 12
+            marker[12].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[12].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[12].open(map, marker[12]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[12].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[12].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir12').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[12].theatreId;
+                      });
+                    $('#moreMove12').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[12].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[12].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove12').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[12].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[12].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 13
+            marker[13].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[13].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[13].open(map, marker[13]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[13].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[13].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir13').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[13].theatreId;
+                      });
+                    $('#moreMove13').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[13].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[13].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove13').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[13].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[13].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 14
+            marker[14].addListener('click', function(){
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[14].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[14].open(map, marker[14]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[14].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[14].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir14').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[14].theatreId;
+                      });
+                    $('#moreMove14').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[14].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[14].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove14').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[14].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[14].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+            ///begin theater marker 15
+            // marker[15].addListener('click', function(){
+            //   console.log('testing testing');
+            //   $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[15].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+            //     .then(function(showtimes){
+            //       console.log(showtimes);
+            //       infoWindow[15].open(map, marker[15]);
+            //       console.log(showtimes);
+            //       ////begin creating in-modal list of showtimes when clicked-on
+            //         if(showtimes.data.length > 0){
+            //           for (var i = 0; i < 6; i++) {
+            //             var time = showtimes.data[i].showtimes[0].dateTime.split('');
+            //             var filteredTime = time.slice(time.length-5, time.length).join('');
+            //             $('.'+theatresArray[15].theatreId).append(
+            //               '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+            //         } else {
+            //           $('.'+theatresArray[15].theatreId).append(
+            //           '<li>Sorry, no movies showing today</li>')
+            //         }
+            //         ////end creating in-modal list
+            //         //begin adding event listeners for in-modal scrolling
+            //         var movieCache = [];
+            //         $('#dir15').on('click', function(){
+            //           //returns directions
+            //             window.location.href = "#/map/"+theatresArray[15].theatreId;
+            //           });
+            //         $('#moreMove15').on('click', function(){
+            //           //scrolls down in your in-modal showtimes viewer
+            //           movieCache.push(showtimes.data[0]);
+            //           showtimes.data.shift();
+            //           var time = showtimes.data[0].showtimes[0].dateTime.split('');
+            //           var filteredTime = time.slice(time.length-5, time.length).join('');
+            // //this removes first item from list/cache and adds a new one to the end of modal list
+            //          $('.'+theatresArray[15].theatreId).find('li')[0].remove();
+            //          $('.'+theatresArray[15].theatreId).append(
+            //            '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+            //         })
+            //         //begin the "go up " button where you can see start times you already scanned through
+            //         $('#backMove15').on('click', function(){
+            //           if(movieCache.length > 0){
+            //             showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+            //             movieCache.pop();
+            //             //begin finding time
+            //             var time = showtimes.data[0].showtimes[0].dateTime.split('');
+            //             var filteredTime = time.slice(time.length-5, time.length).join('');
+            //             //end finding time
+            //             if(showtimes.data.length > 5){
+            //               $('.'+theatresArray[15].theatreId).find('li')[4].remove();
+            //             }
+            //             $('.'+theatresArray[15].theatreId).prepend(
+            //               '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+            //             );
+            //           }
+            //         })
+            //     })
+            // })
+            ///end of .then() callback
       })
-      // for (var i = 0; i < 8; i++) {
-      //   console.log('whatup');
-      //   console.log(marker[i]);
-      //   console.log(marker);
-      // }
-        // marker[i].addListener('click', function(){
-        //   var x = i;
-        //   console.log(x+" baby");
-        // for (var j = 0; j < 8; j++) {
-        //   var a = "a";
-        //   var b = "b"
-        //   var j = j;
-        //   console.log(j)
-        //   console.log(marker[j]);
-        //   var markerThis = marker[j];
-        //   var windowThis = infoWindow[j];
-        //   console.log(windowThis);
-        //   console.log(markerThis);
-        //   markerThis.addListener('click', function(){
-        //     console.log(markerThis);
-        //     console.log(windowThis);
-        //     windowThis.open(map, markerThis);
-        //     // console.log(infoWindow);
-        //     // console.log(j);
-        //     // console.log(infoWindow[j]);
-        //     // console.log(infoWindow[0]);
-        //   })
-        // }
-      // })
+      ///end navigator.geolocation callback
   })
 
 
@@ -223,8 +1014,6 @@ function mapController($http, $routeParams){
               lat: position.coords.latitude,
               lng: position.coords.longitude
             };
-
-            ///begin auto-population of map markers on launch
             var currentDate = new Date();
             self.currentDate = currentDate;
             var year = currentDate.getFullYear();
