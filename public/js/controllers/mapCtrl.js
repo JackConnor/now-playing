@@ -5,10 +5,6 @@ function mapController($http, $routeParams){
   //begin global variables
   var self = this;
   var theatresArray = [];
-  //infoWindow and marker google map holder arrays
-  var marker = [];
-  var infoWindow = [];
-  var functionBox = [];
   //find current time and date
 
   var today = new Date();
@@ -21,17 +17,24 @@ function mapController($http, $routeParams){
   if(minute < 10){
     minute = "0"+minute;
   }
+  var marker = [];
+  console.log(marker);
+  var infoWindow = [];
+  var functionBox = [];
 
   var currentTime = hour+":"+minute;
   console.log(currentTime);
   var todaysDate = year+"-"+month+"-"+day;
   console.log(year+"-"+month+"-"+day);
 
-
   navigator.geolocation.getCurrentPosition(function(data){
     var currentLoc = {lat: data.coords.latitude, lng: data.coords.longitude}
     $http.get("https://data.tmsapi.com/v1.1/theatres?lat="+currentLoc.lat+"&lng="+currentLoc.lng+"&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
       .then(function(data){
+        //infoWindow and marker google map holder arrays
+
+        console.log(currentTime);
+        console.log(marker);
         ///////mark your current postion
         var myLoc = new google.maps.Marker({
             position: {lat: currentLoc.lat, lng: currentLoc.lng},
@@ -52,6 +55,7 @@ function mapController($http, $routeParams){
             theatreId: data.data[i].theatreId
           }
           theatresArray.push(theatreItem);
+          console.log(marker);
           ////begin creating the marker which will be placed on map
           marker[i] = new google.maps.Marker({
               position: {lat: theatresArray[i].lat, lng: theatresArray[i].lng},
@@ -81,26 +85,48 @@ function mapController($http, $routeParams){
                 "<button class='showtimes' id='"+theatresArray[i].theatreId+"'>See All Showtimes</button>"+
               "<div>"
             })//end creating the infoWindow
-            // functionBox[i] = function(i){
-            //   console.log(parseInt(i));
-            //   console.log(i);
-            //   console.log(infoWindow);
-            //   console.log(infoWindow[0]);
-            //   console.log(infoWindow[i]);
-            //   infoWindow[i].open(map, marker[i]);
-            //
-            // }
-            // console.log(functionBox[i]);
-            marker[i].addListener('click', function(a,b,c){
-              console.log('testing baby');
-            })
-
-            //begin creating the event listener
-            // marker[i].addListener('click', functionBox[i]);
+          }
 
         //end for loop below
-        }
       })
+      .then(function(){
+        for (var j = 0; j < 8; j++) {
+          //begin hardCoded infowindow/marker events
+          marker[0].addListener('click', function(){
+              infoWindow[j].open(map, marker[j])
+          })
+        }
+
+      })
+      // for (var i = 0; i < 8; i++) {
+      //   console.log('whatup');
+      //   console.log(marker[i]);
+      //   console.log(marker);
+      // }
+        // marker[i].addListener('click', function(){
+        //   var x = i;
+        //   console.log(x+" baby");
+        // for (var j = 0; j < 8; j++) {
+        //   var a = "a";
+        //   var b = "b"
+        //   var j = j;
+        //   console.log(j)
+        //   console.log(marker[j]);
+        //   var markerThis = marker[j];
+        //   var windowThis = infoWindow[j];
+        //   console.log(windowThis);
+        //   console.log(markerThis);
+        //   markerThis.addListener('click', function(){
+        //     console.log(markerThis);
+        //     console.log(windowThis);
+        //     windowThis.open(map, markerThis);
+        //     // console.log(infoWindow);
+        //     // console.log(j);
+        //     // console.log(infoWindow[j]);
+        //     // console.log(infoWindow[0]);
+        //   })
+        // }
+      // })
   })
 
 
