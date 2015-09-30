@@ -1,17 +1,17 @@
 
   <div class="listContainer">
     <div class="row filterRow">
-      <div class="col-md-6 col-md-offset-3 col-sm-8 col-xs-12 row">
+      <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 row">
         <div class="dropdown col-sm-4 col-xs-12">
           <select class="dropdownToggle" ng-model="sortBy">
-            <option value="">Sort List</option>
+            <option value="">Sort list by...</option>
             <option value="startTime" selected>Sort By Time</option>
             <option value="movieName">Sort Alphabetical</option>
           </select>
         </div>
         <div class="dropdown col-sm-4 col-xs-12">
           <select class="displayLimit" ng-model='displayLimit'>
-            <option value=""># of results</option>
+            <option value=""># to display</option>
             <option value=10 selected>10</option>
             <option value=25 selected>25</option>
             <option value=50>50</option>
@@ -20,7 +20,7 @@
         </div>
         <div class="dropdown col-sm-4 col-xs-12">
           <select class="startHour" ng-model='startHour'>
-            <option value=""># of results</option>
+            <option value="">Starting after...</option>
             <option value=10 selected>10</option>
             <option value=25 selected>25</option>
             <option value=50>50</option>

@@ -37,6 +37,10 @@ if(window.Object.locationStuff){
 
   var currentTime = new Date();
   var currMin = currentTime.getMinutes();
+  if (currMin < 10) {
+    currMin = "0"+currMin
+  }
+  console.log(currMin);
   var currHour = currentTime.getHours();
   self.currentTime = currHour+":"+currMin;
   ///end gettting current time
@@ -137,6 +141,9 @@ if(window.Object.locationStuff){
       //begin getting now's time
       var currentTime = new Date();
       var currMin = currentTime.getMinutes();
+      if (currMin < 10) {
+        currMin = "0"+currMin
+      }
       var currHour = currentTime.getHours();
       self.currentTime = currHour+":"+currMin;
       ///end gettting current time
@@ -170,10 +177,15 @@ if(window.Object.locationStuff){
               console.log(self.currentMinutes);
 
             } else{
-              var currentTenHours = parseInt(self.currentTime[0]*600)
+              console.log(self.currentTime);
+              var currentTenHours = parseInt(self.currentTime[0]*600);
+              console.log(currentTenHours);
               var currentTimeHours = parseInt(self.currentTime[1]*60);
+              console.log(currentTimeHours);
               var currentTimeTenMins =parseInt(self.currentTime[3]*10);
+              console.log(currentTimeTenMins);
               var mins = parseInt(self.currentTime[4]);
+              console.log(mins);
               self.currentMinutes = currentTimeHours + currentTimeTenMins + mins;
               console.log(self.currentMinutes);
             }
@@ -265,6 +277,7 @@ if(window.Object.locationStuff){
          }
          //begin filtering based on user selection
          self.data = filteredData;
+         console.log(self.data);
          ///////this is where it gets it's dat from!
         //
          return self.data
