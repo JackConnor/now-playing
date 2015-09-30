@@ -946,6 +946,13 @@ function mapController($http, $routeParams){
   var currentUrl = window.location.href;
 
   //self.getTheatre is the method for retrieveing a single theater's directions when a clicked on from list view, or to Load theaters by proximity
+  self.theatreIf = function(){
+    if(currentUrl == 'https://localhost:5000/#/map'){
+      return true;
+    } else {
+      return false
+    }
+  }
   self.getTheatre = function(){
     var theatre = $routeParams.id
       //begin if statement
