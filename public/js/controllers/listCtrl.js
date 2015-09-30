@@ -171,12 +171,9 @@ if(window.Object.locationStuff){
             }
 
             var runHours = parseInt(self.runTime.slice(self.runTime.length-6, self.runTime.length-4));
-            console.log(runHours);
             var runMinutes = parseInt(self.runTime.slice(self.runTime.length-3, self.runTime.length-1));
-            console.log(runMinutes);
             self.runTime = runHours+":"+runMinutes
             self.runTimeMinutes = (parseInt(runHours*60)) + parseInt(runMinutes);
-            console.log(self.runTimeMinutes);
             ///end getting movies runtime
 
             //get time to start
@@ -204,11 +201,16 @@ if(window.Object.locationStuff){
           }
          }
          ///end if statement
-
+         filteredData.sort(function(a, b){
+            if(a.startTime < b.startTime) return -1;
+            if(a.startTime > b.startTime) return 1;
+            return 0;
+        })
 
          var filteredData = filteredData.slice(0,100);
          //begin filtering based on user selection
          self.data = filteredData;
+         ///////this is where it gets it's dat from!
         //
          return self.data
        })
@@ -216,12 +218,11 @@ if(window.Object.locationStuff){
   }
   itemsArray();
 }
-
+console.log('stuffffed');
+console.log(self.data);
+console.log('cabbage');
 //////////
 
-
-  //end finding today's date with formatting for api call
-  //begin api call for the data to populate the list view
 
   var buttonCounter = true;
 
