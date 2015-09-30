@@ -57,7 +57,7 @@ if(window.Object.locationStuff){
         var startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
         ///filtering out all times that already happened
         ///////
-        if(startTime > "14:00"){
+        if(startTime > self.currentTime){
           self.startTime = startTime
         } else{
           break;
@@ -159,7 +159,7 @@ if(window.Object.locationStuff){
             var startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
             ///filtering out all times that already happened
             ///////
-            if(startTime > "14:00"){
+            if(startTime > self.currentTime){
               self.startTime = startTime
             } else{
               break;
@@ -225,7 +225,10 @@ if(window.Object.locationStuff){
         })
 
 
-         var filteredData = filteredData.slice(0,100);
+         var filteredData = filteredData;
+         self.myFilter = function(){
+
+         }
          //begin filtering based on user selection
          self.data = filteredData;
          ///////this is where it gets it's dat from!
