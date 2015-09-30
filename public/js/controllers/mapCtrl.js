@@ -3,10 +3,7 @@ angular.module('mapCtrl', [])
 
 function mapController($http, $routeParams){
   ///////begin experimental map thing
-  if(window.Object.locationStuff){
-    console.log('restarting map??');
-    window.Object.reInitMap;
-  }
+
   //////end experiemntal map thing
   //begin global variables
   var self = this;
@@ -976,22 +973,22 @@ function mapController($http, $routeParams){
             var day = currentDate.getDate();
             var formatDate = year + "-"+month()+"-"+day;
             self.formatDate = formatDate;
+            //
+            // navigator.geolocation.getCurrentPosition(function(data){
+            self.currentLocation = {lat: position.coords.latitude, lng: position.coords.longitude};
 
-            navigator.geolocation.getCurrentPosition(function(data){
-              self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude};
+            var url = "https://data.tmsapi.com/v1.1/theatres?lat="+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
 
-              var url = "https://data.tmsapi.com/v1.1/theatres?lat="+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
+            $http.get(url)
+             .success(function(data){
+               self.rawData = data;
+               var filteredData = [];
+               var idCount = 1;
 
-              $http.get(url)
-               .success(function(data){
-                 self.rawData = data;
-                 var filteredData = [];
-                 var idCount = 1;
-
-               }, function(err) {
-                 console.log(err);
-               })
-            })
+             }, function(err) {
+               console.log(err);
+             })
+            // })
           })
         }
 ////end "on launch" portion of if-statement
