@@ -6,7 +6,7 @@
       <option value="movieName">Sort Alphabetical</option>
     </select>
 
-    <div class="row" ng-repeat="movie in list.data | orderBy: sortBy" id="{{movie.id}}">
+    <div class="row" ng-repeat="movie in list.data | orderBy: sortBy"  id="{{movie.id}}">
       <div class="listedMovie col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0" ng-click='list.openButtons(movie)'>
         <div class="row movieRow">
           <div class="title col-sm-5 col-xs-12">
