@@ -2,8 +2,8 @@
   <div class="listContainer">
     <select class="dropdownToggle" ng-model="sortBy">
       <option value="">Sort List</option>
-      <option value="startTime">Sort By Time</option>
-      <option value="movieName">Sort By Name</option>
+      <option value="startTime" selected>Sort By Time</option>
+      <option value="movieName">Sort Alphabetical</option>
     </select>
 
     <div class="row" ng-repeat="movie in list.data | orderBy: sortBy" id="{{movie.id}}">
