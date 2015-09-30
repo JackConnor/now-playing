@@ -2,6 +2,8 @@ angular.module('listCtrl', [])
   .controller('listController', listController);
 
 function listController($http, $routeParams){
+  console.log(window.Object.map);
+  console.log(map);
   var self = this;
   var itemsArray = [{name:"test mofo"}];
 

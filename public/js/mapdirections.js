@@ -122,7 +122,7 @@ function initMap() {
      styles: styleArray
    };
    map = new google.maps.Map(document.getElementById("map"), mapOptions);
-   window.map = map;
+   window.Object.map = map;
    directionsDisplay.setMap(map);
    directionsDisplay.setOptions( { suppressMarkers: true } );
    var request = {
