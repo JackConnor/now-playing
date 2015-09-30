@@ -153,15 +153,49 @@ if(window.Object.locationStuff){
          for (var i = 0; i < self.rawData.length; i++) {
           var showtimes = self.rawData[i].showtimes;
           for (var j = 0; j < showtimes.length; j++) {
-
             //start getting showtimes
             var length = showtimes[j].dateTime.split('').length;
             var startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
+            console.log('currentTime is',self.currentTime);
+            console.log('startTime is',startTime);
+            console.log('length is: '+self.currentTime.length);
+
+            ////begin calculating time minutes for comparisons
+            ///begin calculating current time in minutes
+            if (self.currentTime.length == 4) {
+              var currentTimeHours = parseInt(self.currentTime[0]*60);
+              var currentTimeTenMins =parseInt(self.currentTime[2]*10);
+              var mins = parseInt(self.currentTime[3]);
+              self.currentMinutes = currentTimeHours + currentTimeTenMins + mins;
+              console.log(self.currentMinutes);
+
+            } else{
+              var currentTenHours = parseInt(self.currentTime[0]*600)
+              var currentTimeHours = parseInt(self.currentTime[1]*60);
+              var currentTimeTenMins =parseInt(self.currentTime[3]*10);
+              var mins = parseInt(self.currentTime[4]);
+              self.currentMinutes = currentTimeHours + currentTimeTenMins + mins;
+              console.log(self.currentMinutes);
+            }
+            ////begin calculating this showtimes' time in minutes
+            var startTenHours = parseInt(startTime[0]*600)
+            console.log(startTenHours);
+            var startTimeHours = parseInt(startTime[1]*60);
+            console.log(startTimeHours);
+            var startTimeTenMins =parseInt(startTime[3]*10);
+            console.log(startTimeTenMins);
+            var startMins = parseInt(startTime[4]);
+            console.log(startMins);
+            self.startMinutes = startTenHours + startTimeHours + startTimeTenMins + startMins;
+            console.log(self.startMinutes);
+
             ///filtering out all times that already happened
             ///////
-            if(startTime > self.currentTime){
-              self.startTime = startTime
+            if(self.startMinutes > self.currentMinutes){
+              self.startTime = startTime;
+              console.log('you got this, it starts at', self.startTime);
             } else{
+              console.log('too lat ebro');
               break;
             }
             /////all times are pure until this point
