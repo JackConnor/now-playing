@@ -35,6 +35,11 @@ if(window.Object.locationStuff){
   ///porting in data from the window, which we saved when we got here
   var data = window.Object.locationStuff
 
+  var currentTime = new Date();
+  var currMin = currentTime.getMinutes();
+  var currHour = currentTime.getHours();
+  self.currentTime = currHour+":"+currMin;
+  ///end gettting current time
   self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude};
   var url = 'https://data.tmsapi.com/v1.1/movies/showings?radius=20&startDate='+formatDate+'&lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
   $http.get(url)
@@ -42,7 +47,7 @@ if(window.Object.locationStuff){
      self.rawData = data;
      var filteredData = [];
      var idCount = 1;
-
+     //begin if statement
      for (var i = 0; i < self.rawData.length; i++) {
       var showtimes = self.rawData[i].showtimes;
       for (var j = 0; j < showtimes.length; j++) {
@@ -50,35 +55,39 @@ if(window.Object.locationStuff){
         //start getting showtimes
         var length = showtimes[j].dateTime.split('').length;
         var startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
-        self.startTime = startTime
-
-        if (startTime[0]+startTime[1] > 12){
+        ///filtering out all times that already happened
+        ///////
+        if(startTime > "14:00"){
+          self.startTime = startTime
+        } else{
+          break;
+        }
+        /////all times are pure until this point
+        var movieTime = startTime[0]+startTime[1];
+        var movieTime = parseInt(movieTime);
+        if ( 11 < movieTime && movieTime < 13){
           //this parses any pm's into the proper format
-          self.startTime = startTime.split('').splice(1,4).join('');
-          self.startTimeParsed = self.startTime+"pm";
-
-        } else {
-          self.startTimeParsed = startTime+"pm"
+          self.startTimeParsed = startTime+"pm";
+        }
+        else if(movieTime >= 13){
+          var newHour = movieTime-12;
+          var time = newHour +":"+startTime[3]+startTime[4];
+          self.startTimeParsed = time+"pm";
+        }else {
+          self.startTimeParsed = startTime+"am"
         };
         //end getting showtimes
-
-        //begin getting now's time
-        var currentTime = new Date();
-        var currMin = currentTime.getMinutes();
-        var currHour = currentTime.getHours();
-        self.currentTime = currHour+":"+currMin;
-        ///end gettting current time
-
         ///getting the movies runtime
         if(self.rawData[i].runTime){
           self.runTime = self.rawData[i].runTime;
         } else {
-          self.runTime = "pt99H99M"
+          self.runTime = "pt--H--M"
         }
 
-        var runHours = self.runTime.slice(self.runTime.length-6, self.runTime.length-4);
-        var runMinutes = self.runTime.slice(self.runTime.length-3, self.runTime.length-1);
+        var runHours = parseInt(self.runTime.slice(self.runTime.length-6, self.runTime.length-4));
+        var runMinutes = parseInt(self.runTime.slice(self.runTime.length-3, self.runTime.length-1));
         self.runTime = runHours+":"+runMinutes
+        self.runTimeMinutes = (parseInt(runHours*60)) + parseInt(runMinutes);
         ///end getting movies runtime
 
         //get time to start
@@ -94,6 +103,7 @@ if(window.Object.locationStuff){
           theatreId: showtimes[j].theatre.id,
           theatreName: showtimes[j].theatre.name,
           id: idCount,
+          runTimeMinutes: self.runTimeMinutes,
           runTime: self.runTime,
           startTime: self.startTime,
           startTimeParsed: self.startTimeParsed,
@@ -101,17 +111,23 @@ if(window.Object.locationStuff){
           ticketUrl: showtimes[j].ticketURI
         }
         ///if statement to see if runtime comes after current time
-        if (self.startTime > self.currentTime) {
-          filteredData.push(item);
-          idCount++;
-        } else {
-        }
+        filteredData.push(item);
       }
      }
      ///end if statement
+     //the following sets the array to "sort by time" first
+     filteredData.sort(function(a, b){
+        if(a.startTime < b.startTime) return -1;
+        if(a.startTime > b.startTime) return 1;
+        return 0;
+    })
 
+
+     var filteredData = filteredData;
      //begin filtering based on user selection
-     self.data = filteredData.slice(0,19);
+     self.data = filteredData;
+     ///////this is where it gets it's dat from!
+    //
      return self.data
    })
   ///////end first if you've already been there
@@ -194,7 +210,7 @@ if(window.Object.locationStuff){
               startTime: self.startTime,
               startTimeParsed: self.startTimeParsed,
               timeTo: self.timeTo(),
-              ticketUrl: showtimes[j].ticketURI 
+              ticketUrl: showtimes[j].ticketURI
             }
             ///if statement to see if runtime comes after current time
             filteredData.push(item);
