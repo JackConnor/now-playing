@@ -194,7 +194,7 @@ if(window.Object.locationStuff){
               startTime: self.startTime,
               startTimeParsed: self.startTimeParsed,
               timeTo: self.timeTo(),
-              ticketUrl: showtimes[j].ticketURI
+              ticketUrl: showtimes[j].ticketURI 
             }
             ///if statement to see if runtime comes after current time
             filteredData.push(item);
@@ -207,7 +207,7 @@ if(window.Object.locationStuff){
             if(a.startTime > b.startTime) return 1;
             return 0;
         })
-        
+
 
          var filteredData = filteredData.slice(0,100);
          //begin filtering based on user selection

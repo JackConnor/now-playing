@@ -999,7 +999,7 @@ function mapController($http, $routeParams){
           })
         }
 ////end "on launch" portion of if-statement
-    } else {
+    } else { 
       ///begin "single theater directions" portion of if-statement
       //add single theater directions here
       $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatre+'?api_key=qf6mzc3fkprbntfd95db3hkk')
