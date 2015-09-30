@@ -2,6 +2,7 @@ angular.module('mapCtrl', [])
   .controller('mapController', mapController);
 
 function mapController($http, $routeParams){
+  
   //begin global variables
   var self = this;
   var theatresArray = [];
