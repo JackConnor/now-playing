@@ -2,6 +2,12 @@ angular.module('mapCtrl', [])
   .controller('mapController', mapController);
 
 function mapController($http, $routeParams){
+  ///////begin experimental map thing
+  if(window.Object.locationStuff){
+    console.log('restarting map??');
+    window.Object.reInitMap;
+  }
+  //////end experiemntal map thing
   //begin global variables
   var self = this;
   var theatresArray = [];
@@ -31,6 +37,7 @@ function mapController($http, $routeParams){
   setMap();
 
   navigator.geolocation.getCurrentPosition(function(data){
+    window.Object.locationStuff = data;
     var currentLoc = {lat: data.coords.latitude, lng: data.coords.longitude}
     $http.get("https://data.tmsapi.com/v1.1/theatres?lat="+currentLoc.lat+"&lng="+currentLoc.lng+"&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
       .then(function(data){
@@ -66,6 +73,7 @@ function mapController($http, $routeParams){
               map: map,
               title: theatresArray[i].name,
             });
+            console.log(marker[i]);
             ///end creating the marker
             //begin creating the infoWindow that will popup on click
             infoWindow[i] = new google.maps.InfoWindow({
@@ -91,6 +99,7 @@ function mapController($http, $routeParams){
       .then(function(){
           //begin hardCoded infowindow/marker events
           ///begin theater marker 0
+          console.log('were into the event listener function');
             marker[0].addListener('click', function(){
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[0].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
