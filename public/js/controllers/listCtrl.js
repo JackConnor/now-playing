@@ -206,8 +206,9 @@ if(window.Object.locationStuff){
          ///end if statement
 
          //begin filtering based on user selection
-         self.data = filteredData;
-        //  .slice(0,100)
+         self.data = filteredData.slice(0,100);
+         
+        //
          return self.data
        })
     })
