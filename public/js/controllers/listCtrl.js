@@ -154,13 +154,13 @@ if(window.Object.locationStuff){
           for (var j = 0; j < showtimes.length; j++) {
 
             //start getting showtimes
-            console.log(showtimes[j].dateTime);
             var length = showtimes[j].dateTime.split('').length;
             var startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
             console.log('startime is',startTime);
             console.log('current time is',self.currentTime);
             ///filtering out all times that already happened
-            if(startTime > self.currentTime){
+            if(startTime) //> self.currentTime)
+            {
               console.log('yup ', startTime);
               self.startTime = startTime
             } else{
@@ -168,15 +168,24 @@ if(window.Object.locationStuff){
               break;
             }
             /////all times are pure until this point
-
-            if (startTime[0]+startTime[1] > 12){
+            var movieTime = startTime[0]+startTime[1];
+            var movieTime = parseInt(movieTime);
+            console.log(movieTime);
+            if ( 11 < movieTime && movieTime < 13){
               //this parses any pm's into the proper format
-              self.startTime = startTime.split('').splice(1,4).join('');
-              self.startTimeParsed = self.startTime+"pm";
+              self.startTimeParsed = startTime+"pm";
+              console.log('nooner');
 
-            } else {
-              self.startTimeParsed = startTime+"pm"
+            }
+            else if(movieTime >= 13){
+              var newHour = movieTime-12;
+              console.log(newHour);
+              var time = newHour +":"+startTime[3]+startTime[4];
+              self.startTimeParsed = time+"pm";
+            }else {
+              self.startTimeParsed = startTime+"am"
             };
+            console.log('PARSED TIME IS',self.startTimeParsed);
             //end getting showtimes
             ///getting the movies runtime
             if(self.rawData[i].runTime){
@@ -210,19 +219,15 @@ if(window.Object.locationStuff){
               timeTo: self.timeTo(),
               ticketUrl: showtimes[j].ticketURI
             }
+            console.log(self.startTimeParsed);
             ///if statement to see if runtime comes after current time
-
-            if (self.startTime > self.currentTime) {
-              filteredData.push(item);
-              idCount++;
-            } else {
-            }
+            filteredData.push(item);
           }
          }
          ///end if statement
 
          //begin filtering based on user selection
-         self.data = filteredData.slice(0,19);
+         self.data = filteredData;
          console.log(self.data);
          return self.data
        })
