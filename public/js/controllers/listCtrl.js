@@ -194,18 +194,20 @@ if(window.Object.locationStuff){
               startTime: self.startTime,
               startTimeParsed: self.startTimeParsed,
               timeTo: self.timeTo(),
-              ticketUrl: showtimes[j].ticketURI
+              ticketUrl: showtimes[j].ticketURI 
             }
             ///if statement to see if runtime comes after current time
             filteredData.push(item);
           }
          }
          ///end if statement
+         //the following sets the array to "sort by time" first
          filteredData.sort(function(a, b){
             if(a.startTime < b.startTime) return -1;
             if(a.startTime > b.startTime) return 1;
             return 0;
         })
+
 
          var filteredData = filteredData.slice(0,100);
          //begin filtering based on user selection
