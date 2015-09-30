@@ -2,8 +2,6 @@ angular.module('listCtrl', [])
   .controller('listController', listController);
 
 function listController($http, $routeParams){
-  console.log(window.Object.map);
-  console.log(map);
   var self = this;
   var itemsArray = [{name:"test mofo"}];
 
@@ -15,7 +13,6 @@ function listController($http, $routeParams){
   //finding the date on load and feeding it to the tmsapi to initially populate the list based on the user's location
   var currentDate = new Date();
   self.currentDate = currentDate;
-  console.log(currentDate);
   var year = currentDate.getFullYear();
   var month = function(){
     if(currentDate.getMonth() < 10){
@@ -35,7 +32,6 @@ function listController($http, $routeParams){
 //////begin if, with no pre-existing window.Object.locationStuff
 if(window.Object.locationStuff){
   ////if you've already been here
-  console.log('not my first rodeo');
   ///porting in data from the window, which we saved when we got here
   var data = window.Object.locationStuff
 
@@ -43,7 +39,6 @@ if(window.Object.locationStuff){
   var url = 'https://data.tmsapi.com/v1.1/movies/showings?radius=20&startDate='+formatDate+'&lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
   $http.get(url)
    .success(function(data){
-     console.log('end api call');
      self.rawData = data;
      var filteredData = [];
      var idCount = 1;
@@ -77,7 +72,6 @@ if(window.Object.locationStuff){
         ///getting the movies runtime
         if(self.rawData[i].runTime){
           self.runTime = self.rawData[i].runTime;
-          // console.log(self.runTime);
         } else {
           self.runTime = "pt99H99M"
         }
@@ -107,8 +101,6 @@ if(window.Object.locationStuff){
           ticketUrl: showtimes[j].ticketURI
         }
         ///if statement to see if runtime comes after current time
-        console.log(self.startTime);
-        console.log(self.currentTime);
         if (self.startTime > self.currentTime) {
           filteredData.push(item);
           idCount++;
@@ -120,14 +112,11 @@ if(window.Object.locationStuff){
 
      //begin filtering based on user selection
      self.data = filteredData.slice(0,19);
-     console.log(self.data);
      return self.data
    })
   ///////end first if you've already been there
 }else{
-  console.log('first timer, eh?');
   var itemsArray = function(){
-    console.log('start');
       navigator.geolocation.getCurrentPosition(function(data){
       //begin getting now's time
       var currentTime = new Date();
@@ -137,67 +126,57 @@ if(window.Object.locationStuff){
       ///end gettting current time
 
       window.Object.locationStuff = data;
-      console.log('end nav');
       self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude};
       var url = 'https://data.tmsapi.com/v1.1/movies/showings?radius=20&startDate='+formatDate+'&lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
       $http.get(url)
        .success(function(data){
-         console.log('end api call');
          self.rawData = data;
-        //  console.log(data);
          var filteredData = [];
          var idCount = 1;
          //begin if statement
          for (var i = 0; i < self.rawData.length; i++) {
           var showtimes = self.rawData[i].showtimes;
-          //  console.log(showtimes);
           for (var j = 0; j < showtimes.length; j++) {
 
             //start getting showtimes
             var length = showtimes[j].dateTime.split('').length;
             var startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
-            console.log('startime is',startTime);
-            console.log('current time is',self.currentTime);
             ///filtering out all times that already happened
-            if(startTime) //> self.currentTime)
-            {
-              console.log('yup ', startTime);
+            //  > "17:00" goes below
+            if(startTime){
               self.startTime = startTime
             } else{
-              console.log('nope ' + startTime);
               break;
             }
             /////all times are pure until this point
             var movieTime = startTime[0]+startTime[1];
             var movieTime = parseInt(movieTime);
-            console.log(movieTime);
             if ( 11 < movieTime && movieTime < 13){
               //this parses any pm's into the proper format
               self.startTimeParsed = startTime+"pm";
-              console.log('nooner');
-
             }
             else if(movieTime >= 13){
               var newHour = movieTime-12;
-              console.log(newHour);
               var time = newHour +":"+startTime[3]+startTime[4];
               self.startTimeParsed = time+"pm";
             }else {
               self.startTimeParsed = startTime+"am"
             };
-            console.log('PARSED TIME IS',self.startTimeParsed);
             //end getting showtimes
             ///getting the movies runtime
             if(self.rawData[i].runTime){
               self.runTime = self.rawData[i].runTime;
-              // console.log(self.runTime);
             } else {
-              self.runTime = "pt99H99M"
+              self.runTime = "pt--H--M"
             }
 
-            var runHours = self.runTime.slice(self.runTime.length-6, self.runTime.length-4);
-            var runMinutes = self.runTime.slice(self.runTime.length-3, self.runTime.length-1);
+            var runHours = parseInt(self.runTime.slice(self.runTime.length-6, self.runTime.length-4));
+            console.log(runHours);
+            var runMinutes = parseInt(self.runTime.slice(self.runTime.length-3, self.runTime.length-1));
+            console.log(runMinutes);
             self.runTime = runHours+":"+runMinutes
+            self.runTimeMinutes = (parseInt(runHours*60)) + parseInt(runMinutes);
+            console.log(self.runTimeMinutes);
             ///end getting movies runtime
 
             //get time to start
@@ -213,13 +192,13 @@ if(window.Object.locationStuff){
               theatreId: showtimes[j].theatre.id,
               theatreName: showtimes[j].theatre.name,
               id: idCount,
+              runTimeMinutes: self.runTimeMinutes,
               runTime: self.runTime,
               startTime: self.startTime,
               startTimeParsed: self.startTimeParsed,
               timeTo: self.timeTo(),
               ticketUrl: showtimes[j].ticketURI
             }
-            console.log(self.startTimeParsed);
             ///if statement to see if runtime comes after current time
             filteredData.push(item);
           }
@@ -228,7 +207,7 @@ if(window.Object.locationStuff){
 
          //begin filtering based on user selection
          self.data = filteredData;
-         console.log(self.data);
+        //  .slice(0,100)
          return self.data
        })
     })
@@ -300,8 +279,6 @@ if(window.Object.locationStuff){
   //end function for button window
 
   self.getMovie = function(){
-    console.log("getting your movie");
-    console.log(itemsArray());
 
 
     var key = "a9e6b3f7506ddf2d1499a135372be9f7";
@@ -315,11 +292,9 @@ if(window.Object.locationStuff){
 
     //single movie detail http call to return additional movie details
     //find the proper item object with runtimes and stuff from our self.data object
-    console.log(self.data);
     //end self.data object retrieval
     $http.get(url+key)
       .success(function(data){
-        console.log(data);
       //begin passing my data to my angular frontend via self.'s
       self.posterLink = "https://image.tmdb.org/t/p/w500"+data.results[0].poster_path;
       self.movieDescription = data.results[0].overview;
