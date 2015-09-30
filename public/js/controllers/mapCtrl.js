@@ -27,12 +27,15 @@ function mapController($http, $routeParams){
   var currentTime = hour+":"+minute;
   var todaysDate = year+"-"+month+"-"+day;
 
+  ///start function to keep map a constant dimension ratio
   function setMap(){
-    $('#map').css("height", 100+"%");
+
+    $('#map').css("height", 90+"%");
     console.log('map at full height');
   }
-
+  // $(window).on('resize orientationChange', setMap)
   setMap();
+  /////end viewport function
 
   navigator.geolocation.getCurrentPosition(function(data){
     window.Object.locationStuff = data;
@@ -90,8 +93,10 @@ function mapController($http, $routeParams){
               "<div>"
             })//end creating the infoWindow
             ////begin creating mini popUp infor windows for onload
+            var shortNameArray = theatresArray[i].name.split(' ');
+            var shortName = shortNameArray[0]+" "+shortNameArray[1];
             miniInfo[i] = new google.maps.InfoWindow({
-              content: '<div class="miniMarker">'+theatresArray[i].name+'</div>'
+              content: '<div class="miniMarker">'+shortName+'</div>'
             })
             miniInfo[i].open(map, marker[i]);
           }

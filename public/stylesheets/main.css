@@ -93,6 +93,15 @@ li {
   margin: 0 0 4px 0;
 }
 
+.miniMarker {
+  padding: 0;
+  height: 20px;
+  font-size: 13px;
+  background: transparent;
+  font-weight: bolder;
+  color: gray;
+}
+
 .navfix {
 
 }
