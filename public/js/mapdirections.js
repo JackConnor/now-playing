@@ -100,7 +100,9 @@ function initMap() {
    navigator.geolocation.getCurrentPosition(getPosition);
  }
 
- function getPosition (position) {                                                              //This gets the
+ function getPosition (position) {
+   window.Object.locationStuff = position;
+                                                                //This gets the
    var latitude = position.coords.latitude;                    //users current
    var longitude = position.coords.longitude;                 //location
    var coords = new google.maps.LatLng(latitude, longitude); //Creates variable for map coordinates
@@ -122,7 +124,7 @@ function initMap() {
      styles: styleArray
    };
    map = new google.maps.Map(document.getElementById("map"), mapOptions);
-   window.map = map;
+   window.Object.map = map;
    directionsDisplay.setMap(map);
    directionsDisplay.setOptions( { suppressMarkers: true } );
    var request = {

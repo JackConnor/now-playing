@@ -2,12 +2,16 @@ angular.module('mapCtrl', [])
   .controller('mapController', mapController);
 
 function mapController($http, $routeParams){
-  
+  ///////begin experimental map thing
+  if(window.Object.locationStuff){
+    console.log('restarting map??');
+    window.Object.reInitMap;
+  }
+  //////end experiemntal map thing
   //begin global variables
   var self = this;
   var theatresArray = [];
   //find current time and date
-
   var today = new Date();
   var year = today.getFullYear();
   var month = today.getMonth()+1;
@@ -19,23 +23,24 @@ function mapController($http, $routeParams){
     minute = "0"+minute;
   }
   var marker = [];
-  console.log(marker);
   var infoWindow = [];
   var functionBox = [];
 
   var currentTime = hour+":"+minute;
-  console.log(currentTime);
   var todaysDate = year+"-"+month+"-"+day;
-  console.log(year+"-"+month+"-"+day);
+
+  function setMap(){
+    $('#map').css("height", 100+"%");
+    console.log('map at full height');
+  }
+
+  setMap();
 
   navigator.geolocation.getCurrentPosition(function(data){
+    window.Object.locationStuff = data;
     var currentLoc = {lat: data.coords.latitude, lng: data.coords.longitude}
     $http.get("https://data.tmsapi.com/v1.1/theatres?lat="+currentLoc.lat+"&lng="+currentLoc.lng+"&radius=20&api_key=qf6mzc3fkprbntfd95db3hkk")
       .then(function(data){
-        //infoWindow and marker google map holder arrays
-
-        console.log(currentTime);
-        console.log(marker);
         ///////mark your current postion
         var myLoc = new google.maps.Marker({
             position: {lat: currentLoc.lat, lng: currentLoc.lng},
@@ -68,6 +73,7 @@ function mapController($http, $routeParams){
               map: map,
               title: theatresArray[i].name,
             });
+            console.log(marker[i]);
             ///end creating the marker
             //begin creating the infoWindow that will popup on click
             infoWindow[i] = new google.maps.InfoWindow({
@@ -93,6 +99,7 @@ function mapController($http, $routeParams){
       .then(function(){
           //begin hardCoded infowindow/marker events
           ///begin theater marker 0
+          console.log('were into the event listener function');
             marker[0].addListener('click', function(){
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[0].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -931,74 +938,13 @@ function mapController($http, $routeParams){
                     })
                 })
             })
-            ///begin theater marker 15
-            // marker[15].addListener('click', function(){
-            //   console.log('testing testing');
-            //   $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[15].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
-            //     .then(function(showtimes){
-            //       console.log(showtimes);
-            //       infoWindow[15].open(map, marker[15]);
-            //       console.log(showtimes);
-            //       ////begin creating in-modal list of showtimes when clicked-on
-            //         if(showtimes.data.length > 0){
-            //           for (var i = 0; i < 6; i++) {
-            //             var time = showtimes.data[i].showtimes[0].dateTime.split('');
-            //             var filteredTime = time.slice(time.length-5, time.length).join('');
-            //             $('.'+theatresArray[15].theatreId).append(
-            //               '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
-            //         } else {
-            //           $('.'+theatresArray[15].theatreId).append(
-            //           '<li>Sorry, no movies showing today</li>')
-            //         }
-            //         ////end creating in-modal list
-            //         //begin adding event listeners for in-modal scrolling
-            //         var movieCache = [];
-            //         $('#dir15').on('click', function(){
-            //           //returns directions
-            //             window.location.href = "#/map/"+theatresArray[15].theatreId;
-            //           });
-            //         $('#moreMove15').on('click', function(){
-            //           //scrolls down in your in-modal showtimes viewer
-            //           movieCache.push(showtimes.data[0]);
-            //           showtimes.data.shift();
-            //           var time = showtimes.data[0].showtimes[0].dateTime.split('');
-            //           var filteredTime = time.slice(time.length-5, time.length).join('');
-            // //this removes first item from list/cache and adds a new one to the end of modal list
-            //          $('.'+theatresArray[15].theatreId).find('li')[0].remove();
-            //          $('.'+theatresArray[15].theatreId).append(
-            //            '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
-            //         })
-            //         //begin the "go up " button where you can see start times you already scanned through
-            //         $('#backMove15').on('click', function(){
-            //           if(movieCache.length > 0){
-            //             showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
-            //             movieCache.pop();
-            //             //begin finding time
-            //             var time = showtimes.data[0].showtimes[0].dateTime.split('');
-            //             var filteredTime = time.slice(time.length-5, time.length).join('');
-            //             //end finding time
-            //             if(showtimes.data.length > 5){
-            //               $('.'+theatresArray[15].theatreId).find('li')[4].remove();
-            //             }
-            //             $('.'+theatresArray[15].theatreId).prepend(
-            //               '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
-            //             );
-            //           }
-            //         })
-            //     })
-            // })
+
             ///end of .then() callback
       })
       ///end navigator.geolocation callback
   })
 
-
   self.counter = true;
-
-  function setMap(){
-    $('#map').css("height", 100+"%");
-  }
-  setMap();
 
   var currentUrl = window.location.href;
 
