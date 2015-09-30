@@ -100,7 +100,10 @@ function mapController($http, $routeParams){
             })
             miniInfo[i].open(map, marker[i]);
           }
-
+          myMini = new google.maps.InfoWindow({
+            content: '<div class="miniMarker">You be here, biatch</div>'
+          })
+          myMini.open(map, myLoc)
         //end for loop below
       })
       .then(function(){
