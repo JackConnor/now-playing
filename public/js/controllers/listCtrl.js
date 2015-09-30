@@ -7,11 +7,13 @@ function listController($http, $routeParams){
 
   function setMap(){
     $('#map').css("height", 0+"px");
+    $('#map').css("width", 0+"px");
   }
   setMap();
   //finding the date on load and feeding it to the tmsapi to initially populate the list based on the user's location
   var currentDate = new Date();
   self.currentDate = currentDate;
+  console.log(currentDate);
   var year = currentDate.getFullYear();
   var month = function(){
     if(currentDate.getMonth() < 10){
@@ -26,94 +28,200 @@ function listController($http, $routeParams){
   var formatDate = year + "-"+month()+"-"+day;
   self.formatDate = formatDate;
 
+///were about to attempt a big if statement for itemsArray
+/////////////////////////////////////////////
+//////begin if, with no pre-existing window.Object.locationStuff
+if(window.Object.locationStuff){
+  ////if you've already been here
+  console.log('not my first rodeo');
+  ///porting in data from the window, which we saved when we got here
+  var data = window.Object.locationStuff
+
+  self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude};
+        var url = 'https://data.tmsapi.com/v1.1/movies/showings?radius=20&startDate='+formatDate+'&lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
+        $http.get(url)
+         .success(function(data){
+           console.log('end api call');
+           self.rawData = data;
+          //  console.log(data);
+           var filteredData = [];
+           var idCount = 1;
+           //begin if statement
+           for (var i = 0; i < self.rawData.length; i++) {
+            var showtimes = self.rawData[i].showtimes;
+            //  console.log(showtimes);
+            for (var j = 0; j < showtimes.length; j++) {
+
+              //start getting showtimes
+              var length = showtimes[j].dateTime.split('').length;
+              var startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
+              self.startTime = startTime
+
+              if (startTime[0]+startTime[1] > 12){
+                //this parses any pm's into the proper format
+                self.startTime = startTime.split('').splice(1,4).join('');
+                self.startTimeParsed = self.startTime+"pm";
+
+              } else {
+                self.startTimeParsed = startTime+"pm"
+              };
+              //end getting showtimes
+
+              //begin getting now's time
+              var currentTime = new Date();
+              var currMin = currentTime.getMinutes();
+              var currHour = currentTime.getHours();
+              self.currentTime = currHour+":"+currMin;
+              ///end gettting current time
+
+              ///getting the movies runtime
+              if(self.rawData[i].runTime){
+                self.runTime = self.rawData[i].runTime;
+                // console.log(self.runTime);
+              } else {
+                self.runTime = "pt99H99M"
+              }
+
+              var runHours = self.runTime.slice(self.runTime.length-6, self.runTime.length-4);
+              var runMinutes = self.runTime.slice(self.runTime.length-3, self.runTime.length-1);
+              self.runTime = runHours+":"+runMinutes
+              ///end getting movies runtime
+
+              //get time to start
+              self.timeTo = function(){
+                var hours = currHour + runHours;
+                var minutes = runMinutes + currMin;
+                var minutesTo = hours*60 + minutes;
+                return minutesTo;
+              }
+
+              var item = {
+                movieName: self.rawData[i].title,
+                theatreId: showtimes[j].theatre.id,
+                theatreName: showtimes[j].theatre.name,
+                id: idCount,
+                runTime: self.runTime,
+                startTime: self.startTime,
+                startTimeParsed: self.startTimeParsed,
+                timeTo: self.timeTo(),
+                ticketUrl: showtimes[j].ticketURI
+              }
+              ///if statement to see if runtime comes after current time
+
+              if (self.startTime > self.currentTime) {
+                filteredData.push(item);
+                idCount++;
+              } else {
+              }
+            }
+           }
+           ///end if statement
+
+           //begin filtering based on user selection
+           self.data = filteredData.slice(0,19);
+           console.log(self.data);
+           return self.data
+         })
+  ///////end first if you've already been there
+}else{
+  console.log('first timer, eh?');
   var itemsArray = function(){
+    console.log('start');
       navigator.geolocation.getCurrentPosition(function(data){
+      window.Object.locationStuff = data;
+      console.log('end nav');
       self.currentLocation = {lat: data.coords.latitude, lng: data.coords.longitude};
+            var url = 'https://data.tmsapi.com/v1.1/movies/showings?radius=20&startDate='+formatDate+'&lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
+            $http.get(url)
+             .success(function(data){
+               console.log('end api call');
+               self.rawData = data;
+              //  console.log(data);
+               var filteredData = [];
+               var idCount = 1;
+               //begin if statement
+               for (var i = 0; i < self.rawData.length; i++) {
+                var showtimes = self.rawData[i].showtimes;
+                //  console.log(showtimes);
+                for (var j = 0; j < showtimes.length; j++) {
 
-      var url = 'https://data.tmsapi.com/v1.1/movies/showings?radius=20&startDate='+formatDate+'&lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
-      $http.get(url)
-       .success(function(data){
-         self.rawData = data;
-        //  console.log(data);
-         var filteredData = [];
-         var idCount = 1;
-         //begin if statement
-         for (var i = 0; i < self.rawData.length; i++) {
-          var showtimes = self.rawData[i].showtimes;
-          //  console.log(showtimes);
-          for (var j = 0; j < showtimes.length; j++) {
+                  //start getting showtimes
+                  var length = showtimes[j].dateTime.split('').length;
+                  var startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
+                  self.startTime = startTime
 
-            //start getting showtimes
-            var length = showtimes[j].dateTime.split('').length;
-            var startTime = showtimes[j].dateTime.split('').slice(length-5, length).join('');
-            self.startTime = startTime
+                  if (startTime[0]+startTime[1] > 12){
+                    //this parses any pm's into the proper format
+                    self.startTime = startTime.split('').splice(1,4).join('');
+                    self.startTimeParsed = self.startTime+"pm";
 
-            if (startTime[0]+startTime[1] > 12){
-              //this parses any pm's into the proper format
-              self.startTime = startTime.split('').splice(1,4).join('');
-              self.startTimeParsed = self.startTime+"pm";
+                  } else {
+                    self.startTimeParsed = startTime+"pm"
+                  };
+                  //end getting showtimes
 
-            } else {
-              self.startTimeParsed = startTime+"pm"
-            };
-            //end getting showtimes
+                  //begin getting now's time
+                  var currentTime = new Date();
+                  var currMin = currentTime.getMinutes();
+                  var currHour = currentTime.getHours();
+                  self.currentTime = currHour+":"+currMin;
+                  ///end gettting current time
 
-            //begin getting now's time
-            var currentTime = new Date();
-            var currMin = currentTime.getMinutes();
-            var currHour = currentTime.getHours();
-            self.currentTime = currHour+":"+currMin;
-            ///end gettting current time
+                  ///getting the movies runtime
+                  if(self.rawData[i].runTime){
+                    self.runTime = self.rawData[i].runTime;
+                    // console.log(self.runTime);
+                  } else {
+                    self.runTime = "pt99H99M"
+                  }
 
-            ///getting the movies runtime
-            if(self.rawData[i].runTime){
-              self.runTime = self.rawData[i].runTime;
-              // console.log(self.runTime);
-            } else {
-              self.runTime = "pt99H99M"
-            }
+                  var runHours = self.runTime.slice(self.runTime.length-6, self.runTime.length-4);
+                  var runMinutes = self.runTime.slice(self.runTime.length-3, self.runTime.length-1);
+                  self.runTime = runHours+":"+runMinutes
+                  ///end getting movies runtime
 
-            var runHours = self.runTime.slice(self.runTime.length-6, self.runTime.length-4);
-            var runMinutes = self.runTime.slice(self.runTime.length-3, self.runTime.length-1);
-            self.runTime = runHours+":"+runMinutes
-            ///end getting movies runtime
+                  //get time to start
+                  self.timeTo = function(){
+                    var hours = currHour + runHours;
+                    var minutes = runMinutes + currMin;
+                    var minutesTo = hours*60 + minutes;
+                    return minutesTo;
+                  }
 
-            //get time to start
-            self.timeTo = function(){
-              var hours = currHour + runHours;
-              var minutes = runMinutes + currMin;
-              var minutesTo = hours*60 + minutes;
-              return minutesTo;
-            }
+                  var item = {
+                    movieName: self.rawData[i].title,
+                    theatreId: showtimes[j].theatre.id,
+                    theatreName: showtimes[j].theatre.name,
+                    id: idCount,
+                    runTime: self.runTime,
+                    startTime: self.startTime,
+                    startTimeParsed: self.startTimeParsed,
+                    timeTo: self.timeTo(),
+                    ticketUrl: showtimes[j].ticketURI
+                  }
+                  ///if statement to see if runtime comes after current time
 
-            var item = {
-              movieName: self.rawData[i].title,
-              theatreId: showtimes[j].theatre.id,
-              theatreName: showtimes[j].theatre.name,
-              id: idCount,
-              runTime: self.runTime,
-              startTime: self.startTime,
-              startTimeParsed: self.startTimeParsed,
-              timeTo: self.timeTo(),
-              ticketUrl: showtimes[j].ticketURI
-            }
-            ///if statement to see if runtime comes after current time
+                  if (self.startTime > self.currentTime) {
+                    filteredData.push(item);
+                    idCount++;
+                  } else {
+                  }
+                }
+               }
+               ///end if statement
 
-            if (self.startTime > self.currentTime) {
-              filteredData.push(item);
-              idCount++;
-            } else {
-            }
-          }
-         }
-         ///end if statement
-         self.data = filteredData;
-         console.log(self.data);
-         return self.data
-       })
+               //begin filtering based on user selection
+               self.data = filteredData.slice(0,19);
+               console.log(self.data);
+               return self.data
+             })
     })
   }
   itemsArray();
+}
+
+//////////
+
 
   //end finding today's date with formatting for api call
   //begin api call for the data to populate the list view
