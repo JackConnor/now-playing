@@ -21,10 +21,20 @@
         <div class="dropdown col-sm-4 col-xs-12">
           <select class="startHour" ng-model='startHour'>
             <option value="">Starting after...</option>
-            <option value=10 selected>10</option>
-            <option value=25 selected>25</option>
-            <option value=50>50</option>
-            <option value=100>100</option>
+            <option value=600 selected>10:00am</option>
+            <option value=660 selected>11:00am</option>
+            <option value=720 selected>12:00pm</option>
+            <option value=780 selected>1:00pm</option>
+            <option value=840 selected>2:00pm</option>
+            <option value=900 selected>3:00pm</option>
+            <option value=960 selected>4:00pm</option>
+            <option value=1020 selected>5:00pm</option>
+            <option value=1080 selected>6:00pm</option>
+            <option value=1140 selected>7:00pm</option>
+            <option value=1200 selected>8:00pm</option>
+            <option value=1260 selected>9:00pm</option>
+            <option value=1320 selected>10:00pm</option>
+            <option value=1380 selected>11:00pm</option>
           </select>
         </div>
     </div>
@@ -32,7 +42,7 @@
     </div>
 
 
-    <div class="row" ng-repeat="movie in list.data | orderBy: sortBy | limitTo: displayLimit || 20"  id="{{movie.id}}">
+    <div class="row" ng-repeat="movie in list.data | filter: greaterThan(startMinutes, startHour) | orderBy: sortBy | limitTo: displayLimit || 20" |  id="{{movie.id}}">
       <div class="listedMovie col-sm-8 col-sm-offset-2 col-xs-12 col-xs-offset-0" ng-click='list.openButtons(movie)'>
         <div class="row movieRow">
           <div class="title col-sm-5 col-xs-12">

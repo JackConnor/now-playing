@@ -184,6 +184,7 @@ if(window.Object.locationStuff){
             var startTimeTenMins =parseInt(startTime[3]*10);
             var startMins = parseInt(startTime[4]);
             self.startMinutes = startTenHours + startTimeHours + startTimeTenMins + startMins;
+            console.log(self.startMinutes);
             ///filtering out all times that already happened
             ///////
             if(self.startMinutes > self.currentMinutes){
@@ -237,7 +238,8 @@ if(window.Object.locationStuff){
               startTime: self.startTime,
               startTimeParsed: self.startTimeParsed,
               timeTo: self.timeTo(),
-              ticketUrl: showtimes[j].ticketURI
+              ticketUrl: showtimes[j].ticketURI,
+              startMinutes: self.startMinutes
             }
             ///if statement to see if runtime comes after current time
             filteredData.push(item);
@@ -262,9 +264,21 @@ if(window.Object.locationStuff){
        })
     })
   }
+  self.ten = 600;
+  self.eleven = 660;
   itemsArray();
 }
-//////////
+//////////creatng custom filter
+
+
+//end creating custom filter
+
+self.greaterThan = function(property, val){
+  return function(item){
+    return item[prop] > val
+  }
+}
+
 
 
   var buttonCounter = true;

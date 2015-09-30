@@ -22,6 +22,7 @@ function mapController($http, $routeParams){
   var marker = [];
   var infoWindow = [];
   var functionBox = [];
+  var miniInfo = [];
 
   var currentTime = hour+":"+minute;
   var todaysDate = year+"-"+month+"-"+day;
@@ -70,7 +71,6 @@ function mapController($http, $routeParams){
               map: map,
               title: theatresArray[i].name,
             });
-            console.log(marker[i]);
             ///end creating the marker
             //begin creating the infoWindow that will popup on click
             infoWindow[i] = new google.maps.InfoWindow({
@@ -89,6 +89,11 @@ function mapController($http, $routeParams){
                 "<button class='showtimes' id='"+theatresArray[i].theatreId+"'>See All Showtimes</button>"+
               "<div>"
             })//end creating the infoWindow
+            ////begin creating mini popUp infor windows for onload
+            miniInfo[i] = new google.maps.InfoWindow({
+              content: '<div class="miniMarker">'+theatresArray[i].name+'</div>'
+            })
+            miniInfo[i].open(map, marker[i]);
           }
 
         //end for loop below
@@ -999,7 +1004,7 @@ function mapController($http, $routeParams){
           })
         }
 ////end "on launch" portion of if-statement
-    } else { 
+    } else {
       ///begin "single theater directions" portion of if-statement
       //add single theater directions here
       $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatre+'?api_key=qf6mzc3fkprbntfd95db3hkk')
