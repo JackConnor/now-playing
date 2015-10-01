@@ -168,18 +168,24 @@ if(window.Object.locationStuff){
 
             ////begin calculating time minutes for comparisons
             ///begin calculating current time in minutes
+            console.log(self.currentTime);
             if (self.currentTime.length == 4) {
               var currentTimeHours = parseInt(self.currentTime[0]*60);
               var currentTimeTenMins =parseInt(self.currentTime[2]*10);
               var mins = parseInt(self.currentTime[3]);
               self.currentMinutes = currentTimeHours + currentTimeTenMins + mins;
+              console.log(self.currentMinutes);
 
             } else{
               var currentTenHours = parseInt(self.currentTime[0]*600);
+              console.log(currentTenHours);
               var currentTimeHours = parseInt(self.currentTime[1]*60);
+              console.log(currentTimeHours);
               var currentTimeTenMins =parseInt(self.currentTime[3]*10);
+              console.log(currentTimeTenMins);
               var mins = parseInt(self.currentTime[4]);
-              self.currentMinutes = currentTimeHours + currentTimeTenMins + mins;
+              self.currentMinutes = currentTenHours + currentTimeHours + currentTimeTenMins + mins;
+              console.log(self.currentMinutes);
             }
             ////begin calculating this showtimes' time in minutes
             var startTenHours = parseInt(startTime[0]*600)
