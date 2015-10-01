@@ -113,7 +113,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker0').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[0].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -184,7 +185,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker1').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -254,7 +256,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker2').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -324,7 +327,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker3').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[3].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -394,7 +398,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker4').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[4].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mz34fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -464,7 +469,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker5').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[5].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -534,7 +540,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker6').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[6].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -605,7 +612,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker7').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[7].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -675,7 +683,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker8').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[8].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -746,7 +755,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker9').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[9].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -817,7 +827,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker10').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[10].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -887,7 +898,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker11').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[11].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -958,7 +970,8 @@ function mapController($http, $routeParams){
             ///begin add listener to infoWindows (mini)
             $('.miniMarker12').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[12].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1029,7 +1042,8 @@ function mapController($http, $routeParams){
             ///begin theater marker 0
             $('.miniMarker13').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[13].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1100,7 +1114,8 @@ function mapController($http, $routeParams){
             ///begin theater marker 0
             $('.miniMarker14').on('click', function(){
               for (var i = 0; i < marker.length; i++) {
-                miniInfo[i].close()
+                miniInfo[i].close();
+                infoWindow[i].close();
               }
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[14].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1166,8 +1181,76 @@ function mapController($http, $routeParams){
             evt.currentTarget.innerText = shortNameArrayHolder[14];
 
             })
+            // begin markers
+            ///////////////////////////
+
+            ///begin theater marker 0
+            marker[0].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
+              console.log('testing testing');
+              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[0].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
+                .then(function(showtimes){
+                  console.log(showtimes);
+                  infoWindow[0].open(map, marker[0]);
+                  console.log(showtimes);
+                  ////begin creating in-modal list of showtimes when clicked-on
+                    if(showtimes.data.length > 0){
+                      for (var i = 0; i < 6; i++) {
+                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        $('.'+theatresArray[0].theatreId).append(
+                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                    } else {
+                      $('.'+theatresArray[0].theatreId).append(
+                      '<li>Sorry, no movies showing today</li>')
+                    }
+                    ////end creating in-modal list
+                    //begin adding event listeners for in-modal scrolling
+                    var movieCache = [];
+                    $('#dir0').on('click', function(){
+                      //returns directions
+                        window.location.href = "#/map/"+theatresArray[0].theatreId;
+                      });
+                    $('#moreMove0').on('click', function(){
+                      //scrolls down in your in-modal showtimes viewer
+                      movieCache.push(showtimes.data[0]);
+                      showtimes.data.shift();
+                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                      var filteredTime = time.slice(time.length-5, time.length).join('');
+            //this removes first item from list/cache and adds a new one to the end of modal list
+                     $('.'+theatresArray[0].theatreId).find('li')[0].remove();
+                     $('.'+theatresArray[0].theatreId).append(
+                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
+                    })
+                    //begin the "go up " button where you can see start times you already scanned through
+                    $('#backMove0').on('click', function(){
+                      if(movieCache.length > 0){
+                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
+                        movieCache.pop();
+                        //begin finding time
+                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
+                        var filteredTime = time.slice(time.length-5, time.length).join('');
+                        //end finding time
+                        if(showtimes.data.length > 5){
+                          $('.'+theatresArray[0].theatreId).find('li')[4].remove();
+                        }
+                        $('.'+theatresArray[0].theatreId).prepend(
+                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
+                        );
+                      }
+                    })
+                })
+            })
+
             ///begin theater marker 1
             marker[1].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[1].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1224,6 +1307,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 2
             marker[2].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[2].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1280,6 +1367,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 3
             marker[3].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[3].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1336,6 +1427,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 4
             marker[4].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[4].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1392,6 +1487,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 5
             marker[5].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[5].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1448,6 +1547,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 6
             marker[6].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[6].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1504,6 +1607,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 7
             marker[7].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[7].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1558,64 +1665,12 @@ function mapController($http, $routeParams){
                     })
                 })
             })
-            ///begin theater marker 13
-            marker[13].addListener('click', function(){
-              console.log('testing testing');
-              $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[13].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
-                .then(function(showtimes){
-                  console.log(showtimes);
-                  infoWindow[13].open(map, marker[13]);
-                  console.log(showtimes);
-                  ////begin creating in-modal list of showtimes when clicked-on
-                    if(showtimes.data.length > 0){
-                      for (var i = 0; i < 6; i++) {
-                        var time = showtimes.data[i].showtimes[0].dateTime.split('');
-                        var filteredTime = time.slice(time.length-5, time.length).join('');
-                        $('.'+theatresArray[13].theatreId).append(
-                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
-                    } else {
-                      $('.'+theatresArray[13].theatreId).append(
-                      '<li>Sorry, no movies showing today</li>')
-                    }
-                    ////end creating in-modal list
-                    //begin adding event listeners for in-modal scrolling
-                    var movieCache = [];
-                    $('#dir13').on('click', function(){
-                      //returns directions
-                        window.location.href = "#/map/"+theatresArray[13].theatreId;
-                      });
-                    $('#moreMove13').on('click', function(){
-                      //scrolls down in your in-modal showtimes viewer
-                      movieCache.push(showtimes.data[0]);
-                      showtimes.data.shift();
-                      var time = showtimes.data[0].showtimes[0].dateTime.split('');
-                      var filteredTime = time.slice(time.length-5, time.length).join('');
-            //this removes first item from list/cache and adds a new one to the end of modal list
-                     $('.'+theatresArray[13].theatreId).find('li')[0].remove();
-                     $('.'+theatresArray[13].theatreId).append(
-                       '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>')
-                    })
-                    //begin the "go up " button where you can see start times you already scanned through
-                    $('#backMove13').on('click', function(){
-                      if(movieCache.length > 0){
-                        showtimes.data.splice(0,0, movieCache[movieCache.length-1]);
-                        movieCache.pop();
-                        //begin finding time
-                        var time = showtimes.data[0].showtimes[0].dateTime.split('');
-                        var filteredTime = time.slice(time.length-5, time.length).join('');
-                        //end finding time
-                        if(showtimes.data.length > 5){
-                          $('.'+theatresArray[13].theatreId).find('li')[4].remove();
-                        }
-                        $('.'+theatresArray[13].theatreId).prepend(
-                          '<li>'+showtimes.data[0].title+' '+filteredTime+'</li>'
-                        );
-                      }
-                    })
-                })
-            })
             ///begin theater marker 9
             marker[9].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[9].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1672,6 +1727,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 10
             marker[10].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[10].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1728,6 +1787,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 11
             marker[11].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[11].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1784,6 +1847,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 12
             marker[12].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[12].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1840,6 +1907,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 13
             marker[13].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[13].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
@@ -1896,6 +1967,10 @@ function mapController($http, $routeParams){
             })
             ///begin theater marker 14
             marker[14].addListener('click', function(){
+              for (var i = 0; i < marker.length; i++) {
+                miniInfo[i].close();
+                infoWindow[i].close();
+              }
               console.log('testing testing');
               $http.get('https://data.tmsapi.com/v1.1/theatres/'+theatresArray[14].theatreId+'/showings?startDate='+todaysDate+'&api_key=qf6mzc3fkprbntfd95db3hkk')
                 .then(function(showtimes){
