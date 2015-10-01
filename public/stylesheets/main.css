@@ -39,11 +39,18 @@ li {
 
 .dropdown select{
   background: transparent;
-  background-color: #D2B9D3;
+  background-color: #e9e5dc;
   font-size: 24px;
+  border-radius: 10px;
+  border-color: black;
+  border: 3px;
+  box-shadow: 2px 2px 4px #000000;
   width: 100%;
-  height: 60px;
-  opacity: .6;
+  height: 50px;
+}
+
+.dropdown select:hover {
+  background-color: #d2cab8;
 }
 
 .mapButton {
@@ -63,11 +70,6 @@ li {
 
 .detailInfo {
 
-}
-
-.dropdownToggle {
-  /*display: block;
-  text-align: center;*/
 }
 
 .formControl {
@@ -101,6 +103,10 @@ li {
   min-height: 100%;
   margin: 0 0 0 20%;
   margin: 0 0 4px 0;
+  border-radius: 8px;
+  border-color: black;
+  border-width: 0px;
+  box-shadow: 2px 2px 4px #000000;
 }
 
 .miniMarker {
@@ -119,7 +125,7 @@ li {
 }
 
 .threeBtn {
-  width: 33%;
+  width: 32.5%;
   height: 35px;
 }
 
@@ -144,6 +150,10 @@ li {
 #buyBtn {
   background-color: white;
   color: black;
+}
+
+#buyBtn:hover {
+  background-color: #ebebeb;
 }
 
 .buttonRow {

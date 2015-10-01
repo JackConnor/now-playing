@@ -3,13 +3,16 @@
     <div class="row filterRow">
       <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12 row">
         <div class="dropdown col-sm-4 col-xs-12">
+          <div class="sortButtons">
           <select class="dropdownToggle" ng-model="sortBy">
             <option value="">Sort list by...</option>
+            <option value="movieName">Sort By Movie</option>
             <option value="startTime" selected>Sort By Time</option>
-            <option value="movieName">Sort Alphabetical</option>
           </select>
+          </div>
         </div>
         <div class="dropdown col-sm-4 col-xs-12">
+          <div class="sortButtons">
           <select class="displayLimit" ng-model='displayLimit'>
             <option value=""># to display</option>
             <option value=10 selected>10</option>
@@ -17,8 +20,10 @@
             <option value=50>50</option>
             <option value=100>100</option>
           </select>
+          </div>
         </div>
         <div class="dropdown col-sm-4 col-xs-12">
+          <div class="sortButtons">
           <select class="startHour" ng-model='startHour'>
             <option value="">Starting after...</option>
             <option value=600 selected>10:00am</option>
@@ -36,6 +41,7 @@
             <option value=1320 selected>10:00pm</option>
             <option value=1380 selected>11:00pm</option>
           </select>
+          </div>
         </div>
     </div>
 
