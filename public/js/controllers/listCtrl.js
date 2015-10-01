@@ -15,17 +15,18 @@ function listController($http, $routeParams){
   self.currentDate = currentDate;
   var year = currentDate.getFullYear();
   var month = function(){
-    if(currentDate.getMonth() < 10){
+    if(currentDate.getMonth() < 9){
       var fullMonth = "0" + (currentDate.getMonth()+1);
       var fullMonthInt = parseInt(fullMonth);
       return fullMonth
     } else {
-      return currentDate.getMonth()
+      return (currentDate.getMonth()+1)
     };
   }
   var day = currentDate.getDate();
   var formatDate = year + "-"+month()+"-"+day;
   self.formatDate = formatDate;
+  console.log(self.formatDate);
 
 ///were about to attempt a big if statement for itemsArray
 /////////////////////////////////////////////
@@ -137,10 +138,11 @@ if(window.Object.locationStuff){
 }else{
   var itemsArray = function(){
       navigator.geolocation.getCurrentPosition(function(data){
+        console.log(data);
       //begin getting now's time
       var currentTime = new Date();
       var currMin = currentTime.getMinutes();
-      if (currMin < 10) {
+      if (currMin < 9) {
         currMin = "0"+currMin
       }
       var currHour = currentTime.getHours();
@@ -152,6 +154,7 @@ if(window.Object.locationStuff){
       var url = 'https://data.tmsapi.com/v1.1/movies/showings?radius=20&startDate='+formatDate+'&lat='+self.currentLocation.lat+'&lng='+self.currentLocation.lng+'&api_key=qf6mzc3fkprbntfd95db3hkk'
       $http.get(url)
        .success(function(data){
+         console.log(data);
          self.rawData = data;
          var filteredData = [];
          var idCount = 1;
