@@ -164,6 +164,39 @@ function mapController($http, $routeParams){
                     })
                 })
             })
+            ///begin add listener to infoWindows (mini)
+            miniInfo[0].addListener('click', function(){
+              console.log('yea ya');
+            })
+            miniInfo[1].addListener('click', function(){
+              console.log('yea ya');
+            })
+            miniInfo[2].addListener('click', function(){
+              console.log('yea ya');
+            })
+            miniInfo[3].addListener('click', function(){
+              console.log('yea ya');
+            })
+            miniInfo[4].addListener('click', function(){
+              console.log('yea ya');
+            })
+            miniInfo[5].addListener('click', function(){
+              console.log('yea ya');
+            })
+            miniInfo[6].addListener('click', function(){
+              console.log('yea ya');
+            })
+            miniInfo[7].addListener('click', function(){
+              console.log('yea ya');
+            })
+            miniInfo[8].addListener('click', function(){
+              console.log('yea ya');
+            })
+            miniInfo[9].addListener('click', function(){
+              console.log('yea ya');
+            })
+            console.log(minInfo[9]);
+
             ///begin theater marker 1
             marker[1].addListener('click', function(){
               console.log('testing testing');

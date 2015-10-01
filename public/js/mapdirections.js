@@ -119,7 +119,7 @@ function initMap() {
    window.directionsDisplay = directionsDisplay;
    var mapOptions = //Sets map options
    {
-     zoom: 15,  //Sets zoom level (0-21)
+     zoom: 14,  //Sets zoom level (0-21)
      center: coords, //zoom in on users location
      styles: styleArray
    };
