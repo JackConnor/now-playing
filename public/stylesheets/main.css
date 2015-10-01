@@ -3,6 +3,11 @@ li {
   list-style-type: none
 }
 
+.backPop{
+  display: inline-block;
+  width: 50%;
+}
+
 .buttons {
   margin-left: 25%;
 }
@@ -69,6 +74,11 @@ li {
   width: 250px;
   height: 50px;
   font-size: 24px;
+}
+
+.forwardPop {
+  display: inline-block;
+  width: 50%;
 }
 
 .goToMap {
@@ -157,15 +167,15 @@ li {
 
 .popoutBox {
   min-height: 100%;
-  width: 250px;
+  width: 220px;
   margin: 0 auto;
 }
 
 .popoutBox li{
-  border-bottom: 2px solid gray;
-  height: 25px;
-  margin: 0 0 0 0;
-  background-color: #B6B6B4;
+  /*border-bottom: 2px solid gray;*/
+  height: 100%;
+  margin: 2px 0 0 0;
+  background-color: #D6EBFF;
 }
 
 .movieRow {

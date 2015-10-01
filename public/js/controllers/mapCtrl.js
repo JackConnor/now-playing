@@ -82,12 +82,11 @@ function mapController($http, $routeParams){
               //begin html content for infowindow
               "<div class='popoutBox' id='popoutBox"+i+"'>"+
                 "<h4>"+theatresArray[i].name+"</h4>"+
-                "<p>Upcoming Movietimes</p>"+
+                // "<p>Upcoming Movietimes</p>"+
                 "<div class="+theatresArray[i].theatreId+">"+
                 "</div>" +
-                "<button id='backMove"+i+"'>see earlier showtimes/|\\</button>" +
-                "<br>" +
-                "<button id='moreMove"+i+"'>see later showtimes\\|/</button>" +
+                "<button class='backPop' id='backMove"+i+"'>earlier movies</button>" +
+                "<button class='forwardPop' id='moreMove"+i+"'>later movies</button>" +
                 "<br>" +
                 "<button class='direction' id='dir"+i+"'>Get Directions</button>" +
                 "<button class='showtimes' id='"+theatresArray[i].theatreId+"'>See All Showtimes</button>"+
