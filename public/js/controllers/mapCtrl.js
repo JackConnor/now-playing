@@ -83,8 +83,8 @@ function mapController($http, $routeParams){
               "<div class='popoutBox' id='popoutBox"+i+"'>"+
                 "<h4>"+theatresArray[i].name+"</h4>"+
                 "<p>Upcoming Movietimes</p>"+
-                "<ul class="+theatresArray[i].theatreId+">"+
-                "</ul>" +
+                "<div class="+theatresArray[i].theatreId+">"+
+                "</div>" +
                 "<button id='backMove"+i+"'>see earlier showtimes/|\\</button>" +
                 "<br>" +
                 "<button id='moreMove"+i+"'>see later showtimes\\|/</button>" +
@@ -125,10 +125,10 @@ function mapController($http, $routeParams){
                         var time = showtimes.data[i].showtimes[0].dateTime.split('');
                         var filteredTime = time.slice(time.length-5, time.length).join('');
                         $('.'+theatresArray[1].theatreId).append(
-                          '<li>'+showtimes.data[i].title+' '+filteredTime+'</li>')}
+                          '<div>'+showtimes.data[i].title+' '+filteredTime+'</div>')}
                     } else {
                       $('.'+theatresArray[0].theatreId).append(
-                      '<li>Sorry, no movies showing today</li>')
+                      '<div>Sorry, no movies showing today</div>')
                     }
                     ////end creating in-modal list
                     //begin adding event listeners for in-modal scrolling

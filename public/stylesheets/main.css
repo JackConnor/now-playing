@@ -97,9 +97,7 @@ li {
   padding: 0;
   height: 20px;
   font-size: 13px;
-  background: transparent;
   font-weight: bolder;
-  color: gray;
 }
 
 .navfix {
@@ -159,7 +157,8 @@ li {
 
 .popoutBox {
   min-height: 100%;
-  width: 270px;
+  width: 250px;
+  margin: 0 auto;
 }
 
 .popoutBox li{
@@ -313,7 +312,7 @@ body {
 
 #map {
   height: 60%;
-  background-color: gray;
+  background-color: #F0F0F5;
   width: 80%;
   margin-left: 10%;
 }
